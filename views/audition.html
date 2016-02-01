@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="msapplication-tap-highlight" content="no" />
+    <link href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/css/weui.min.css" rel="stylesheet">
+    <link href="/css/base.css" rel="stylesheet">
+    <link href="/css/audition.css" rel="stylesheet" />
+    <title><%= record.title%></title>
+</head>
+<body>
+    <div class="thumb-up">
+        <img src="http://resource.hizuoye.com/<%=record.coverImage%>" width="100%" height="100%"  alt=""/>
+    </div>
+    <div class="title">
+        <%= record.title%>
+    </div>
+
+    <div class="star">
+        <label class="colorful">推荐级别：</label>
+        <i class="fa fa-star"></i>
+        <i class="fa fa-star"></i>
+        <i class="fa fa-star"></i>
+        <i class="fa fa-star"></i>
+        <i class="fa fa-star"></i>
+    </div>
+
+    <div style="width: 100%;">
+        <div class="information">
+            <div class="item">
+                <i class="fa fa-user"></i>
+                <label>主讲老师：<%= record.teacher%></label>
+            </div>
+            <div class="item">
+                <i class="fa fa-clock-o"></i>
+                <label>上课时间：<%= record.courseTime%></label>
+            </div>
+            <div class="item">
+                <i class="fa fa-location-arrow"></i>
+                <label>上课地点：<%= record.address%></label>
+            </div>
+        </div>
+    </div>
+
+    <div class="audition-detail">
+        <div class="introduction">
+            <i class="fa fa-bookmark"></i><label class="gap">教师简介</label>
+        </div>
+        <div class="detail">
+            <div class="outer">
+                <img src="http://resource.hizuoye.com/<%=record.teacherPhoto%>" alt="" width="72px" height="72px"/>
+            </div>
+            <div class="outer-right">
+                <div class="option name"><%= record.teacher%></div>
+                <div class="option">特邀金牌讲师</div>
+            </div>
+        </div>
+        <div class="detail-info">
+            <div class="left"><i class="fa fa-quote-left"></i></div>
+            <div class="right">
+                <%= record.teacherBrief%>
+            </div>
+        </div>
+
+
+        <div class="class-introduction">
+            <div class="introduction">
+                <i class="fa fa-bookmark"></i><label class="gap">课程简介</label>
+            </div>
+            <div class="class-detail">
+                <div class="left">
+                    <label>课程说明：</label>
+                </div>
+                <div class="right">
+                    <label><%- record.content%></label>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="register-board">
+        <div class="item total">
+            <label>已有 <%= list.length%> 人报名</label>
+        </div>
+
+        <% if (list.length) {%>
+        <% list.forEach(function(item){ %>
+        <div class="item">
+            <img src="/images/thumb.png" alt="" width="23px" height="23px"/>
+            <div class="value">
+                <label><%= item.name%></label>
+            </div>
+            <div class="date">
+                <%= moment(item.createdTime).format('YYYY-MM-DD  HH:mm')%>
+            </div>
+        </div>
+        <% })%>
+        <% } %>
+    </div>
+
+    <div class="statistics">
+        <div class="viewd">
+            阅读
+            <label class="number">
+                <% if (record.visit == null) { %>
+                0
+                <% } else {%>
+                <%= record.visit%>
+                <% } %>
+            </label>
+
+        </div>
+        <div class="like">
+            <i class="fa fa-thumbs-o-up"></i><label class="number"><span id="like"><%= record.like%></span></label>
+        </div>
+        <div class="whistle">
+            举报
+        </div>
+    </div>
+
+    <div id="mask-bg"></div>
+    <div id="mask-sh">
+        <div class="register-info">
+            <div class="item">
+                <label class="name-label">姓名：</label><input type="text" class="r-name">
+            </div>
+            <div class="item">
+                <label class="name-label">手机：</label><input type="text" class="r-phone">
+            </div>
+            <% if (record.enroll.fields.length) { %>
+            <% record.enroll.fields.forEach(function(field){ %>
+            <div class="item">
+                <label class="name-label"><%= field.label%>：</label>
+                <input type="<%= field.inputType%>" class="r-field">
+            </div>
+            <% })%>
+            <% } %>
+            <div class="submit-area">
+                <div class="outer">
+                    <div class="okay" id="okay">确定</div>
+                    <div class="quit" id="quit">取消</div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer" id="register">
+            <label style="font-size: 17px"><i class="fa fa-hand-pointer-o"></i> 点我报名</label>
+        </div>
+    </footer>
+    <input type="hidden" value="<%= record._id.toString()%>" class="r-id"/>
+    <input type="hidden" value="<%= record.enroll._id.toString()%>" class="r-enroll"/>
+    <input type="hidden" value="<%= record.schoolId._id.toString()%>" class="r-schoolId"/>
+</body>
+<script type="text/javascript" src="/js/lib/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="/js/register.js"></script>
+<script type="text/javascript" src="/js/share.js"></script>
+</html>

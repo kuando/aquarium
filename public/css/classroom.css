@@ -1,0 +1,216 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+a {
+    color: #323436;
+    text-decoration: none;
+}
+
+a:link {
+    text-decoration: none;
+}
+
+a:visited {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+a:active {
+    text-decoration: none;
+}
+
+#slider{
+    width:100%;
+    overflow: hidden;
+}
+
+.title{
+    margin: 10px auto;
+    font-size: 23px;
+    overflow: hidden;
+    margin-bottom: 17px;
+}
+
+.description{
+    margin-top: 10px;
+    overflow: hidden;
+    border-bottom: 1px dashed #e7e7e7;
+    padding-bottom: 12px;
+}
+
+.description .left{
+    float: left;
+    height: 23px;
+    width: 50%;
+    color: #FF8A00;
+    font-size: 15px;
+    padding-right: 10px;
+    font-size: 15px;
+}
+
+.description .left label{
+    color: #323436;
+}
+
+.description .right{
+    font-size: 15px;
+    float: left;
+    height: 24px;
+    padding-left: 5px;
+}
+
+.separation{
+    height:3px;
+    background-color: #e7e7e7;
+}
+
+.course-brief{
+    margin-top: 30px;
+    border-bottom: 1px solid #E7E7E7;
+    padding-bottom: 0px;
+    font-size: 18px;
+    text-indent: 0px;
+    width: 136px;
+    background-color: #0099e9;
+    color: #FFF;
+    line-height: 28px;
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+.introduction{
+    margin-top: 20px;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.introduction ul{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    margin-left: 20%;
+}
+
+.introduction ul li{
+    cursor: pointer;
+    float: left;
+    width: 30%;
+    text-align: center;
+    font-size: 19px;
+}
+
+.introduction .active{
+    border-bottom: 3px solid #0099e9;
+}
+
+.content{
+    margin-top: 15px;
+}
+
+.brief-detail{
+    word-wrap: break-word;
+    text-align: justify;
+    font-size: 13px;
+    padding-right: 6px;
+    margin-bottom: 10px;
+    padding-top: 16px;
+    border-bottom: 1px dashed #e7e7e7;
+    padding-bottom: 15px;
+    line-height: 20px;
+}
+
+.course-list{
+    margin-bottom: 35px;
+    min-height: 296px;
+}
+
+.course-list ul{
+    list-style: none;
+    padding: 0;
+    overflow: hidden;
+    min-height: 160px;
+}
+
+.course-list ul li{
+    cursor: pointer;
+    height: 36px;
+    border-bottom: 1px dashed #e7e7e7;
+    line-height: 30px;
+    padding-top: 6px;
+}
+
+.course-list ul li .left{
+    float: left;
+    width: 90%;
+    font-size: 15px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.course-list ul li .left span{
+    color: #0099e9;
+    font-size: 16px;
+    margin-right: 5px;
+}
+
+.course-list ul li .right{
+    float: left;
+    font-size: 15px;
+    margin-left: 10px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.label-icon{
+    color:#0099e9;
+    font-size: 16px;
+}
+
+.statistics{
+    height: 40px;
+    width: 100%;
+    color: #a9a9a9;
+}
+
+.statistics .viewd{
+    font-size: 16px;
+    float:left;
+}
+
+.statistics .like{
+    float: left;
+    margin-left: 20px;
+    cursor:pointer;
+    font-size:16px;
+}
+
+.statistics .number{
+    margin-left: 5px;
+    cursor:pointer;
+}
+
+.statistics .whistle{
+    float:right;
+    margin-top: -2px;
+}
+
+.footer{
+    cursor: pointer;
+    width: 100%;
+    position: fixed;
+    left: 0px;
+    bottom: 0px;
+    height: 45px;
+    background-color: #0099e9;
+    text-align: center;
+    color: #FFF;
+    font-size: 15px;
+    line-height: 44px;
+    _top:expression(document.documentElement.clientHeight + document.documentElement.scrollTop - this.offsetHeight);
+}

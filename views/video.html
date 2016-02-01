@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="msapplication-tap-highlight" content="no" />
+    <link href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/css/weui.min.css" rel="stylesheet">
+    <link href="/css/base.css" rel="stylesheet">
+    <link href="/css/video.css" rel="stylesheet" />
+    <title><%= item.title%></title>
+</head>
+<body>
+
+    <div class="title"><%= item.title%></div>
+    <div class="video"><%- item.link%></div>
+    <section class="content">
+        <div class="introduction">
+            <i class="fa fa-bookmark"></i><label class="gap">知识重点</label>
+        </div>
+        <div class="brief">
+            <%= item.brief%>
+        </div>
+
+    </section>
+
+
+    <div class="statistics">
+        <div class="viewd">
+            阅读
+            <label class="number">
+                <%= item.visit%>
+            </label>
+        </div>
+        <div class="like">
+            <i class="fa fa-thumbs-o-up"></i>
+            <label class="number"><span id="like"><%= item.like%></span></label>
+        </div>
+        <div class="whistle">
+            举报
+        </div>
+    </div>
+    <input type="hidden" value="<%= eventId%>" class="e-id"/>
+    <input type="hidden" value="<%= item._id%>" class="v-id"/>
+</body>
+<script type="text/javascript" src="/js/lib/jquery-1.11.3.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        //点赞
+        $('.like').bind('click', function () {
+            var e_id = $('.e-id').val();
+            var v_id = $('.v-id').val();
+            var like = $('#like').text();
+            $.post("/view/praise", {
+                like: like,
+                eventId: e_id,
+                videoId: v_id
+            }, function () {
+                $('#like').text(parseInt(like) + 1);
+            }).error(function () {
+                alert('网络故障，请稍后重试！');
+                return;
+            });
+        });
+
+    });
+</script>
+</html>

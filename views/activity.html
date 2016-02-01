@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="msapplication-tap-highlight" content="no" />
+    <link href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/css/weui.min.css" rel="stylesheet">
+    <link href="/css/base.css" rel="stylesheet">
+    <title><%= record.title%></title>
+</head>
+<body>
+    <!-- 头部 -->
+    <header>
+        <div class="title">
+            <%= record.title%>
+        </div>
+    </header>
+
+    <!-- 基本信息 -->
+    <div class="base-info">
+        <div class="left">
+            <div class="institution"><%= record.schoolId.schoolName%></div>
+            <div class="date"><%= moment(record.createTime).format('YYYY-MM-DD') %></div>
+        </div>
+    </div>
+
+    <!-- 公告栏 -->
+    <div class="click-board">
+        <!-- 时间 -->
+        <div class="item">
+            <div class="icon">
+                <i class="fa fa-clock-o"></i>
+            </div>
+            <div class="value">
+                <label><%= moment(record.startTime).format('MM/DD HH:mm') %> 至 <%= moment(record.endTime).format('MM/DD HH:mm') %></label>
+            </div>
+        </div>
+
+        <div class="item">
+            <div class="icon">
+                <i class="fa fa-location-arrow"></i>
+            </div>
+            <div class="value">
+                <label class="cus-color"><%= record.address %></label>
+            </div>
+        </div>
+
+        <div class="item">
+            <div class="icon">
+                <i class="fa fa-user"></i>
+            </div>
+            <div class="value">
+                <label><%= list.length%> 人已完成报名</label>
+            </div>
+        </div>
+
+    </div>
+
+    <%if (record.coverImage) {%>
+    <div class="thumbs">
+        <img src="http://resource.hizuoye.com/<%=record.coverImage%>" width="100%" height="100%" alt="">
+    </div>
+    <% } %>
+
+    <!-- 内容 -->
+    <section class="content">
+        <!-- 文章正文 -->
+        <%- record.content%>
+    </section>
+
+    <div class="register-board">
+        <div class="item total">
+            <label>已有 <%= list.length%> 人报名</label>
+        </div>
+
+        <% if (list.length) {%>
+            <% list.forEach(function(item){ %>
+                <div class="item">
+                    <img src="/images/thumb.png" alt="" width="23px" height="23px"/>
+                    <div class="value">
+                        <label><%= item.name%></label>
+                    </div>
+                    <% if (item.createdTime) {%>
+                    <div class="date">
+                        <%= moment(item.createdTime).format('YYYY-MM-DD  HH:mm')%>
+                    </div>
+                    <% } %>
+                </div>
+            <% })%>
+        <% } %>
+    </div>
+
+    <div class="statistics cus-bottom">
+        <div class="viewd">
+            阅读
+            <label class="number">
+                <% if (record.visit == null) { %>
+                    0
+                <% } else {%>
+                    <%= record.visit%>
+                <% } %>
+            </label>
+
+        </div>
+        <div class="like">
+            <i class="fa fa-thumbs-o-up"></i><label class="number"><span id="like"><%= record.like%></span></label>
+        </div>
+        <div class="whistle">
+            举报
+        </div>
+    </div>
+
+    <div id="mask-bg"></div>
+    <div id="mask-sh">
+        <div class="register-info">
+            <div class="item">
+                <label class="name-label">姓名：</label><input type="text" class="r-name">
+            </div>
+            <div class="item">
+                <label class="name-label">手机：</label><input type="text" class="r-phone">
+            </div>
+            <% if (record.enroll.fields.length) { %>
+                <% record.enroll.fields.forEach(function(field){ %>
+                    <div class="item">
+                        <label class="name-label"><%= field.label%>：</label>
+                        <input type="<%= field.inputType%>" class="r-field">
+                    </div>
+                <% })%>
+            <% } %>
+            <div class="submit-area">
+                <div class="outer">
+                    <div class="okay" id="okay">确定</div>
+                    <div class="quit" id="quit">取消</div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- 底部 -->
+    <footer>
+        <div class="footer" id="register">
+            <label class="enroll-label"><i class="fa fa-hand-pointer-o"></i> 点我报名</label>
+        </div>
+    </footer>
+    <input type="hidden" value="<%= record._id.toString()%>" class="r-id"/>
+    <input type="hidden" value="<%= record.enroll._id.toString()%>" class="r-enroll"/>
+    <input type="hidden" value="<%= record.schoolId._id.toString()%>" class="r-schoolId"/>
+</body>
+<script type="text/javascript" src="/js/lib/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="/js/register.js"></script>
+<script type="text/javascript" src="/js/share.js"></script>
+</html>

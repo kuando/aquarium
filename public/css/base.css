@@ -1,0 +1,360 @@
+body{
+    margin-left: 10px !important;
+    margin-right: 10px !important;
+}
+
+iframe{
+    width: 100% !important;
+    max-height: 280px !important;
+}
+
+embed {
+    width: 100% !important;
+}
+
+.alpha {
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.alpha body {
+    height: 100%;
+    overflow: hidden;
+}
+
+.title{
+    width: 100%;
+    font-size: 25px;
+    letter-spacing: 0.01rem;
+    line-height: 35px;
+    padding-top: 10px;
+}
+
+.base-info{
+    width:100%;
+    margin-top: 5px;
+}
+
+.base-info .left{
+    width: 90%;
+    float:left;
+    height: 32px;
+    font-size:16px;
+}
+
+.base-info .left img{
+    border-radius: 20px;
+    float:left;
+}
+
+.base-info .left .institution{
+    float: left;
+    margin-left: 1px;
+    color:#0099e9;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    width:60%;
+}
+
+.base-info .left .date{
+    float: left;
+    color:#999999;
+    margin-left: 23px;
+    font-weight: normal;
+}
+
+.base-info .left .cus-date{
+    float: left;
+    color:#999999;
+    margin-left: 23px;
+    font-weight: normal;
+}
+
+.base-info .right{
+    width: 46%;
+    float:right;
+    height: 32px;
+    font-size:13px;
+    color:#999999;
+}
+
+.base-info .right .viewd{
+    float:left;
+    padding-top:7px;
+    text-align: left;
+}
+
+.base-info .right .viewd em{
+    font-style: normal;
+    font-weight: normal;
+    margin-left: 3px;
+}
+
+.base-info .right .share{
+    float:right;
+    padding-top:7px;
+    text-align: right;
+}
+.base-info .right .share em{
+    font-style: normal;
+    font-weight: normal;
+    margin-left: 3px;
+    margin-right: 5px;
+}
+
+.content{
+    font-size: 15px;
+    line-height: 23px;
+    text-align: left;
+    letter-spacing: 0.01rem;
+    min-height: 400px;
+}
+
+.content img{
+    max-width: 100% !important;
+}
+
+.click-board{
+    margin-top: 40px;
+    width: 100%;
+    font-size: 14px;
+    background-color: #F5F5F5;
+    color: #323436;
+    padding-bottom: 15px;
+    border-radius:2px;
+    margin-bottom: 15px;
+
+}
+
+.click-board .item{
+    min-height: 35px;
+    margin-left: 5px;
+    margin-right: 5px;
+    border-bottom: 1px solid #e7e7e7;
+    padding-bottom: 5px;
+    overflow: hidden;
+}
+
+.click-board .item .icon{
+    float: left;
+    margin-left: 6px;
+    font-size: 18px;
+    margin-top: 7px;
+    color: #a0a0a0;
+}
+
+.click-board .item .value{
+    float: left;
+    margin-left: 10px;
+    margin-top: 10px;
+    font-size: 15px;
+    text-overflow: ellipsis;
+    width: 88%;
+}
+
+.cus-color{
+    color: #0099e9;
+}
+
+.register-board{
+    margin-top: 25px;
+    width: 100%;
+    font-size: 13px;
+    background-color: #F5F5F5;
+    color: #323436;
+    padding-bottom: 30px;
+    margin-bottom: 20px;
+    border-radius:2px
+}
+
+.register-board .item{
+    min-height: 35px;
+    margin-left: 5px;
+    margin-right: 5px;
+    border-bottom: 1px solid #e7e7e7;
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+
+.register-board .item img{
+    float: left;
+    margin-top: 5px;
+    border-radius: 2px;
+}
+
+.register-board .item .value{
+    float: left;
+    margin-left: 10px;
+    margin-top: 10px;
+    color: #0099e9;
+}
+
+.register-board .item .date{
+    float: right;
+    line-height: 41px;
+    color: #a1a1a1;
+    font-size: 12px;
+}
+
+.register-board .total{
+    margin-left: 5px;
+    line-height: 50px;
+    font-size: 15px;
+    color: #0099E9;
+}
+
+.footer{
+    cursor: pointer;
+    width: 100%;
+    position: fixed;
+    left: 0px;
+    bottom: 0px;
+    height: 45px;
+    background-color: #0099E9;
+    text-align: center;
+    color: #FFF;
+    font-size: 15px;
+    line-height: 44px;
+    border-radius: 0px;
+    _top:expression(document.documentElement.clientHeight + document.documentElement.scrollTop - this.offsetHeight);
+}
+
+
+/**遮罩层*/
+#mask-bg {
+    display: none;
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    z-index: 1001;
+    -moz-opacity: 0.7;
+    opacity: .70;
+    filter: alpha(opacity=70);
+}
+
+#mask-sh {
+    display: none;
+    position: absolute;
+    top: 18%;
+    left: 14%;
+    width: 63%;
+    padding: 8px;
+    border: 8px solid #E8E9F7;
+    background-color: #FFF;
+    z-index: 1002;
+    overflow: hidden;
+}
+
+.thumbs{
+    margin-top: 20px;
+}
+
+.register-info{
+    width: 100%;
+    margin: 0px auto;
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+.register-info .item{
+    padding-top: 10px;
+    font-size: 13px;
+}
+
+.register-info .name-label{
+    line-height: 38px;
+}
+
+.register-info input{
+    color: #8B8D90;
+    padding: 5px;
+    width: 60%;
+    text-align: center;
+    border-bottom:1px solid #e7e7e7;
+    border-top: 0;
+    border-left: 0;
+    border-right:0;
+    font-size:14px;
+}
+
+.register-info .submit-area{
+    text-align: center;
+    height: 40px;
+    margin-top: 25px;
+    font-size:15px
+}
+
+.register-info .submit-area .outer{
+    margin: 0 auto;
+    width: 141px;
+    height: 40px;
+}
+
+.register-info .submit-area .okay{
+    cursor: pointer;
+    height: 30px;
+    width: 60px;
+    background-color: #0099E9;
+    color: #FFF;
+    float: left;
+    padding: 1px;
+    border-radius: 2px;
+    line-height: 30px;
+}
+
+.register-info .submit-area .quit{
+    height: 30px;
+    width: 60px;
+    float: right;
+    border: 1px solid #0099E9;
+    border-radius: 2px;
+    line-height: 30px;
+    cursor: pointer;
+    color:#323436;
+}
+
+.register-info .submit-area .quit:hover{
+    background-color: #0099E9;
+    color: #fff;
+}
+
+.enroll-label{
+    font-size: 17px;
+}
+
+.statistics{
+    height: 40px;
+    width: 100%;
+    color: #a9a9a9;
+}
+
+.statistics .viewd{
+    font-size: 16px;
+    float:left;
+}
+
+.statistics .like{
+    float: left;
+    margin-left: 20px;
+    cursor:pointer;
+    font-size: 16px;
+}
+
+.statistics .number{
+    margin-left: 5px;
+    cursor:pointer;
+}
+
+.statistics .whistle{
+    float:right;
+    margin-top: -2px;
+}
+
+.cus-bottom{
+    margin-bottom: 45px;
+}

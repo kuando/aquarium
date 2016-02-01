@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="msapplication-tap-highlight" content="no" />
+    <title></title>
+    <style type="text/css">
+
+        body{
+            background-color: #d32e3c;
+        }
+
+        #header img{
+            border-radius: 5px;
+        }
+
+        #lottery {
+            width: 100%;
+            background-size: cover;
+            margin:12px auto;
+        }
+
+        #lottery .content{
+            margin: 0 auto;
+            width:100%;
+        }
+
+        #lottery table td {
+            text-align: center;
+            vertical-align: middle;
+            font-size: 24px;
+            color: #333;
+            font-index: -999;
+        }
+
+        #lottery table td img{
+            max-width: 100px;
+            width:expression(this.width > 100 ? "100px" : this.width);
+            overflow:hidden;
+        }
+
+        #lottery table td a {
+            display: block;
+            text-decoration: none;
+        }
+
+        #lottery table td.td_1 {
+            background-color: #8670ff;
+        }
+
+        #lottery table td.td_2 {
+            background-color: #df88cf;
+        }
+
+        #lottery table td.td_3 {
+            background-color: #8ed9f9;
+        }
+
+        #lottery table td.td_4 {
+            background-color: #fef9b9;
+        }
+
+        #lottery table td.td_5 {
+            background-color: #ff745b;
+        }
+
+        #lottery table td.td_6 {
+            background-color: #21d9cf;
+        }
+
+        #lottery table td.td_7 {
+            background-color: #fdfacf;
+        }
+
+        #lottery table td.td_8 {
+            background-color: #fa598f;
+        }
+
+        #lottery table td.td_9 {
+            background-color: #ea0000;
+        }
+
+        #lottery table td.active {
+            background-color: yellow;
+        }
+
+
+        #setting, #instruction{
+            border-radius: 5px;
+            border: 2px dashed #FFD813;
+            margin: 20px auto 0px;
+            background-size: cover;
+            width: 100%;
+        }
+
+        .title{
+            color: #ffd815;
+            margin-left: 15px;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .list-awards{
+            list-style: none;
+            margin-left: -24px;
+            font-size: 15px;
+        }
+
+        .list-awards li {
+            margin-top: 8px;
+            color: #fff
+        }
+
+        #awarded {
+            margin: 24px auto 60px 0px;
+            height: 500px;
+            background: url('../../assets/images/roulette/awards-list.png') no-repeat;
+            background-size: 100% 100%;
+
+        }
+
+        .name-list{
+            width: 259px;
+            height: 341px;
+            margin: 0 auto;
+            overflow-y: scroll;
+        }
+
+        .name-list .item{
+            height: 40px;
+        }
+
+        .name-list .item ul{
+            list-style: none;
+            margin-left: -18px;
+        }
+
+        .name-list .item ul li{
+            float: left;
+            margin-right: 15px;
+            line-height: 41px;
+            color: #fff;
+            font-size: 14px;
+        }
+        .name-list .item ul li:first-child{
+            margin-right: 30px;
+        }
+
+        .name-list .item ul li:last-child{
+            margin-right: 0px;
+        }
+
+        .name-list .item ul li img{
+            border-radius: 20px;
+        }
+
+        .name-list .name-width{
+            width: 45px;
+        }
+
+        ul.award-title{
+            list-style: none;
+        }
+
+        ul.award-title li{
+            float: left;
+            margin-left: 53px;
+            color: #FFF;
+            font-weight: bold;
+            font-size: 15px;
+        }
+
+        ul.award-title li:last-child{
+            margin-left: 33px;
+        }
+
+        .roulette-footer{
+            width: 100%;
+            position:fixed;
+            left:0px;
+            bottom:0;
+            _position:absolute;
+            height: 40px;
+            background-color: #323436;
+            text-align: center;
+            color: #fff;
+            font-size: 14px;
+            line-height: 38px;
+            opacity: .8;
+            _top:expression(document.documentElement.clientHeight + document.documentElement.scrollTop - this.offsetHeight);
+        }
+
+
+        /**遮罩层*/
+        #bg {
+            display: none;
+            position: absolute;
+            top: 0%;
+            left: 0%;
+            width: 100%;
+            height: 100%;
+            background-color: black;
+            z-index: 1001;
+            -moz-opacity: 0.7;
+            opacity: .70;
+            filter: alpha(opacity=70);
+        }
+
+        #show {
+            display: none;
+            position: absolute;
+            top: 25%;
+            left: 22%;
+            width: 53%;
+            height: 49%;
+            padding: 8px;
+            border: 8px solid #E8E9F7;
+            background-color: white;
+            z-index: 1002;
+            overflow: auto;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- 嵌入背景音乐 -->
+    <!--<audio controls="controls" hidden="hidden" autoplay="autoplay" loop="loop">
+        <source src="../../assets/images/roulette/abc.mp3" type="audio/mpeg" />
+    </audio>-->
+    <div id="header">
+        <img src="../../assets/images/roulette/post.jpg" width="100%" alt="">
+    </div>
+
+    <div id="lottery">
+        <table border="0" cellpadding="0" cellspacing="0" class="content">
+            <tr class="lottery-group">
+                <td class="lottery-unit td_1 active" ><img src="../../assets/images/roulette/1.png"/></td>
+                <td class="lottery-unit td_2"><img src="../../assets/images/roulette/2.png"  /></td>
+                <td class="lottery-unit td_3"><img src="../../assets/images/roulette/4.png"  /></td>
+            </tr>
+            <tr class="lottery-group">
+                <td class="lottery-unit td_4"><img src="../../assets/images/roulette/7.png"  /></td>
+                <td class="td_5"><a href="#"><img src="../../assets/images/roulette/start.jpg"   /></a></td>
+                <td class="lottery-unit td_6"><img src="../../assets/images/roulette/5.png"   /></td>
+            </tr>
+            <tr class="lottery-group">
+                <td class="lottery-unit td_7"><img src="../../assets/images/roulette/3.png"   /></td>
+                <td class="lottery-unit td_8"><img src="../../assets/images/roulette/6.png"   /></td>
+                <td class="lottery-unit td_9"><img src="../../assets/images/roulette/8.png"   /></td>
+            </tr>
+        </table>
+    </div>
+    <div id="setting">
+        <div class="title">奖项设置：</div>
+        <div class="">
+            <ul class="list-awards">
+                <li>一等奖：iphone6 plus手机一部</li>
+                <li>二等奖：iphone6 plus手机一部</li>
+                <li>三等奖：iphone6 plus手机一部</li>
+            </ul>
+        </div>
+    </div>
+    <div id="instruction">
+        <div class="title">活动说明：</div>
+        <div class="">
+            <ul class="list-awards">
+                <li>本次活动每人每天有3次机会</li>
+                <li>我们的中奖几率是很高的哦，快来参加吧！</li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="awarded">
+        <div style="width: 259px; height: 65px; margin: 0 auto">
+        </div>
+        <div style="width: 259px; height: 40px; margin: 0 auto">
+            <ul class="award-title">
+                <li>姓名</li>
+                <li>手机号码</li>
+            </ul>
+        </div>
+        <div class="name-list">
+            <div class="item">
+                <ul>
+                    <li>
+                        <img src="../../assets/images/roulette/k24.jpg" width="35px" height="35px"/>
+                    </li>
+                    <li class="name-width">张正茂</li>
+                    <li>186****4156</li>
+                </ul>
+            </div>
+
+            <div class="item">
+                <ul>
+                    <li>
+                        <img src="../../assets/images/roulette/123.jpg" width="35px" height="35px"/>
+                    </li>
+                    <li class="name-width">小雪</li>
+                    <li>186****4156</li>
+                </ul>
+            </div>
+
+            <div class="item">
+                <ul>
+                    <li>
+                        <img src="../../assets/images/roulette/k24.jpg" width="35px" height="35px"/>
+                    </li>
+                    <li class="name-width">王小宝</li>
+                    <li>186****4156</li>
+                </ul>
+            </div>
+
+            <div class="item">
+                <ul>
+                    <li>
+                        <img src="../../assets/images/roulette/123.jpg" width="35px" height="35px"/>
+                    </li>
+                    <li class="name-width">小雪</li>
+                    <li>186****4156</li>
+                </ul>
+            </div>
+
+            <div class="item">
+                <ul>
+                    <li>
+                        <img src="../../assets/images/roulette/123.jpg" width="35px" height="35px"/>
+                    </li>
+                    <li class="name-width">小雪</li>
+                    <li>186****4156</li>
+                </ul>
+            </div>
+
+            <div class="item">
+                <ul>
+                    <li>
+                        <img src="../../assets/images/roulette/123.jpg" width="35px" height="35px"/>
+                    </li>
+                    <li class="name-width">小雪</li>
+                    <li>186****4156</li>
+                </ul>
+            </div>
+
+            <div class="item">
+                <ul>
+                    <li>
+                        <img src="../../assets/images/roulette/123.jpg" width="35px" height="35px"/>
+                    </li>
+                    <li class="name-width">小雪</li>
+                    <li>186****4156</li>
+                </ul>
+            </div>
+
+            <div class="item">
+                <ul>
+                    <li>
+                        <img src="../../assets/images/roulette/123.jpg" width="35px" height="35px"/>
+                    </li>
+                    <li class="name-width">小雪</li>
+                    <li>186****4156</li>
+                </ul>
+            </div>
+
+            <div class="item">
+                <ul>
+                    <li>
+                        <img src="../../assets/images/roulette/123.jpg" width="35px" height="35px"/>
+                    </li>
+                    <li class="name-width">小雪</li>
+                    <li>186****4156</li>
+                </ul>
+            </div>
+            <div class="item">
+                <ul>
+                    <li>
+                        <img src="../../assets/images/roulette/123.jpg" width="35px" height="35px"/>
+                    </li>
+                    <li class="name-width">小雪</li>
+                    <li>186****4156</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="roulette-footer">
+            @宽度科技
+    </div>
+</body>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script type="text/javascript">
+
+    var defaults = {
+        selector:     '#lottery',
+        width:        4,    // 转盘宽度
+        height:       4,    // 转盘高度
+        initSpeed:    300,	// 初始转动速度
+        speed:        0,	// 当前转动速度
+        upStep:       80,   // 加速滚动步长
+        upMax:        50,   // 速度上限
+        downStep:     30,   // 减速滚动步长
+        downMax:      500,  // 减速上限
+        waiting:      3000, // 匀速转动时长
+        index:        0,    // 初始位置
+        target:       7,    // 中奖位置，可通过后台算法来获得，默认值：最便宜的一个奖项或者"谢谢参与"
+        isRunning:    false // 当前是否正在抽奖
+    }
+
+    var lottery = {
+
+        // 初始化用户配置
+        lottery: function (options) {
+            this.options = $.extend(true, defaults, options);
+            this.options.speed = this.options.initSpeed;
+            this.container = $(this.options.selector);
+            this._setup();
+        },
+
+        // 开始装配转盘
+        _setup: function () {
+
+            // 这里为每一个奖项设置一个有序的下标，方便lottery._roll的处理
+            // 初始化第一行lottery-group的序列
+            for (var i = 0; i < this.options.width; ++i) {
+                this.container.find('.lottery-group:first .lottery-unit:eq(' + i + ')').attr('lottery-unit-index', i);
+            }
+
+            // 初始化最后一行lottery-group的序列
+            for (var i = lottery._count() - this.options.height + 1, j = 0, len = this.options.width + this.options.height - 2; i >= len; --i, ++j) {
+                this.container.find('.lottery-group:last .lottery-unit:eq(' + j + ')').attr('lottery-unit-index', i);
+            }
+
+            // 初始化两侧lottery-group的序列
+            for (var i = 1, len = this.options.height - 2; i <= len; ++i) {
+                this.container.find('.lottery-group:eq(' + i + ') .lottery-unit:first').attr('lottery-unit-index', lottery._count() - i);
+                this.container.find('.lottery-group:eq(' + i + ') .lottery-unit:last').attr('lottery-unit-index', this.options.width + i - 1);
+            }
+            this._enable();
+        },
+
+        // 开启抽奖
+        _enable: function () {
+            this.container.find('a').bind('click', this.beforeRoll);
+        },
+
+        // 禁用抽奖
+        _disable: function () {
+            this.container.find('a').unbind('click', this.beforeRoll);
+        },
+
+        // 转盘加速
+        _up: function () {
+            var _this = this;
+            if (_this.options.speed <= _this.options.upMax) {
+                _this._constant();
+            } else {
+                _this.options.speed -= _this.options.upStep;
+                _this.upTimer = setTimeout(function () { _this._up(); }, _this.options.speed);
+            }
+        },
+
+        // 转盘匀速
+        _constant: function () {
+            var _this = this;
+            clearTimeout(_this.upTimer);
+            setTimeout(function () { _this.beforeDown(); }, _this.options.waiting);
+        },
+
+        // 减速之前的操作，支持用户追加操作（例如：从后台获取中奖号）
+        beforeDown: function () {
+            var _this = this;
+            _this.aim();
+            if (_this.options.beforeDown) {
+                _this.options.beforeDown.call(_this);
+            }
+            _this._down();
+        },
+
+        // 转盘减速
+        _down: function () {
+            var _this = this;
+            if (_this.options.speed > _this.options.downMax && _this.options.target == _this._index()) {
+                _this._stop();
+            } else {
+                _this.options.speed += _this.options.downStep;
+                _this.downTimer = setTimeout(function () { _this._down(); }, _this.options.speed);
+            }
+        },
+
+        // 转盘停止，还原设置
+        _stop: function () {
+            var _this = this;
+            clearTimeout(_this.downTimer);
+            clearTimeout(_this.rollerTimer);
+            _this.options.speed = _this.options.initSpeed;
+            _this.options.isRunning = false;
+            _this._enable();
+
+            //console.log(_this._index() + '----')
+        },
+
+        // 抽奖之前的操作，支持用户追加操作
+        beforeRoll: function () {
+            var _this = lottery;
+            _this._disable();
+            if (_this.options.beforeRoll) {
+                _this.options.beforeRoll.call(_this);
+            }
+            _this._roll();
+        },
+
+        // 转盘滚动
+        _roll: function () {
+            var _this = this;
+            _this.container.find('[lottery-unit-index=' + _this._index() + ']').removeClass("active");
+            ++_this.options.index;
+            _this.container.find('[lottery-unit-index=' + _this._index() + '].lottery-unit').addClass("active");
+            _this.rollerTimer = setTimeout(function () { _this._roll(); }, _this.options.speed);
+            if (!_this.options.isRunning) {
+                _this._up();
+                _this.options.isRunning = true;
+            }
+        },
+
+        // 转盘当前格子下标
+        _index: function () {
+            return this.options.index % this._count();
+        },
+
+        // 转盘总格子数
+        _count: function () {
+            return this.options.width * this.options.height - (this.options.width - 2) * (this.options.height - 2);
+        },
+
+        // 获取中奖号，用户可重写该事件，默认随机数字
+        aim: function () {
+            if (this.options.aim) {
+                this.options.aim.call(this);
+            } else {
+                this.options.target = parseInt(parseInt(Math.random() * 10) * this._count() / 10);
+                console.log(this.options.target);
+            }
+        }
+    };
+
+
+    window.onload = function () {
+        lottery.lottery({
+            selector:     '#lottery',
+            width:        3,
+            height:       3,
+            index:        0,    // 初始位置
+            initSpeed:    800,  // 初始转动速度(越小转到的越快)
+            upStep:       150,   // 加速滚动步长
+            upMax:        150,   // 速度上限
+            downStep:     30,   // 减速滚动步长
+            downMax:      500,  // 减速上限
+            waiting:      3000, // 匀速转动时长
+            target:       targetAward(),
+            beforeRoll: function () { // 重写滚动前事件：beforeRoll
+                // console.log(this);
+                //alert(1);
+            },
+            aim:function(){
+
+            }
+        });
+    }
+
+    //客户中奖几率
+    function targetAward(){
+        return 6;
+    }
+
+</script>
+</html>

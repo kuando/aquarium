@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="msapplication-tap-highlight" content="no" />
+    <title></title>
+    <!--<link href="http://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.css" rel="stylesheet">-->
+    <link href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+    <style type="text/css">
+
+        body{
+            background-color: #d32e3c;
+            font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+        }
+        #header img{
+            border-radius: 2px;
+        }
+        #outer{
+            /*margin: 6px;*/
+        }
+
+        #join{
+            height:30px;
+        }
+
+        #join .join-btn{
+            margin: 12px auto;
+            text-align: center;
+            width: 79%;
+            height: 52px;
+            line-height: 48px;
+            background-color: #FFD813;
+            border-radius: 2px;
+            color: #FFF;
+            font-weight: bold;
+            letter-spacing: 1px;
+            font-size: 30px;
+            cursor:pointer
+        }
+
+        #rank{
+            /*border-radius: 5px;*/
+            /*border: 2px dashed #FFD813;*/
+            margin: 38px auto 0px;
+            background-color:#fff;
+            background-size: cover;
+            width: 100%;
+            border-radius: 2px;
+            height: 70px;
+        }
+
+        #rank .arrangements{
+            margin: 0 auto;
+        }
+
+        #rank .arrangements ul{
+            list-style: none;
+            height: 70px;
+            margin: 0 auto;
+            width:88%;
+        }
+
+        #rank .arrangements ul li{
+            float: left;
+            height: 70px;
+            width: 31%;
+            margin-right: 11px;
+            /*border-right: 3px solid #0dd1ff;*/
+        }
+
+        #rank .arrangements ul li:first-child{
+            margin-left: -25px;
+        }
+
+        #rank .arrangements ul li .index{
+            padding-top: 8px;
+            font-size: 15px;
+            text-align: center;
+        }
+
+        #rank .arrangements ul li .text{
+            margin-left: 3px;
+        }
+
+        #rank .arrangements ul li .count{
+            text-align: center;
+            padding-top: 8px;
+            font-size: 16px;
+            color:#323436;
+        }
+
+        #instruction{
+            margin: 0 auto 0px;
+            background-color:#fff;
+            background-size: cover;
+            width: 100%;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            border-radius: 2px;
+        }
+
+        #search{
+            /*margin: 10px auto 0px;
+            background-color:#fff;
+            background-size: cover;
+            width: 100%;
+            padding-top: 5px;
+            padding-bottom: 5px;*/
+            height: 56px;
+            width: 100%;
+            margin-top: 5px;
+        }
+
+        #search .search-bar{
+            float: left;
+            width:72%;
+        }
+
+        #search .search-bar input{
+            margin-top: 8px;
+            border: medium none;
+            background: transparent none repeat scroll 0% 0%;
+            line-height: 14px;
+            height: 27px;
+            color: #8B8D90;
+            padding: 6px;
+            outline: medium none;
+            float: left;
+            width: 95%;
+            background-color: #fff;
+            text-align: center;
+            border-radius: 2px;
+        }
+
+
+        #search .search-btn{
+            border-radius: 2px;
+            float: left;
+            width: 24%;
+            text-align: center;
+            height: 39px;
+            background-color: #FFD815;
+            margin-left: 4%;
+            margin-top: 8px;
+            line-height: 37px;
+            font-size: 15px;
+            cursor: pointer;
+            color:#fff
+        }
+
+        .title{
+            color: #323436;
+            margin-left: 15px;
+            margin-top: 10px;
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+        .list-awards{
+            list-style: none;
+            margin-left: -24px;
+            font-size: 15px;
+        }
+
+        .list-awards li {
+            margin-top: 8px;
+            color: #000
+        }
+
+        /**正文*/
+        .content {
+            padding-top:10px;
+            margin: 5px auto;
+            background-color: #fff;
+            border-radius:2px;
+        }
+
+        .item {
+            background: #fff;
+            color: #333;
+            border-radius: 3px;
+            padding: 8px;
+            word-break: break-all;
+            word-wrap: break-word;
+            white-space: pre;
+            white-space: pre-wrap;
+            border: 1px solid #f1f1f1;
+            cursor:pointer;
+        }
+
+        .item img {
+            width: 100%;
+            height: auto;
+        }
+
+        .item p {
+            text-align: center;
+            margin-top: 5px;
+        }
+
+        .item a{
+            text-decoration: none;
+        }
+
+        .item a:active{
+            color: #551a8b;
+        }
+
+        .item a:visited{
+            color: #551a8b;
+        }
+
+        .item .label-name{
+            height: 25px;
+            width: 100%;
+            text-align: center;
+            background-color: #F1F2F2;
+            font-size: 13px;
+            padding-top: 10px;
+            color: #0000ee;
+        }
+
+        .item .label-vote{
+            text-align: center;
+            height: 32px;
+            margin: 15px auto;
+            margin-bottom: 5px;
+        }
+
+        .item .label-vote .left{
+            float: left;
+            height: 32px;
+            background-color: #fd483f;
+            width: 55%;
+            border-radius: 3px;
+            color:#fff;
+            font-size: 14px;
+            line-height: 32px;
+        }
+
+        .item .label-vote .right{
+            float: left;
+            height: 32px;
+            width: 45%;
+            color: #F00;
+            line-height: 34px;
+            font-size: 14px;
+        }
+
+
+        .item .name-text{
+            margin-left: 5px;
+        }
+
+        .rules-outerside{
+            overflow: hidden;
+            margin-top: 32px;
+        }
+
+        .rules-outerside .title{
+            margin: 0px;
+            height: 30px;
+            width: 40%;
+            background-color: #FFD815;
+            border-radius: 20px;
+            color: #FFF;
+            text-align: center;
+            line-height: 1.8;
+            font-weight: normal;
+            font-size: 17px;
+        }
+
+        .rules-outerside .line{
+            height: 8px;
+            border-bottom: 1px dashed #ffd815;
+        }
+
+        .rules-outerside .description{
+            min-height: 50px;
+            color: #fff;
+            padding-top: 5px;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .margin-bottom{
+            height: 85px;
+            width: 100%;
+        }
+
+        .roulette-footer{
+            width: 100%;
+            position:fixed;
+            left:0px;
+            bottom:0;
+            _position:absolute;
+            height: 45px;
+            background-color: #323436;
+            text-align: center;
+            color: #fff;
+            font-size: 14px;
+            line-height: 38px;
+            opacity: .9;
+            _top:expression(document.documentElement.clientHeight + document.documentElement.scrollTop - this.offsetHeight);
+        }
+
+        .roulette-footer ul{
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .roulette-footer ul li{
+            float: left;
+            width: 24%;
+            line-height: 45px;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        .roulette-footer .active{
+            color:#ffd815;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="header">
+        <img src="/images/castvote/111.jpg" width="100%" alt="">
+    </div>
+
+    <div id="outer">
+        <div id="join">
+            <div class="join-btn">我要报名</div>
+        </div>
+
+        <div id="rank">
+            <div class="arrangements">
+                <ul>
+                    <li>
+                        <div class="index"><i class="fa fa-user"></i><label class="text">参与选手</label></div>
+                        <div class="count">323</div>
+                    </li>
+                    <li>
+                        <div class="index"><i class="fa fa-hand-pointer-o"></i><label class="text">累计投票</label></div>
+                        <div class="count">1234</div>
+                    </li>
+                    <li>
+                        <div class="index"><i class="fa fa-bar-chart"></i>
+                            <label class="text">访问量</label></div>
+                        <div class="count">9999</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="search">
+            <div class="search-bar"><input type="text" placeholder="请输入编号或者名称搜索" /></div>
+            <div class="search-btn">搜索</div>
+        </div>
+
+        <!--<div id="instruction">
+            <div class="title">活动说明：</div>
+            <div class="">
+                <ul class="list-awards">
+                    <li>本次活动每人每天有3次机会，希望投票</li>
+                    <li>本次活动每人每天有3次机会，希望投票</li>
+                </ul>
+            </div>
+        </div>-->
+
+        <section>
+            <div class="content">
+                <div id="device" class="gridalicious">
+                    <div class="galcolumn">
+                        <div class="item"><img src="/images/castvote/1.jpg"/><div class="label-name"><a href="javascript:void(0);"><label>123</label>号<label class="name-text">王小宝</label></a></div><div class="label-vote"><div class="left">投TA一票</div><div class="right">13366票</div></div></div>
+                        <div class="item"><img src="/images/castvote/2.jpg"/><div class="label-name"><a href="javascript:void(0);"><label>123</label>号<label class="name-text">王小宝</label></a></div><div class="label-vote"><div class="left">投TA一票</div><div class="right">3366票</div></div></div>
+                        <div class="item"><img src="/images/castvote/3.jpg"/><div class="label-name"><a href="javascript:void(0);"><label>123</label>号<label class="name-text">王小宝</label></a></div><div class="label-vote"><div class="left">投TA一票</div><div class="right">3366票</div></div></div>
+                        <div class="item"><img src="/images/castvote/4.jpg"/><div class="label-name"><a href="javascript:void(0);"><label>123</label>号<label class="name-text">王小宝</label></a></div><div class="label-vote"><div class="left">投TA一票</div><div class="right">3366票</div></div></div>
+                        <div class="item"><img src="/images/castvote/5.jpg"/><div class="label-name"><a href="javascript:void(0);"><label>123</label>号<label class="name-text">王小宝</label></a></div><div class="label-vote"><div class="left">投TA一票</div><div class="right">3366票</div></div></div>
+                        <div class="item"><img src="/images/castvote/6.jpg"/><div class="label-name"><a href="javascript:void(0);"><label>123</label>号<label class="name-text">王小宝</label></a></div><div class="label-vote"><div class="left">投TA一票</div><div class="right">3366票</div></div></div>
+                        <div class="item"><img src="/images/castvote/7.jpg"/><div class="label-name"><a href="javascript:void(0);"><label>123</label>号<label class="name-text">王小宝</label></a></div><div class="label-vote"><div class="left">投TA一票</div><div class="right">3366票</div></div></div>
+                        <div class="item"><img src="/images/castvote/8.jpg"/><div class="label-name"><a href="javascript:void(0);"><label>123</label>号<label class="name-text">王小宝</label></a></div><div class="label-vote"><div class="left">投TA一票</div><div class="right">3366票</div></div></div>
+                        <div class="item"><img src="/images/castvote/9.jpg"/><div class="label-name"><a href="javascript:void(0);"><label>123</label>号<label class="name-text">王小宝</label></a></div><div class="label-vote"><div class="left">投TA一票</div><div class="right">3366票</div></div></div>
+                        <div class="item"><img src="/images/castvote/10.jpg"/><div class="label-name"><a href="javascript:void(0);"><label>123</label>号<label class="name-text">王小宝</label></a></div><div class="label-vote"><div class="left">投TA一票</div><div class="right">3366票</div></div></div>
+                        <div class="item"><img src="/images/castvote/4.jpg"/><div class="label-name"><a href="javascript:void(0);"><label>123</label>号<label class="name-text">王小宝</label></a></div><div class="label-vote"><div class="left">投TA一票</div><div class="right">3366票</div></div></div>
+                        <div class="item"><img src="/images/castvote/5.jpg"/><div class="label-name"><a href="javascript:void(0);"><label>123</label>号<label class="name-text">王小宝</label></a></div><div class="label-vote"><div class="left">投TA一票</div><div class="right">3366票</div></div></div>
+                        <div class="item"><img src="/images/castvote/6.jpg"/><div class="label-name"><a href="javascript:void(0);"><label>123</label>号<label class="name-text">王小宝</label></a></div><div class="label-vote"><div class="left">投TA一票</div><div class="right">3366票</div></div></div>
+                        <div class="item"><img src="/images/castvote/7.jpg"/><div class="label-name"><a href="javascript:void(0);"><label>123</label>号<label class="name-text">王小宝</label></a></div><div class="label-vote"><div class="left">投TA一票</div><div class="right">3366票</div></div></div>
+                        <div class="item"><img src="/images/castvote/8.jpg"/><div class="label-name"><a href="javascript:void(0);"><label>123</label>号<label class="name-text">王小宝</label></a></div><div class="label-vote"><div class="left">投TA一票</div><div class="right">3366票</div></div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+    <!-- 分页区域 -->
+    <div class=""></div>
+    <!-- 活动说明-->
+    <div class="rules-outerside">
+        <div class="title">活动说明</div>
+        <div class="line"></div>
+        <div class="description">
+            1.本次活动每人每天有3次机会，希望投票 <br/>
+            2.本次活动每人每天有3次机会，希望投票 <br/>
+            3.本次活动每人每天有3次机会，希望投票 <br/>
+            4.每人每天有3次机会，希望投票 <br/>
+            5.你知道的，每人每天有3次机会，希望投票 <br/>
+        </div>
+    </div>
+    <!-- 活动规则-->
+    <div class="rules-outerside">
+        <div class="title">活动规则</div>
+        <div class="line"></div>
+        <div class="description">
+            1.本次活动每人每天有3次机会，希望投票 <br/>
+            2.本次活动每人每天有3次机会，希望投票 <br/>
+            3.本次活动每人每天有3次机会，希望投票 <br/>
+            4.每人每天有3次机会，希望投票 <br/>
+            5.你知道的，每人每天有3次机会，希望投票 <br/>
+        </div>
+    </div>
+
+    <div class="margin-bottom">
+
+    </div>
+
+
+    <div class="roulette-footer">
+        <ul>
+            <li class="active"><i class="fa fa-home"></i> 首页</li>
+            <li><i class="fa fa-bar-chart"></i> 排行榜</li>
+            <li><i class="fa fa-pencil-square-o"></i> 报名</li>
+            <li><i class="fa fa-trophy"></i> 奖品</li>
+        </ul>
+    </div>
+    <script type="text/javascript" src="/js/lib/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="/js/lib/jquery.grid-a-licious.min.js"></script>
+    <script type="text/javascript" src="/js/lib/touche.min.js"></script>
+</body>
+
+<script type="text/javascript">
+    var makeboxes = function() {
+        var boxes = new Array;
+        var randTxt = ['Michael CHeung'];
+        var amount = Math.floor(Math.random()*10);
+        for(i=1;i<amount;i++){
+            num = Math.floor(Math.random()*randTxt.length);
+            div = $('<div></div>').addClass('item');
+            content = "<img src='/images/castvote/"+i+".jpg'/>"+
+                '<div class="label-name"><a href="javascript:void(0);"><label>123</label>号<label class="name-text">王小宝</label></a></div><div class="label-vote"><div class="left">投TA一票</div><div class="right">366票</div></div></div>';
+            div.append(content);
+            boxes.push(div);
+        }
+        return boxes;
+    };
+    //滚动条事件
+    $(document).ready(function () {
+        $(window).scroll(function () {
+            if (($(window).scrollTop() + $(window).height()) == $(document).height()) {
+                //$("#device").gridalicious('append', makeboxes());
+            }
+        });
+        //主要部分
+        $("#device").gridalicious({
+            gutter: 8,         //padding
+            width: 150,			//width
+            animate: true,
+            animationOptions: {
+                speed: 150,
+                duration: 400,
+                complete: function (data) {
+                    console.log("站长素材 - sc.chinaz.com");
+                }
+            },
+        });
+
+
+
+        //底部tab
+        $('.roulette-footer').find('ul li').each(function(index){
+            $(this).on('click', function(){
+                $(this).addClass('active').siblings().removeClass('active');
+            });
+        });
+    });
+</script>
+</html>

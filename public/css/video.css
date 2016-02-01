@@ -1,0 +1,57 @@
+.title{
+    font-size: 20px;
+    margin-bottom: 15px;
+    padding-bottom: 5px;
+    color:#323436;
+    border-bottom: 1px solid #e7e7e7;
+}
+
+.video{
+    overflow:hidden;
+}
+
+.introduction{
+    margin-top: 23px;
+    border-bottom: 1px solid #E7E7E7;
+    padding-bottom: 0px;
+    font-size: 18px;
+    text-indent: 0px;
+    width: 136px;
+    background-color: #0099e9;
+    color: #FFF;
+    line-height: 28px;
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+.brief{
+    margin-top: 15px;
+    min-height: 240px;
+}
+
+.statistics{
+    height: 40px;
+    width: 100%;
+    color: #a9a9a9;
+}
+
+.statistics .viewd{
+    font-size: 16px;
+    float:left;
+}
+
+.statistics .like{
+    float: left;
+    margin-left: 20px;
+    cursor:pointer;
+    font-size:16px;
+}
+
+.statistics .number{
+    margin-left: 5px;
+    cursor:pointer;
+}
+
+.statistics .whistle{
+    float:right;
+}

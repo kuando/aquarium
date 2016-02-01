@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="msapplication-tap-highlight" content="no" />
+    <title></title>
+    <!--<link href="http://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.css" rel="stylesheet">-->
+    <link href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+    <style type="text/css">
+
+        body{
+            font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+        }
+
+        .header-blurbg{
+            height: 120px;
+            background: url('/images/castvote/header2.jpg') center top repeat;
+            background-size: cover;
+            color: #fff;
+        }
+
+        .header-blurbg .title{
+            overflow: hidden;
+            border-bottom: 1px solid #f9f9f9;
+            width: 90%;
+            margin: 0px auto;
+            padding-bottom: 2px;
+        }
+
+        .header-blurbg .title .left{
+            float: left;
+            padding-top: 20px;
+            font-size: 22px;
+        }
+
+        .header-blurbg .title .num{
+            font-size: 14px;
+            margin-left: 1px;
+        }
+
+        .header-blurbg .title .count{
+
+        }
+
+        .header-blurbg .title .left .name{
+            margin-left: 10px;
+        }
+
+        .header-blurbg .title .right{
+            float: right;
+            padding-top: 17px;
+            font-size: 27px;
+        }
+
+        .header-blurbg .description{
+            width: 90%;
+            margin: 0 auto;
+            padding-top: 10px;
+        }
+
+        .content-area{
+            margin: 15px auto;
+        }
+
+        .content-area .frame{
+            border: 1px solid #E7E7E7;
+            overflow: hidden;
+            padding: 10px;
+            border-radius: 3px;
+        }
+
+        .bottom-bg{
+            background: transparent url("/images/castvote/bottom-bg.png") no-repeat;
+            height: 52px;
+            width: 100%;
+            background-size: 100% 100%;
+            height: 52px;
+            width: 100%;
+            margin-bottom: 45px;
+        }
+
+        .roulette-footer{
+            width: 100%;
+            position:fixed;
+            left:0px;
+            bottom:0;
+            _position:absolute;
+            height: 45px;
+            background-color: #323436;
+            text-align: center;
+            color: #fff;
+            font-size: 14px;
+            line-height: 38px;
+            opacity: .9;
+            _top:expression(document.documentElement.clientHeight + document.documentElement.scrollTop - this.offsetHeight);
+        }
+
+        .roulette-footer ul{
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .roulette-footer ul li{
+            float: left;
+            width: 24%;
+            line-height: 45px;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        .roulette-footer .active{
+            color:#ffd815;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="header-blurbg">
+        <div class="title">
+            <div class="left">12306<label class="num">号</label><label class="name">左清一郎</label></div>
+            <div class="right"><label class="count">999</label><label class="num">票</label></div>
+        </div>
+        <div class="description">
+            描述：我长得这么漂亮，赶紧来给我投票吧！
+        </div>
+    </div>
+
+    <!--<div id="header">
+        <img src="/images/castvote/111.jpg" width="100%" alt="">
+    </div>-->
+
+    <div class="content-area">
+        <div class="frame">
+            <img src="/images/castvote/temp.jpg" width="100%" alt=""/>
+            <img src="/images/castvote/t2.jpg" width="100%" alt=""/>
+            <img src="/images/castvote/t3.jpg" width="100%" alt=""/>
+            <img src="/images/castvote/t4.jpg" width="100%" alt=""/>
+        </div>
+
+    </div>
+
+    <div style="height: 300px">
+
+    </div>
+
+    <div class="bottom-bg">
+
+    </div>
+
+    <div class="roulette-footer">
+        <ul>
+            <li class="active"><i class="fa fa-home"></i> 首页</li>
+            <li><i class="fa fa-bar-chart"></i> 排行榜</li>
+            <li><i class="fa fa-pencil-square-o"></i> 报名</li>
+            <li><i class="fa fa-trophy"></i> 奖品</li>
+        </ul>
+    </div>
+    <script type="text/javascript" src="/js/lib/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="/js/lib/jquery.grid-a-licious.min.js"></script>
+</body>
+
+<script type="text/javascript">
+    //滚动条事件
+    $(document).ready(function () {
+        $(window).scroll(function () {
+            if (($(window).scrollTop() + $(window).height()) == $(document).height()) {
+                //$("#device").gridalicious('append', makeboxes());
+            }
+        });
+        //主要部分
+        $("#device").gridalicious({
+            gutter: 8,         //padding
+            width: 150,			//width
+            animate: true,
+            animationOptions: {
+                speed: 150,
+                duration: 400,
+                complete: function (data) {
+                    console.log("站长素材 - sc.chinaz.com");
+                }
+            },
+        });
+
+
+
+        //底部tab
+        $('.roulette-footer').find('ul li').each(function(index){
+            $(this).on('click', function(){
+                $(this).addClass('active').siblings().removeClass('active');
+            });
+        });
+    });
+</script>
+</html>
