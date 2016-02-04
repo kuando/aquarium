@@ -118,21 +118,29 @@ exports.addVideoLikeCount = (req, res)=>{
         parseInt(req.body.like) + 1
     );
     res.sendStatus(200);
-}
+};
 
-exports.castVote = (req, res)=>{
-    res.render('castvote/castvote');
-}
+exports.Vote = (req, res)=>{
+    res.render('vote/vote');
+};
 
-exports.castVoteDetail = (req, res)=>{
-    res.render('castvote/castvote-detail');
-}
+exports.VoteRules = (req, res)=>{
+    res.render('vote/vote-rules');
+};
+
+exports.VoteEnroll = (req, res)=>{
+    res.render('vote/vote-enroll');
+};
+
+exports.VoteDetail = (req, res)=>{
+    res.render('vote/vote-detail');
+};
 
 
 //错误页面处理
 exports.errorPage = (req, res)=>{
     res.render('error');
-}
+};
 
 
 function errorHandler(error, res){

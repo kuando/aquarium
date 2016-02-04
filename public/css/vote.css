@@ -1,0 +1,210 @@
+.vote-header{
+    padding: 20px 10px 0 10px;
+    margin-bottom: -20px;
+}
+.vote-header .vote-arrangements{
+    padding: 10px;
+    height: 75px;
+    border-radius: 10px;
+    background-color: #fff;
+}
+.vote-header .vote-arrangements li{
+    float: left;
+    width: 33%;
+    padding: 5px 0;
+    text-align: center;
+    border-right: 1px solid transparent;
+}
+.vote-header .vote-arrangements li .count{
+    font-weight: bold;
+    margin-top: 5px;
+}
+li.no-b{
+    border:none!important;
+}
+.vote-header .vote-details{
+    padding: 20px 20px 10px 0;
+}
+.vote-header .vote-details span{
+    font-weight: 600;
+}
+.vote-content{
+    padding-top: 10px;
+}
+.cut-off{
+    /*height: 50px;*/
+}
+.cut-yun{
+}
+.vote-filter{
+    padding-top: 5px;
+}
+.vote-filter .btn{
+    margin-right: 5px;
+}
+.vote-option-list{
+    padding-top: 20px;
+}
+.vote-option-list{
+    padding-left: 5px;
+    padding-right: 5px;
+}
+.vote-option-list .item{
+    padding-left: 5px;
+    padding-right: 5px;
+}
+.vote-option-list .thumbnail{
+    border-radius: 0;
+    overflow: hidden;
+    padding: 0;
+    border: none;
+    position: relative;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+.vote-option-list .thumbnail .caption{
+    padding: 9px 0 9px 5px;
+}
+.vote-option-list .thumbnail .caption .item-details{
+    width: 65%;
+}
+.vote-option-list .thumbnail .caption .item-details .count{
+    margin-bottom: 0;
+}
+.vote-toupiao{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 35%;
+    height: 68px;
+    text-align: center;
+    line-height: 68px;
+    letter-spacing: 1px;
+}
+.vote-option-list .thumbnail .number{
+    width: 80px;
+    height: 45px;
+    position: absolute;
+    top: 0;
+    right: 10px;
+    text-align: center;
+    line-height: 35px;
+}
+
+/*导航*/
+.vote-menu ul{
+    margin-left: -10px;
+    margin-right: -10px;
+}
+.vote-menu li{
+    width: 25%;
+    float: left;
+    height: 50px;
+    list-style-type: none;
+    text-align: center;
+    border-right: 1px solid #dfdfdf;
+}
+.vote-menu li a{
+    color: #666;
+    text-decoration: none;
+}
+.vote-menu li i{
+    display: block;
+    font-size: 16px;
+    margin-top: 7px;
+}
+.search-modal{
+    height: 75px;
+    width: 100%;
+    padding-top: 20px;
+    position: fixed;
+    bottom: 50px;
+    background-color:rgba(0,0,0,0.5);
+    display: none;
+}
+.search-modal .close-search{
+    position: absolute;
+    top: 0;
+    right: 3px;
+    color: #fff;
+}
+/*规则*/
+.vote-rules{
+    padding-top: 20px;
+    padding-bottom: 50px;
+}
+.vote-rules .rules-column{
+    height: 30px;
+    width: 130px;
+    font-size: 16px;
+    padding-left: 20px;
+    line-height: 30px;
+    border-bottom-right-radius: 25px;
+    border-top-right-radius: 25px;
+}
+.vote-rules .rules-details{
+    padding-top: 20px;
+    margin-bottom: 20px;
+    line-height: 25px;
+}
+
+/*选手*/
+.player-info{
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 10px;
+    margin-top: 10px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+}
+.player-info .num{
+     font-size: 24px;
+}
+.player-info .number .count{
+    font-size: 24px;
+}
+.player-info .title .name{
+    margin-left: 10px;
+}
+.player-info .player-rank{
+    margin-top: 40px;
+}
+.player-info .player-desc{
+    font-size: 13px;
+    margin-top: 10px;
+}
+.player-img{
+    padding-top: 20px;
+}
+.player-img img{
+    margin-bottom: 20px;
+}
+.player-controls{
+    padding-bottom: 70px;
+}
+.player-controls .btn{
+    margin-bottom: 10px;
+}
+.share-modal{
+    width: 100%;
+    height: 100%;
+    background-color:rgba(0,0,0,0.5);
+    position: fixed;
+    z-index: 5000;
+    top: 0;
+    display: none;
+}
+.share-modal .share-tips{
+    position: fixed;
+    top: 35%;
+    text-align: center;
+}
+.share-modal .share-tips .close-share{
+    margin-top: 50px;
+}
+/*报名*/
+.enroll-form{
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 5px;
+    margin-top: 20px;
+}

@@ -1,0 +1,121 @@
+body{
+    background-color: #e3f5ff;
+}
+
+.search-btn,
+.search-btn:hover,
+.search-btn:focus,
+.search-btn:active{
+    background-color: #72c0e6 !important;
+    border: 1px solid #72c0e6 !important;
+    color: #fff;
+}
+.btn-filter,
+.btn-filter:hover,
+.btn-filter:focus{
+    background-color: #72c0e6 !important;
+    border: 1px solid #72c0e6 !important;
+    color: #ffffff;
+    border-radius:4px;
+}
+.btn-filter.active{
+    background-color: #037ab2 !important;
+    border: 1px solid #037ab2 !important;
+}
+.vote-header{
+    background-color: #72c0e6;
+}
+.vote-header .vote-arrangements li{
+    border-color: #72c0e6;
+    color: #72c0e6;
+}
+.vote-header .vote-details{
+    color: #fff;
+}
+
+.cut-off{
+    /*background-image: url("/images/vote/mw_001.jpg");*/
+}
+.vote-option-list .thumbnail{
+    background-color: #72c0e6;
+}
+.vote-option-list .thumbnail p{
+    color: #fff;
+}
+.vote-toupiao{
+    background-color:#f67685;
+    color: #fff;
+}
+.vote-option-list .thumbnail .number{
+    background-image: url("/images/vote/number-blue.png");
+    color: #fff;
+}
+/*∑÷“≥*/
+.pagination > li > a,
+.pagination > li > span {
+    color: #72c0e6;
+}
+.pagination > li > a:hover,
+.pagination > li > span:hover,
+.pagination > li > a:focus,
+.pagination > li > span:focus {
+    color: #72c0e6;
+    border-color: #72c0e6;
+}
+.pagination > .active > a,
+.pagination > .active > span,
+.pagination > .active > a:hover,
+.pagination > .active > span:hover,
+.pagination > .active > a:focus,
+.pagination > .active > span:focus {
+    background-color: #72c0e6;
+    border-color: #72c0e6;
+}
+.pagination > .disabled > span,
+.pagination > .disabled > span:hover,
+.pagination > .disabled > span:focus,
+.pagination > .disabled > a,
+.pagination > .disabled > a:hover,
+.pagination > .disabled > a:focus {
+    color: #72c0e6;
+}
+.vote-rules .rules-column{
+    background-color: #72c0e6;
+    color: #fff;
+}
+.vote-rules .rules-details{
+    color: #1883b9;
+}
+.vote-menu{
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#f2f2f2));
+    background-image: -webkit-linear-gradient(top, #ffffff, #f2f2f2);
+    background-image: -o-linear-gradient(top, #ffffff, #f2f2f2);
+    background-image: linear-gradient(to bottom, #ffffff, #f2f2f2);
+}
+
+/*—° ÷*/
+.player-info .num,
+.player-info .number .count{
+    color: #72c0e6;
+}
+.btn-info,
+.btn-info:hover,
+.btn-info:focus,
+.btn-info:active{
+    background-color: #72c0e6 !important;
+    border: 1px solid #72c0e6 !important;
+}
+.btn-warning,
+.btn-warning:hover,
+.btn-warning:focus,
+.btn-warning:active{
+    background-color: #ffbd4a !important;
+    border: 1px solid #ffbd4a !important;
+}
+.btn-danger,
+.btn-danger:active,
+.btn-danger:focus,
+.btn-danger:hover{
+    background-color: #f67685 !important;
+    border: 1px solid #f67685 !important;
+}

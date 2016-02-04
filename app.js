@@ -41,10 +41,16 @@ app.post('/view/praise', routes.addVideoLikeCount);
 app.get('/event/:eventId/view/:videoId', routes.turnToVideo);
 
 //投票
-app.get('/castvote', routes.castVote);
+app.get('/vote', routes.Vote);
+
+//投票规则
+app.get('/vote/rules', routes.VoteRules);
+
+//投票报名
+app.get('/vote/enroll', routes.VoteEnroll);
 
 //投票详情
-app.get('/castvote/detail', routes.castVoteDetail);
+app.get('/vote/detail', routes.VoteDetail);
 
 
 app.listen(app.get('port'),function () {
