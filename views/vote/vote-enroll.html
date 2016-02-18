@@ -10,6 +10,7 @@
     <title></title>
     <link href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="/css/bootstrap.css" rel="stylesheet">
+    <link href="/css/uploadify.css" rel="stylesheet">
     <link href="/css/bootstrap-theme.css" rel="stylesheet">
     <link href="/css/vote.css" rel="stylesheet">
     <link href="/css/theme/theme-blue.css" rel="stylesheet">
@@ -17,17 +18,43 @@
 <body>
 <!--header-->
 <div class="container-fluid">
+    <div class="vote-column-title">
+        参赛报名处
+    </div>
     <div class="row">
         <div class="col-xs-12">
             <div class="enroll-form">
                 <form class="form-horizontal">
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Email address</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                        <label for="name">姓名：</label>
+                        <input type="email" class="form-control" id="name" placeholder="请输入姓名">
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputPassword1">Password</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                        <label for="phone">电话：</label>
+                        <input type="password" class="form-control" id="phone" placeholder="请输入电话">
+                    </div>
+                    <div class="form-group">
+                        <label>上传图片：</label>
+                        <div class="row">
+                            <div id="fileList">
+
+                            </div>
+                            <div class="col-xs-4">
+                                <a href="javascript:void(0);" class="a-upload">
+                                    <img src="/images/vote/upload_btn-blue.png" width="100%">
+                                    <input type="file" id="fileElem" multiple accept="image/*"  onchange="handleFiles(this)">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>描述：</label>
+                        <textarea class="form-control" rows="3" placeholder="请根据参赛规则进行填写"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-offset-2 col-xs-8">
+                            <button class="btn btn-info btn-block">报名</button>
+                        </div>
                     </div>
                 </form>
             </div>
@@ -38,8 +65,8 @@
     <div class="container-fluid">
         <ul class="list-unstyled">
             <li><a href="/vote"><i class="fa fa-home"></i>首页</a></li>
-            <li><a href="#"><i class="fa fa-pencil-square-o"></i>报名</a></li>
-            <li><a href="#"><i class="fa fa-bar-chart"></i>排行</a></li>
+            <li><a href="/vote/enroll"><i class="fa fa-pencil-square-o"></i>报名</a></li>
+            <li><a href="/vote/rank"><i class="fa fa-bar-chart"></i>排行</a></li>
             <li class="no-b"><a href="javascript:void(0)" id="openSearchModal"><i class="fa fa-search"></i>搜索</a></li>
         </ul>
     </div>
@@ -61,7 +88,30 @@
 </div>
 <script type="text/javascript" src="/js/lib/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="/js/lib/bootstrap.min.js"></script>
+<script type="text/javascript" src="/js/lib/jquery.uploadify.min.js"></script>
 <script type="text/javascript" src="/js/vote.js"></script>
 </body>
+<script type="text/javascript">
+    window.URL = window.URL || window.webkitURL;
+    var fileElem = document.getElementById("fileElem");
+    var fileList = document.getElementById("fileList");
+    function handleFiles(obj) {
+        var files = obj.files;
+        var img = new Image();
+        if(window.URL){
+            //File API
+            img.src = window.URL.createObjectURL(files[0]); //创建一个object URL，并不是你的本地路径
+            img.onload = function(e) {
+                window.URL.revokeObjectURL(this.src); //图片加载后，释放object URL
+            }
+            img.className = "col-xs-4";
+            console.log(img)
+//            var div = document.createElement("div");
+//            div.className = "col-xs-4";
+//            div.innerHTML = img;
+            fileList.appendChild(img);
 
+        }
+    }
+</script>
 </html>

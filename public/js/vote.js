@@ -26,4 +26,5 @@ $(document).ready(function () {
     $(".share-modal").on("click","#closeShare", function(){
         $("#shareModal").fadeOut()
     });
+
 });

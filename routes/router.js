@@ -132,6 +132,9 @@ exports.VoteEnroll = (req, res)=>{
     res.render('vote/vote-enroll');
 };
 
+exports.VoteRank = (req, res)=>{
+    res.render('vote/vote-rank');
+};
 exports.VoteDetail = (req, res)=>{
     res.render('vote/vote-detail');
 };

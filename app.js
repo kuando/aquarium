@@ -49,6 +49,9 @@ app.get('/vote/rules', routes.VoteRules);
 //投票报名
 app.get('/vote/enroll', routes.VoteEnroll);
 
+//投票排行
+app.get('/vote/rank', routes.VoteRank);
+
 //投票详情
 app.get('/vote/detail', routes.VoteDetail);
 

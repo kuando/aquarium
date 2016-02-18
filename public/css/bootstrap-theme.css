@@ -251,3 +251,8 @@
     border-color: transparent;
     cursor: not-allowed;
 }
+/*form*/
+.form-group label{
+    color: #666;
+    font-weight: normal;
+}

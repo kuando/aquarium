@@ -1,7 +1,6 @@
 body{
     background-color: #e3f5ff;
 }
-
 .search-btn,
 .search-btn:hover,
 .search-btn:focus,
@@ -29,6 +28,9 @@ body{
     border-color: #72c0e6;
     color: #72c0e6;
 }
+.vote-header .recently p{
+    color: #fff;
+}
 .vote-header .vote-details{
     color: #fff;
 }
@@ -44,6 +46,10 @@ body{
 }
 .vote-toupiao{
     background-color:#f67685;
+    color: #fff;
+}
+a.vote-toupiao:hover,
+a.vote-toupiao:active{
     color: #fff;
 }
 .vote-option-list .thumbnail .number{

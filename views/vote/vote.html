@@ -24,7 +24,6 @@
                 <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
                 <li data-target="#carousel-example-generic" data-slide-to="1"></li>
             </ol>
-
             <!-- Wrapper for slides -->
             <div class="carousel-inner" role="listbox">
                 <div class="item active">
@@ -64,6 +63,27 @@
                     </li>
                 </ul>
             </div>
+            <div class="recently">
+                <p>最近报名：</p>
+                <ul class="list-unstyled">
+                    <li><img src="/images/castvote/1.jpg"></li>
+                    <li><img src="/images/castvote/2.jpg"></li>
+                    <li><img src="/images/castvote/3.jpg"></li>
+                    <li><img src="/images/castvote/4.jpg"></li>
+                    <li><img src="/images/castvote/5.jpg"></li>
+                    <li><img src="/images/castvote/6.jpg"></li>
+                    <li><img src="/images/castvote/7.jpg"></li>
+                    <li><img src="/images/castvote/8.jpg"></li>
+                    <li><img src="/images/castvote/9.jpg"></li>
+                    <li><img src="/images/castvote/1.jpg"></li>
+                    <li><img src="/images/castvote/2.jpg"></li>
+                    <li><img src="/images/castvote/3.jpg"></li>
+                    <li><img src="/images/castvote/4.jpg"></li>
+                    <li><img src="/images/castvote/5.jpg"></li>
+                    <li><img src="/images/castvote/6.jpg"></li>
+                    <li><img src="/images/castvote/7.jpg"></li>
+                </ul>
+            </div>
             <div class="vote-details">
                 <p><span>主题名称</span>：萌宝大赛</p>
                 <p><span>主办单位</span>：南京能动英语</p>
@@ -78,9 +98,9 @@
     <div class="row vote-content">
         <div class="col-xs-12">
             <div class="vote-filter">
-                <a class="btn btn-filter">我要参加</a>
+                <a href="/vote/enroll" class="btn btn-filter">我要参加</a>
                 <a href="/vote/rules" class="btn btn-filter">赛事规则</a>
-                <a class="btn btn-filter">TOP 50</a>
+                <a href="/vote/rank" class="btn btn-filter">TOP 50</a>
             </div>
             <div class="vote-option-list">
                 <div class="row" id="masonry">
@@ -90,10 +110,10 @@
                             <div class="number">00001号</div>
                             <div class="caption">
                                 <div class="item-details">
-                                    <p class="name">王小宝小宝</p>
+                                    <p class="name">李小宝</p>
                                     <p class="count">13 票</p>
                                 </div>
-                                <a href="#" class="vote-toupiao" role="button">投票</a>
+                                <a href="/vote/detail" class="vote-toupiao" role="button">投票</a>
                             </div>
                         </div>
                     </div>
@@ -224,35 +244,13 @@
     <div class="row cut-yun">
         <img src="/images/vote/mw_002.jpg" width="100%">
     </div>
-    <div class="vote-rules">
-        <div class="row rules-column">奖品设置</div>
-        <div class="row rules-details">
-            <div class="col-xs-12">
-                1.本次活动每人每天有3次机会，希望投票 <br/>
-                2.本次活动每人每天有3次机会，希望投票 <br/>
-                3.本次活动每人每天有3次机会，希望投票 <br/>
-                4.每人每天有3次机会，希望投票 <br/>
-                5.你知道的，每人每天有3次机会，希望投票 <br/>
-            </div>
-        </div>
-        <div class="row rules-column">奖品设置</div>
-        <div class="row rules-details">
-            <div class="col-xs-12">
-                1.本次活动每人每天有3次机会，希望投票 <br/>
-                2.本次活动每人每天有3次机会，希望投票 <br/>
-                3.本次活动每人每天有3次机会，希望投票 <br/>
-                4.每人每天有3次机会，希望投票 <br/>
-                5.你知道的，每人每天有3次机会，希望投票 <br/>
-            </div>
-        </div>
-    </div>
 </div>
 <nav class="navbar vote-menu navbar-fixed-bottom">
     <div class="container-fluid">
         <ul class="list-unstyled">
             <li><a href="/vote"><i class="fa fa-home"></i>首页</a></li>
-            <li><a href="#"><i class="fa fa-pencil-square-o"></i>报名</a></li>
-            <li><a href="#"><i class="fa fa-bar-chart"></i>排行</a></li>
+            <li><a href="/vote/enroll"><i class="fa fa-pencil-square-o"></i>报名</a></li>
+            <li><a href="/vote/rank"><i class="fa fa-bar-chart"></i>排行</a></li>
             <li class="no-b"><a href="javascript:void(0)" id="openSearchModal"><i class="fa fa-search"></i>搜索</a></li>
         </ul>
     </div>

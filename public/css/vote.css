@@ -1,3 +1,13 @@
+.vote-column-title{
+    background-image: url("/images/vote/title-bg.png");
+    width: 220px;
+    height: 70px;
+    line-height: 65px;
+    text-align: center;
+    font-size: 18px;
+    margin: 0 auto;
+    margin-top: 20px;
+}
 .vote-header{
     padding: 20px 10px 0 10px;
     margin-bottom: -20px;
@@ -7,6 +17,7 @@
     height: 75px;
     border-radius: 10px;
     background-color: #fff;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.3);
 }
 .vote-header .vote-arrangements li{
     float: left;
@@ -22,6 +33,28 @@
 li.no-b{
     border:none!important;
 }
+.vote-header .recently{
+    height: 110px;
+    padding-top: 15px;
+}
+.vote-header .recently p{
+    color: #fff;
+    font-weight: 600;
+}
+.vote-header .recently ul{
+}
+.vote-header .recently li{
+    float: left;
+    height: 35px;
+    width: 42px;
+    margin-bottom: 5px;
+    text-align: center;
+}
+.vote-header .recently li img{
+    width: 30px;
+    height: 30px;
+    border-radius: 5px;
+}
 .vote-header .vote-details{
     padding: 20px 20px 10px 0;
 }
@@ -35,6 +68,7 @@ li.no-b{
     /*height: 50px;*/
 }
 .cut-yun{
+    margin-bottom: 50px;
 }
 .vote-filter{
     padding-top: 5px;
@@ -71,7 +105,7 @@ li.no-b{
 .vote-option-list .thumbnail .caption .item-details .count{
     margin-bottom: 0;
 }
-.vote-toupiao{
+a.vote-toupiao{
     position: absolute;
     bottom: 0;
     right: 0;
@@ -80,6 +114,7 @@ li.no-b{
     text-align: center;
     line-height: 68px;
     letter-spacing: 1px;
+    text-decoration: none;
 }
 .vote-option-list .thumbnail .number{
     width: 80px;
@@ -203,8 +238,72 @@ li.no-b{
 }
 /*±¨Ãû*/
 .enroll-form{
-    padding: 10px;
+    padding: 10px 20px;
     background-color: #fff;
     border-radius: 5px;
     margin-top: 20px;
+    margin-bottom: 70px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+}
+/*a  upload */
+.a-upload {
+    line-height: 20px;
+    position: relative;
+    cursor: pointer;
+    color: #888;
+    overflow: hidden;
+    display: inline-block;
+}
+
+.a-upload  input {
+    position: absolute;
+    font-size: 100px;
+    right: 0;
+    top: 0;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    cursor: pointer
+}
+/*ÅÅÐÐ*/
+.rank-list{
+}
+.rank-item{
+    height: 60px;
+}
+.rank-item .media{
+    height: 60px;
+    border-radius: 35px;
+    background-color: #72c0e6;
+    color: #fff;
+    padding-top: 5px;
+    position: relative;
+    margin-top: 20px;
+}
+.rank-item .media h4{
+    font-size: 14px;
+    margin-top: 3px;
+}
+.rank-item .media .player-num{
+    font-weight: bold;
+    margin-left: 20px;
+    margin-right: 2px;
+    font-size: 16px;
+}
+.rank-item .media .number{
+    background-image: url("/images/vote/blue-rank-num.png");
+    width: 34px;
+    height: 40px;
+    position: absolute;
+    text-align: center;
+    top: 0;
+    right: 30px;
+    padding-top: 5px;
+    font-weight: 600;
+    color: #fff;
+}
+.rank-item .media img{
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+    margin-left: 5px;
 }

@@ -17,29 +17,55 @@
 <body>
 <!--header-->
 <div class="container-fluid">
+    <div class="vote-column-title">
+        排行榜
+    </div>
     <div class="row">
         <div class="col-xs-12">
-            <div class="player-info">
-                <div class="title pull-left"><span class="num">00001</span>号<span class="name">李小宝</span></div>
-                <div class="number pull-right"><span class="count">123</span>票</div>
-                <div class="player-rank">当前排名：<span class="num">21</span></div>
-                <div class="player-desc">
-                    在互联网时代，如何能够在线上找到目标客户，同时引导目标客户从线上转移到线下消费？Jpush极光推送将为大家分享如何通过一个简单方便的SaaS平台产品，在互联网世界里精准找到目标用户，并且向目标用户进行精准营销与推广。
+            <div class="rank-list">
+                <div class="rank-item">
+                    <div class="media">
+                        <div class="media-left">
+                            <a href="#">
+                                <img class="media-object" src="/images/castvote/1.jpg" alt="...">
+                            </a>
+                        </div>
+                        <div class="media-body">
+                            <h4 class="media-heading">王小宝</h4>
+                            <span>编号：00001</span>
+                            <span class="player-num">4680</span>票
+                            <div class="number">1</div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="player-img">
-                <img src="/images/castvote/3.jpg" width="100%">
-                <img src="/images/castvote/8.jpg" width="100%">
-                <img src="/images/castvote/10.jpg" width="100%">
-            </div>
-            <div class="player-controls">
-                <div class="row">
-                    <div class="col-xs-offset-2 col-xs-8">
-                        <a href="http://app.hizuoye.com/auth" class="btn btn-warning btn-block">投TA一票</a>
-                        <button type="button" class="btn btn-danger btn-block" id="sharePlayer">帮TA拉票</button>
-                        <button type="button" class="btn btn-info btn-block">我要报名</button>
-                        <button type="button" class="btn btn-info btn-block">看看其他选手</button>
-                        <button type="button" class="btn btn-info btn-block">关注主办方</button>
+                <div class="rank-item">
+                    <div class="media">
+                        <div class="media-left">
+                            <a href="#">
+                                <img class="media-object" src="/images/castvote/2.jpg" alt="...">
+                            </a>
+                        </div>
+                        <div class="media-body">
+                            <h4 class="media-heading">马晓东</h4>
+                            <span>编号：00001</span>
+                            <span class="player-num">3123</span>票
+                            <div class="number">2</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="rank-item">
+                    <div class="media">
+                        <div class="media-left">
+                            <a href="#">
+                                <img class="media-object" src="/images/castvote/3.jpg" alt="...">
+                            </a>
+                        </div>
+                        <div class="media-body">
+                            <h4 class="media-heading">李小伟</h4>
+                            <span>编号：00001</span>
+                            <span class="player-num">1232</span>票
+                            <div class="number">3</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -51,7 +77,7 @@
         <ul class="list-unstyled">
             <li><a href="/vote"><i class="fa fa-home"></i>首页</a></li>
             <li><a href="/vote/enroll"><i class="fa fa-pencil-square-o"></i>报名</a></li>
-            <li><a href="#"><i class="fa fa-bar-chart"></i>排行</a></li>
+            <li><a href="/vote/rank"><i class="fa fa-bar-chart"></i>排行</a></li>
             <li class="no-b"><a href="javascript:void(0)" id="openSearchModal"><i class="fa fa-search"></i>搜索</a></li>
         </ul>
     </div>
@@ -70,14 +96,6 @@
             </div>
         </div>
     </form>
-</div>
-<div class="share-modal" id="shareModal">
-    <div  class="share-tips" >
-        <img src="/images/vote/share_tips.png" width="100%">
-        <a class="close-share btn btn-info" id="closeShare">我知道了</a>
-    </div>
-
-
 </div>
 <script type="text/javascript" src="/js/lib/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="/js/lib/bootstrap.min.js"></script>
