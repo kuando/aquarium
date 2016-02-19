@@ -1,19 +1,19 @@
 body{
-    background-color: #e3f5ff;
+    background-color: #ffdccc;
 }
 .search-btn,
 .search-btn:hover,
 .search-btn:focus,
 .search-btn:active{
-    background-color: #72c0e6 !important;
-    border: 1px solid #72c0e6 !important;
+    background-color: #ff756b !important;
+    border: 1px solid #ff756b !important;
     color: #fff;
 }
 .btn-filter,
 .btn-filter:hover,
 .btn-filter:focus{
-    background-color: #72c0e6 !important;
-    border: 1px solid #72c0e6 !important;
+    background-color: #ff756b !important;
+    border: 1px solid #ff756b !important;
     color: #ffffff;
     border-radius:4px;
 }
@@ -22,11 +22,11 @@ body{
     border: 1px solid #037ab2 !important;
 }
 .vote-header{
-    background-color: #72c0e6;
+    background-color: #fee797;
 }
 .vote-header .vote-arrangements li{
-    border-color: #72c0e6;
-    color: #72c0e6;
+    border-color: #fee797;
+    color: #fee797;
 }
 .vote-header .recently p{
     color: #fff;
@@ -36,13 +36,13 @@ body{
 }
 
 .vote-option-list .thumbnail{
-    background-color: #72c0e6;
+    background-color: #ff756b;
 }
 .vote-option-list .thumbnail p{
     color: #fff;
 }
 .vote-toupiao{
-    background-color:#f67685;
+    background-color:#fa483c;
     color: #fff;
 }
 a.vote-toupiao:hover,
@@ -50,20 +50,20 @@ a.vote-toupiao:active{
     color: #fff;
 }
 .vote-option-list .thumbnail .number{
-    background-image: url("/images/vote/theme-blue/number-blue.png");
+    background-image: url("/images/vote/theme-red/number-red.png");
     color: #fff;
 }
 /*∑÷“≥*/
 .pagination > li > a,
 .pagination > li > span {
-    color: #72c0e6;
+    color: #ff756b;
 }
 .pagination > li > a:hover,
 .pagination > li > span:hover,
 .pagination > li > a:focus,
 .pagination > li > span:focus {
-    color: #72c0e6;
-    border-color: #72c0e6;
+    color: #ff756b;
+    border-color: #ff756b;
 }
 .pagination > .active > a,
 .pagination > .active > span,
@@ -71,8 +71,8 @@ a.vote-toupiao:active{
 .pagination > .active > span:hover,
 .pagination > .active > a:focus,
 .pagination > .active > span:focus {
-    background-color: #72c0e6;
-    border-color: #72c0e6;
+    background-color: #ff756b;
+    border-color: #ff756b;
 }
 .pagination > .disabled > span,
 .pagination > .disabled > span:hover,
@@ -80,14 +80,14 @@ a.vote-toupiao:active{
 .pagination > .disabled > a,
 .pagination > .disabled > a:hover,
 .pagination > .disabled > a:focus {
-    color: #72c0e6;
+    color: #ff756b;
 }
 .vote-rules .rules-column{
-    background-color: #72c0e6;
+    background-color: #ff756b;
     color: #fff;
 }
 .vote-rules .rules-details{
-    color: #1883b9;
+    color: #ff756b;
 }
 .vote-menu{
     background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#f2f2f2));
@@ -99,14 +99,14 @@ a.vote-toupiao:active{
 /*—° ÷*/
 .player-info .num,
 .player-info .number .count{
-    color: #72c0e6;
+    color: #ff756b;
 }
 .btn-info,
 .btn-info:hover,
 .btn-info:focus,
 .btn-info:active{
-    background-color: #72c0e6 !important;
-    border: 1px solid #72c0e6 !important;
+    background-color: #ff756b !important;
+    border: 1px solid #ff756b !important;
 }
 .btn-warning,
 .btn-warning:hover,
@@ -124,10 +124,10 @@ a.vote-toupiao:active{
 }
 
 .rank-item .media .number{
-    background-image: url("/images/vote/theme-blue/rank-num.png");
+    background-image: url("/images/vote/theme-red/rank-num.png");
     color: #fff;
 }
 .rank-item .media{
-    background-color: #72c0e6;
+    background-color: #ff756b;
     color: #fff;
 }
