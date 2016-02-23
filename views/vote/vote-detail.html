@@ -39,7 +39,7 @@
                         <button type="button" class="btn btn-danger btn-block" id="sharePlayer">帮TA拉票</button>
                         <button type="button" class="btn btn-info btn-block">我要报名</button>
                         <button type="button" class="btn btn-info btn-block">看看其他选手</button>
-                        <button type="button" class="btn btn-info btn-block">关注主办方</button>
+                        <button type="button" class="btn btn-info btn-block" id="followSponsor">关注主办方</button>
                     </div>
                 </div>
             </div>
@@ -71,13 +71,18 @@
         </div>
     </form>
 </div>
+<div class="follow-modal" id="followModal">
+    <div  class="follow-tips" >
+        <img class="center-block" src="/images/vote/ewm.jpg" width="60%">
+        <p class="info" style="">长按上方二维码关注主办方</p>
+        <a class="close-follow btn btn-info" id="closeFollow">我知道了</a>
+    </div>
+</div>
 <div class="share-modal" id="shareModal">
     <div  class="share-tips" >
-        <img src="/images/vote/share_tips.png" width="100%">
+        <img src="/images/vote/share_tips.png" width="90%">
         <a class="close-share btn btn-info" id="closeShare">我知道了</a>
     </div>
-
-
 </div>
 <script type="text/javascript" src="/js/lib/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="/js/lib/bootstrap.min.js"></script>

@@ -156,6 +156,7 @@ a.vote-toupiao{
     bottom: 50px;
     background-color:rgba(0,0,0,0.5);
     display: none;
+    z-index: 5000;
 }
 .search-modal .close-search{
     position: absolute;
@@ -219,7 +220,7 @@ a.vote-toupiao{
 .player-controls .btn{
     margin-bottom: 10px;
 }
-.share-modal{
+.share-modal,.follow-modal{
     width: 100%;
     height: 100%;
     background-color:rgba(0,0,0,0.5);
@@ -232,6 +233,17 @@ a.vote-toupiao{
     position: fixed;
     top: 35%;
     text-align: center;
+}
+.follow-modal .follow-tips{
+    position: fixed;
+    top: 20%;
+    text-align: center;
+}
+.follow-modal .follow-tips .info{
+    color: #fff;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-weight: bold
 }
 .share-modal .share-tips .close-share{
     margin-top: 50px;
