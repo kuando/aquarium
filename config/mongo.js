@@ -2,7 +2,7 @@
 /**
  * Module dependencies.
  */
-var db = require('../config/configuration').db;
+var db = require('./config').db;
 var mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
 

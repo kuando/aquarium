@@ -2,7 +2,8 @@
  * Created by Administrator on 2016/1/18.
  */
 $(document).ready(function () {
-
+    var loadingToast = $("#loadingToast");
+    var successToast = $("#successToast");
     $('#register').bind('click', function () {
         $("#mask-bg").show();
         $("#mask-sh").show();
@@ -23,7 +24,7 @@ $(document).ready(function () {
             alert('请输入联系方式！');
             return;
         }
-        if(checkMobile(phone)) return;
+        if (checkMobile(phone)) return;
         var $fields = $('.r-field')
             , len = $fields.size()
             , fields = new Array(len);
@@ -35,42 +36,31 @@ $(document).ready(function () {
             }
 
         });
-        var createdTime = new Date();
-        $.post("/enrollment", {
+        loadingToast.show();
+        var _id = $('.r-id').val();
+        $.post("/events/" + _id + "/enrollNames", {
             name: name,
             phone: phone,
-            fields: fields,
-            enroll: enroll,
-            schoolId: schoolId,
-            createdTime:createdTime
+            fields: fields
         }, function (data) {
-            alert('您已成功报名！');
             removeMask();
-            if(data.result){
+            successToast.show();
+            loadingToast.hide();
+            setTimeout(function () {
+                successToast.hide();
+            }, 2000);
+            if (data.result) {
                 appendRegisteredInfo(data.result);
             }
-        }).error(function (data) {
-            if (data.status == 401) {
-                alert('您已经报过名了！');
-                removeMask();
-            }
-            return;
         });
-
     });
 
     //点赞
     $('.like').bind('click', function () {
         var _id = $('.r-id').val();
         var like = $('#like').text();
-        $.post("/praise", {
-            _id: _id,
-            like: parseInt(like)
-        }, function () {
+        $.post("/events/" + _id + '/like', function () {
             $('#like').text(parseInt(like) + 1);
-        }).error(function () {
-            alert('网络故障，请稍后重试！');
-            return;
         });
     });
 
@@ -94,15 +84,15 @@ $(document).ready(function () {
     }
 
     //添加报名过后的信息
-    function appendRegisteredInfo(item){
+    function appendRegisteredInfo(item) {
         var registered =
             '<div class="item">' +
             '<img src="/images/thumb.png" alt="" width="23px" height="23px"/>' +
             '<div class="value">' +
             '<label>' + item.name + '</label>' +
             '</div>' +
-            '<div class="date">'+ new Date(item.createdTime).Format('yyyy-MM-dd hh:mm') +'</div>' +
-        '</div>';
+            '<div class="date">' + new Date(item.createdTime).Format('yyyy-MM-dd hh:mm') + '</div>' +
+            '</div>';
         $('.register-board').append(registered);
     }
 });

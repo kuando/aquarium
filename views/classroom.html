@@ -2,86 +2,86 @@
 <html>
 <head lang="en">
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
     <meta name="format-detection" content="telephone=no"/>
-    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="msapplication-tap-highlight" content="no"/>
     <link href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
-    <link href="/css/classroom.css" rel="stylesheet" />
+    <link href="/css/classroom.css" rel="stylesheet"/>
     <title><%= record.title%></title>
 </head>
 <body>
-    <div id="slider">
-        <img src="http://resource.hizuoye.com/<%= record.coverImage%>" alt="" width="100%"/>
-        <div class="separation"></div>
-        <div class="title">
-            <%= record.title%>
+<div id="slider">
+    <img src="http://resource.hizuoye.com/<%= record.coverImage%>" alt="" width="100%"/>
+    <div class="separation"></div>
+    <div class="title">
+        <%= record.title%>
+    </div>
+    <div class="description">
+        <div class="left">
+            <label name="">推荐指数：</label>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
         </div>
-        <div class="description">
-            <div class="left">
-                <label name="">推荐指数：</label>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-            </div>
-            <div class="right">
-                <i class="fa fa-user"></i>
-                <%= record.visit%> 人正在看
-            </div>
+        <div class="right">
+            <i class="fa fa-user"></i>
+            <%= record.visit%> 人正在看
         </div>
+    </div>
 
-        <div class="course-brief"><i class="fa fa-bookmark"></i>课程简介</div>
-        <div class="brief-detail item-list">
-            <%= record.courseBrief%>
-        </div>
-
-        <div class="course-brief"><i class="fa fa-bookmark"></i>课程列表</div>
-        <div class="course-list">
-            <ul>
-                <% if (record.courses.length) { %>
-                <% record.courses.forEach(function(course){ %>
-                <a href="/event/<%= record._id.toString()%>/view/<%= course._id%>">
-                    <li>
-                        <div class="left">
-                            <span class="label-icon"><i class="fa fa-play-circle-o"></i></span>
-                            <%= course.title%>
-                        </div>
-                    </li>
+    <div class="course-brief"><i class="fa fa-bookmark"></i>课程简介</div>
+    <div class="brief-detail item-list">
+        <%= record.courseBrief%>
+    </div>
+    <div class="course-brief"><i class="fa fa-bookmark"></i>课程列表</div>
+    <div class="course-list">
+        <ul>
+            <% if (record.courses.length) { %>
+            <% record.courses.forEach(function(course){ %>
+            <li>
+                <a href="/events/<%= record.id.toString()%>/videos/<%= course._id%>">
+                    <div class="left">
+                        <span class="label-icon"><i class="fa fa-play-circle-o"></i></span>
+                        <%= course.title%>
+                    </div>
                 </a>
-                <% })%>
-                <% } %>
-            </ul>
-        </div>
+            </li>
+            <% })%>
+            <% } %>
+        </ul>
     </div>
+</div>
 
-    <div class="statistics">
-        <div class="viewd">
-            阅读
-            <label class="number">
-                <% if (record.visit == null) { %>
-                0
-                <% } else {%>
-                <%= record.visit%>
-                <% } %>
-            </label>
-        </div>
-        <div class="like">
-            <i class="fa fa-thumbs-o-up"></i><label class="number"><span id="like"><%= record.like%></span></label>
-        </div>
-        <div class="whistle">
-            举报
-        </div>
+<div class="statistics">
+    <div class="viewd">
+        阅读
+        <label class="number">
+            <% if (record.visit == null) { %>
+            0
+            <% } else {%>
+            <%= record.visit%>
+            <% } %>
+        </label>
     </div>
-    <input type="hidden" value="<%= record._id.toString()%>" class="r-id"/>
+    <div class="like">
+        <i class="fa fa-thumbs-o-up"></i><label class="number"><span id="like"><%= record.like%></span></label>
+    </div>
+    <div class="whistle">
+        举报
+    </div>
+</div>
+<input type="hidden" value="<%= record._id.toString()%>" class="r-id"/>
 </body>
-<script type="text/javascript" src="/js/lib/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="/js/lib/zepto.min.js"></script>
 <script type="text/javascript" src="/js/register.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
         $('.introduction').find('ul>li').each(function (index) {
-            var clazz = 'active'
+            var clazz = 'active';
             $(this).bind('click', function () {
                 $(this).addClass(clazz).siblings().removeClass(clazz);
                 $('.item-list').eq(index).show().siblings().hide();
