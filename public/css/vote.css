@@ -233,11 +233,13 @@ a.vote-toupiao{
     position: fixed;
     top: 35%;
     text-align: center;
+    width: 100%;
 }
 .follow-modal .follow-tips{
     position: fixed;
     top: 20%;
     text-align: center;
+    width: 100%;
 }
 .follow-modal .follow-tips .info{
     color: #fff;
