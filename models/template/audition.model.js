@@ -4,7 +4,6 @@
 'use strict';
 
 const mongoose = require('mongoose');
-const Event = mongoose.model('Event');
 
 //试听课邀请
 const auditionSchema = new mongoose.Schema({

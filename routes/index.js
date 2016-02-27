@@ -8,34 +8,33 @@ const event = require('../controller/event');
 module.exports = function (app) {
 
     // 获取指定活动
-    app.get('/events/:eventId', event.findEventById);
+    app.get('/events/:eventId([a-f0-9]{24})', event.findEventById);
 
     //点赞服务
-    app.post('/events/:eventId/like', event.addLikeCount);
+    app.post('/events/:eventId([a-f0-9]{24})/like', event.addLikeCount);
 
     //报名服务
-    app.post('/events/:eventId/enrollNames', event.saveEnrolledName);
+    app.post('/events/:eventId([a-f0-9]{24})/enrollNames', event.saveEnrolledName);
 
     //视频点赞服务
-    app.post('/events/:eventId/videos/:videoId/like', event.addVideoLikeCount);
+    app.post('/events/:eventId([a-f0-9]{24})/videos/:videoId([a-f0-9]{24})/like', event.addVideoLikeCount);
 
     //点播课程
-    app.get('/events/:eventId/videos/:videoId', event.findVideoById);
+    app.get('/events/:eventId([a-f0-9]{24})/videos/:videoId([a-f0-9]{24})', event.findVideoById);
 
-
-    //投票
-    app.get('/vote', event.vote);
+    // 投票首页
+    app.get('/votes/:eventId([a-f0-9]{24})', event.findEventById);
 
     //投票规则
-    app.get('/vote/rules', event.voteRules);
+    app.get('/votes/:voteId([a-f0-9]{24})/rules', event.voteRules);
 
     //投票报名
-    app.get('/vote/enroll', event.voteEnroll);
+    app.get('/votes/:voteId([a-f0-9]{24})/enroll', event.voteEnroll);
 
     //投票排行
-    app.get('/vote/rank', event.voteRank);
+    app.get('/votes/:voteId([a-f0-9]{24})/rank', event.voteRank);
 
     //投票详情
-    app.get('/vote/detail', event.votePlayer);
+    app.get('/votes/:voteId([a-f0-9]{24})/players/:playerId([a-f0-9]{24})', event.votePlayer);
 
 };

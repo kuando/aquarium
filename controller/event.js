@@ -8,43 +8,38 @@ const mongoose = require('mongoose');
 const Event = mongoose.model('Event');
 const Classroom = Event.discriminators['classroom'];
 const EnrollNames = mongoose.model('EnrollNames');
+const VotePlayer = mongoose.model('VotePlayer');
+
 
 module.exports = {
 
     findEventById: (req, res) => {
-        let Model = Event;
-        let template = req.query.template;
-        if (template) {
-            Model = Model.discriminators[template];
-        }
-        Model.findByIdAndUpdate(req.params.eventId, {$inc: {visit: 1}})
+        Event.findByIdAndUpdate(req.params.eventId, {$inc: {visit: 1}})
             .populate('schoolId', 'schoolName')
-            .populate('enroll')
             .exec()
             .then((event)=> {
                 if (!event) {
                     return Promise.reject(new Error('活动不存在'));
                 }
-                if (!event.enroll) {
-                    return {record: event};
+                req.event = event;
+                switch (event.template) {
+                    case 'article':
+                        return renderEvent(req, res);
+                    case 'activity':
+                    case 'classroom':
+                    case 'audition':
+                        return renderEnrolledEvent(req, res);
+                    case 'vote':
+                        return renderVoteEvent(req, res);
+                    default:
+                        return Promise.reject(new Error('活动类型错误'));
                 }
-                return EnrollNames.find({enroll: event.enroll}).then((names)=> {
-                    return {
-                        list: names,
-                        record: event
-                    };
-                });
-            })
-            .then((ret)=> {
-                ret.moment = moment;
-                return res.render(ret.record.template, ret);
             })
             .catch((err)=> {
                 console.error(err);
                 res.sendStatus(400);
             });
     },
-
 
     addLikeCount: (req, res)=> {
         Event.findByIdAndUpdate(req.params.eventId, {$inc: {like: 1}}).select('like').exec()
@@ -80,7 +75,6 @@ module.exports = {
     },
 
     findVideoById: (req, res)=> {
-        console.log('find video');
         let eventId = req.params.eventId;
         let videoId = req.params.videoId;
         Classroom.findOneAndUpdate({
@@ -121,12 +115,19 @@ module.exports = {
         });
     },
 
-    vote: (req, res)=> {
-        res.render('vote/vote');
-    },
 
     voteRules: (req, res)=> {
-        res.render('vote/vote-rules');
+        let voteId = req.params.voteId;
+        let Vote = Event.discriminators['vote'];
+        Vote.findById(voteId).select('prize participation explanation')
+            .lean().exec()
+            .then((vote)=> {
+                if (!vote) {
+                    return Promise.reject(new Error('投票不存在'));
+                }
+                res.locals.vote = vote;
+                res.render('vote/vote-rules');
+            });
     },
 
     voteEnroll: (req, res)=> {
@@ -138,7 +139,73 @@ module.exports = {
     },
 
     votePlayer: (req, res)=> {
-        res.render('vote/vote-detail');
+        let Vote = Event.discriminators['vote'];
+        let playerId = req.params.playerId;
+        let voteId = req.params.voteId;
+        Vote.findById(voteId).select('requireFollow followTip schoolId')
+            .populate('schoolId','schoolName privateQrcode')
+            .exec()
+            .then((vote)=> {
+                if (!vote) {
+                    return Promise.reject(new Error('投票不存在'));
+                }
+                res.locals.vote = vote;
+                return VotePlayer.findById(playerId).lean().exec();
+            })
+            .then((player)=> {
+                if (!player) {
+                    return Promise.reject(new Error('选手不存在'));
+                }
+                res.locals.player = player;
+                return VotePlayer
+                    .where('vote', voteId)
+                    .where('poll').gt(player.poll)
+                    .count().exec();
+            })
+            .then((rank)=> {
+                res.locals.rank = rank;
+                res.render('vote/vote-detail');
+            }).catch((err)=> {
+            console.log('error is ', err);
+        });
     }
-
 };
+
+
+// 渲染活动页面
+function renderEvent(req, res) {
+    let event = req.event;
+    res.locals.record = event;
+    res.locals.moment = moment;
+    res.render(req.pagePath || event.template);
+}
+
+// 渲染包含报名的活动页面
+function renderEnrolledEvent(req, res) {
+    let event = req.event;
+    let enroll = event.enroll;
+    EnrollNames.find({enroll: enroll}).then((names)=> {
+        res.locals.list = names;
+        renderEvent(req, res);
+    });
+}
+
+// 渲染投票页面
+function renderVoteEvent(req, res) {
+    let event = req.event;
+    let limit = req.query.limit || 20;
+    let skip = req.query.skip || 0;
+    return VotePlayer.find({vote: event})
+        .limit(limit).skip(skip).exec()
+        .then((players)=> {
+            res.locals.players = players;
+            return VotePlayer.count({vote: event}).exec();
+        })
+        .then((count)=> {
+            res.locals.vote = event;
+            res.locals.totalPlayer = count;
+            req.pagePath = 'vote/index';
+            return renderEvent(req, res);
+        });
+}
+

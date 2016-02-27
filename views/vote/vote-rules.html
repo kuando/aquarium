@@ -43,16 +43,7 @@
         </div>
     </div>
 </div>
-<nav class="navbar vote-menu navbar-fixed-bottom">
-    <div class="container-fluid">
-        <ul class="list-unstyled">
-            <li><a href="/vote"><i class="fa fa-home"></i>首页</a></li>
-            <li><a href="/vote/enroll"><i class="fa fa-pencil-square-o"></i>报名</a></li>
-            <li><a href="/vote/rank"><i class="fa fa-bar-chart"></i>排行</a></li>
-            <li class="no-b"><a href="javascript:void(0)" id="openSearchModal"><i class="fa fa-search"></i>搜索</a></li>
-        </ul>
-    </div>
-</nav>
+<%- include('footer.html') %>
 <div class="search-modal chearfix" id="searchModal">
     <a class="close-search" id="closeSearch"><i class="fa fa-times"></i></a>
     <form class="form-horizontal" id="searchModalForm">
@@ -68,7 +59,7 @@
         </div>
     </form>
 </div>
-<script type="text/javascript" src="/js/lib/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="/js/lib/jquery-2.2.1.min.js"></script>
 <script type="text/javascript" src="/js/lib/bootstrap.min.js"></script>
 <script type="text/javascript" src="/js/vote.js"></script>
 </body>

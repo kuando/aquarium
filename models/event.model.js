@@ -1,11 +1,11 @@
 /**
- * Created by Administrator on 2016/1/14.
+ * Created by Frank on 16/1/11.
  */
 'use strict';
 
-let mongoose = require('mongoose');
-let Schema = mongoose.Schema;
-let ObjectId = Schema.Types.ObjectId;
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+const ObjectId = Schema.Types.ObjectId;
 
 const eventSchema = new Schema({
 
@@ -61,6 +61,9 @@ const eventSchema = new Schema({
         default: 0
     },
 
+    //标签
+    tags: [String],
+
     //创建人角色
     creatorRole: {
         type: Number,
@@ -71,7 +74,7 @@ const eventSchema = new Schema({
     template: {
         type: String,
         required: '模版不能为空',
-        enum: ['article', 'activity', 'audition', 'classroom']
+        enum: ['article', 'activity', 'audition', 'classroom','vote']
     },
 
     schoolId: {
@@ -87,8 +90,28 @@ const eventSchema = new Schema({
 
 });
 
+
+eventSchema.post('remove', (event)=> {
+
+    //如果存在报名,删除该活动后,一并删除报名信息
+    mongoose.model('Enroll').remove({
+        event: event._id
+    }).exec();
+
+    //如果存在任务,则删除任务信息
+    mongoose.model('ScoreTask').remove({
+        event: event._id
+    }).exec();
+
+});
+
+
 const Event = mongoose.model('Event', eventSchema);
+
 Event.discriminator('activity', require('./template/activity.model'));
 Event.discriminator('article', require('./template/article.model'));
 Event.discriminator('audition', require('./template/audition.model'));
 Event.discriminator('classroom', require('./template/classroom.model'));
+Event.discriminator('vote', require('./template/vote.model'));
+
+
