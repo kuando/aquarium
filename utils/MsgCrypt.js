@@ -6,6 +6,7 @@ const _ = require('lodash');
 const crypto = require('crypto');
 const libxmljs = require("libxmljs");
 const randomString = require('randomstring');
+const AES_ALGORITHM = 'aes-256-cbc';
 
 
 /**
@@ -23,7 +24,11 @@ function getSHA1(token, timestamp, nonce, encrypt) {
     return sha.digest("hex");
 }
 
-
+/**
+ * 解析xml字符串
+ * @param xmlText
+ * @returns {{encrypt: *, toUseName: *}}
+ */
 function extractXml(xmlText) {
     try {
         let xmlDoc = libxmljs.parseXml(xmlText);
@@ -38,6 +43,11 @@ function extractXml(xmlText) {
     }
 }
 
+/**
+ * 生产xml字符串
+ * @param data 模版数据
+ * @returns {*}
+ */
 function generateXml(data) {
     return `
     <xml>
@@ -49,7 +59,11 @@ function generateXml(data) {
 }
 
 
-//对明文进行补位填充
+/**
+ * 对明文进行补位操作
+ * @param size
+ * @returns {Buffer}
+ */
 function pkcs7Encode(size) {
     let blockSize = 32;
     let amountToPad = blockSize - (size % blockSize);
@@ -64,7 +78,11 @@ function pkcs7Encode(size) {
     return new Buffer(tmp);
 }
 
-// 删除解密后的明文补位字符
+/**
+ * 删除补位
+ * @param decrypted
+ * @returns {Buffer|Array.<T>|string|Array|*|Blob}
+ */
 function pkcs7Decode(decrypted) {
 
     let pad = _.last(decrypted);
@@ -102,56 +120,48 @@ function getRandomString() {
     });
 }
 
-/**
- *
- * @param token 公共平台开发者设置的token
- * @param key   EncodingAESKey
- * @param appid 公共平台appid
- * @constructor
- */
-function Prpcrypt(token, key, appid) {
-    this.token = token;
-    this.key = new Buffer(key + '=', 'base64');
-    this.appid = appid;
-}
-
-Prpcrypt.prototype.getCipher = function () {
-    let cipher = crypto.createCipheriv('aes-256-cbc', this.key, this.key.slice(0,16));
+function getCipher(key) {
+    let cipher = crypto.createCipheriv(AES_ALGORITHM, key, key.slice(0, 16));
     cipher.setAutoPadding(true);
     return cipher;
-};
+}
 
-Prpcrypt.prototype.getDecipher = function () {
-    let decipher = crypto.createDecipheriv('aes-256-cbc', this.key, this.key.slice(0, 16));
+function getDecipher(key) {
+    let decipher = crypto.createDecipheriv(AES_ALGORITHM, key, key.slice(0, 16));
     decipher.setAutoPadding(true);
     return decipher;
-};
+}
 
 
 /**
  * 对消息进行加密
  * @param text  需要加密的明文
  */
-Prpcrypt.prototype.encrypt = function (text) {
+function encrypt(cipher, appid, text) {
     let randomBuf = new Buffer(getRandomString());
     let textBuf = new Buffer(text);
     let netBytesOrderBuf = new Buffer(getNetworkBytesOrder(textBuf.length));
-    let appidBuf = new Buffer(this.appid);
+    let appidBuf = new Buffer(appid);
     let totalLength = randomBuf.length + textBuf.length + netBytesOrderBuf.length + appidBuf.length;
     let padBuf = pkcs7Encode(totalLength);
     totalLength += padBuf.length;
     let sumBuf = Buffer.concat([randomBuf, netBytesOrderBuf, textBuf, appidBuf, padBuf], totalLength);
-    let cipher = this.getCipher();
     try {
         let crypted = Buffer.concat([cipher.update(sumBuf), cipher.final()]);
         return crypted.toString('base64');
     } catch (err) {
         throw new Error(err);
     }
-};
+}
 
-Prpcrypt.prototype.decrypt = function (text) {
-    let decipher = this.getDecipher();
+/**
+ * 对消息进行解密
+ * @param decipher
+ * @param appid
+ * @param text
+ * @returns {*}
+ */
+function decrypt(decipher, appid, text) {
     let decrypted = new Buffer(text, 'base64');
     let xmlContent;
     let fromAppid;
@@ -165,11 +175,26 @@ Prpcrypt.prototype.decrypt = function (text) {
     } catch (err) {
         throw new Error(err);
     }
-    if (fromAppid !== this.appid) {
+    if (fromAppid !== appid) {
         throw new Error('appid不一致');
     }
     return xmlContent;
-};
+}
+
+
+/**
+ *
+ * @param token 公共平台开发者设置的token
+ * @param key   EncodingAESKey
+ * @param appid 公共平台appid
+ * @constructor
+ */
+function MsgCrypt(token, key, appid) {
+    this.token = token;
+    this.key = new Buffer(key + '=', 'base64');
+    this.appid = appid;
+}
+
 
 /**
  *
@@ -177,8 +202,9 @@ Prpcrypt.prototype.decrypt = function (text) {
  * @param nonce
  * @param timestamp
  */
-Prpcrypt.prototype.encryptMsg = function (replayMsg, nonce, timestamp) {
-    let encrypt = this.encrypt(replayMsg);
+MsgCrypt.prototype.encryptMsg = function (replayMsg, nonce, timestamp) {
+    let cipher = getCipher(this.key);
+    let encrypt = encrypt(cipher, this.appid, replayMsg);
     if (timestamp === "") {
         timestamp = new Date().getTime();
     }
@@ -196,17 +222,16 @@ Prpcrypt.prototype.encryptMsg = function (replayMsg, nonce, timestamp) {
  * @param msgSignature
  * @param timestamp
  * @param nonce
- * @param postData
+ * @param encrypt 加密的信息
  */
-Prpcrypt.prototype.decryptMsg = function (msgSignature, timestamp, nonce, postData) {
-    let xmlData = extractXml(postData);
-    let signature = getSHA1(this.token, timestamp, nonce, xmlData.encrypt);
+MsgCrypt.prototype.decryptMsg = function (msgSignature, timestamp, nonce, encrypt) {
+    let signature = getSHA1(this.token, timestamp, nonce, encrypt);
     if (signature !== msgSignature) {
         throw new Error('签名不匹配');
     }
-    return this.decrypt(xmlData.encrypt);
+    let decipher = getDecipher(this.key);
+    return decrypt(decipher, this.appid, encrypt);
 };
 
-
-module.exports = Prpcrypt;
+module.exports = MsgCrypt;
 

@@ -7,10 +7,12 @@ const express = require('express');
 const path = require('path');
 const ejs = require('ejs');
 const bodyParser = require('body-parser');
+const xmlParser = require('express-xml-bodyparser');
 const requireDir = require('require-dir');
 const app = express();
 
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(xmlParser());
 
 app.set('views', path.join(__dirname, '../views'));
 
