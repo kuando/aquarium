@@ -9,6 +9,7 @@ if (!process.env.NODE_ENV) {
 }
 
 require('./config/mongo');
+require('./config/redis');
 const app = require('./config/express');
 const config = require('./config/config');
 

@@ -222,16 +222,15 @@ MsgCrypt.prototype.encryptMsg = function (replayMsg, nonce, timestamp) {
  * @param msgSignature
  * @param timestamp
  * @param nonce
- * @param postData
+ * @param encrypt 加密的信息
  */
-MsgCrypt.prototype.decryptMsg = function (msgSignature, timestamp, nonce, postData) {
-    let xmlData = extractXml(postData);
-    let signature = getSHA1(this.token, timestamp, nonce, xmlData.encrypt);
+MsgCrypt.prototype.decryptMsg = function (msgSignature, timestamp, nonce, encrypt) {
+    let signature = getSHA1(this.token, timestamp, nonce, encrypt);
     if (signature !== msgSignature) {
         throw new Error('签名不匹配');
     }
     let decipher = getDecipher(this.key);
-    return decrypt(decipher, this.appid, xmlData.encrypt);
+    return decrypt(decipher, this.appid, encrypt);
 };
 
 module.exports = MsgCrypt;

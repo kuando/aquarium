@@ -131,7 +131,17 @@ module.exports = {
     },
 
     voteEnroll: (req, res)=> {
-        res.render('vote/vote-enroll');
+        let Vote = Event.discriminators['vote'];
+        let voteId = req.params.voteId;
+        Vote.findById(voteId)
+            .select('voteEnroll prize participation explanation')
+            .exec().then((vote)=> {
+            if (!vote) {
+                return Promise.reject(new Error('投票不存在'));
+            }
+            res.locals.vote = vote;
+            res.render('vote/vote-enroll');
+        });
     },
 
     voteRank: (req, res)=> {
@@ -143,7 +153,7 @@ module.exports = {
         let playerId = req.params.playerId;
         let voteId = req.params.voteId;
         Vote.findById(voteId).select('requireFollow followTip schoolId')
-            .populate('schoolId','schoolName privateQrcode')
+            .populate('schoolId', 'schoolName privateQrcode')
             .exec()
             .then((vote)=> {
                 if (!vote) {
