@@ -186,30 +186,54 @@ a.vote-toupiao{
 
 /*—° ÷*/
 .player-info{
-    background-color: #fff;
-    border-radius: 5px;
     padding: 10px;
     margin-top: 10px;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+    position: relative;
+    border-bottom: 1px dashed transparent;
 }
-.player-info .num{
-     font-size: 24px;
+.player-info .img{
+    width: 90px;
+    height: 80px;
+    float: left;
 }
-.player-info .number .count{
-    font-size: 24px;
+.player-info .img img{
+    width: 80px;
+    height: 80px;
+    margin-right: 10px;
 }
-.player-info .title .name{
-    margin-left: 10px;
+.player-info .info{
+    height: 80px;
+    padding-top: 10px;
+    font-size: 16px;
+    font-weight: 500;
 }
-.player-info .player-rank{
-    margin-top: 40px;
+.player-info .info .name{
+    letter-spacing: 5px;
 }
-.player-info .player-desc{
-    font-size: 13px;
-    margin-top: 10px;
+.player-info .player-poll{
+    width: 120px;
+    height: 60px;
+    position: absolute;
+    top: 0;
+    right: 30px;
+    font-size: 14px;
+    text-align: center;
+    line-height: 26px;
+
+}
+.player-details{
+    font-size: 14px;
+    padding: 20px 10px 0 10px;
+    line-height: 25px;
+}
+.player-details .tag{
+    padding: 5px 10px;
+    margin-right: 10px;
+    border-radius: 4px;
 }
 .player-img{
-    padding-top: 20px;
+    padding: 20px 10px 0 10px;
+    margin-bottom: 20px;
 }
 .player-img img{
     margin-bottom: 20px;
@@ -219,6 +243,9 @@ a.vote-toupiao{
 }
 .player-controls .btn{
     margin-bottom: 10px;
+    padding: 10px 12px;
+    border: none!important;
+    box-shadow: inset 0 -4px rgba(0,0,0,.25);
 }
 .share-modal,.follow-modal{
     width: 100%;

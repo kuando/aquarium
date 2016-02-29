@@ -1,6 +1,9 @@
 body{
     background-color: #ffdccc;
 }
+body.details{
+    background-color: #eecf37;
+}
 .search-btn,
 .search-btn:hover,
 .search-btn:focus,
@@ -97,23 +100,43 @@ a.vote-toupiao:active{
 }
 
 /*—° ÷*/
-.player-info .num,
-.player-info .number .count{
+.player-info{
+    background-color: #fff;
+    border-color: #ff756b;
+}
+.player-info .info{
     color: #ff756b;
+}
+.player-info .info .name{
+    letter-spacing: 5px;
+}
+.player-info .player-poll{
+    background: url('/images/vote/theme-red/player-rank.png');
+    color: #fff;
+}
+.player-details{
+    background: #fff;
+}
+.player-details .tag{
+    color: #fff;
+    background: #ff756b;
+}
+.player-img{
+    background: #fff;
 }
 .btn-info,
 .btn-info:hover,
 .btn-info:focus,
 .btn-info:active{
-    background-color: #ff756b !important;
-    border: 1px solid #ff756b !important;
+    background-color: #72d26e !important;
+    border: 1px solid #72d26e !important;
 }
 .btn-warning,
 .btn-warning:hover,
 .btn-warning:focus,
 .btn-warning:active{
-    background-color: #ffbd4a !important;
-    border: 1px solid #ffbd4a !important;
+    background-color: #f05e23 !important;
+    border: 1px solid #f05e23 !important;
 }
 .btn-danger,
 .btn-danger:active,

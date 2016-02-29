@@ -1,6 +1,9 @@
 body{
     background-color: #e3f5ff;
 }
+body.details{
+    background-color: #72c0e6;
+}
 .search-btn,
 .search-btn:hover,
 .search-btn:focus,
@@ -50,7 +53,7 @@ a.vote-toupiao:active{
     color: #fff;
 }
 .vote-option-list .thumbnail .number{
-    background-image: url("/images/vote/theme-blue/number-blue.png");
+    background-image: url("/images/vote/theme-default/number-blue.png");
     color: #fff;
 }
 /*∑÷“≥*/
@@ -97,16 +100,36 @@ a.vote-toupiao:active{
 }
 
 /*—° ÷*/
-.player-info .num,
-.player-info .number .count{
+.player-info{
+    background-color: #fff;
+    border-color: #72c0e6;
+}
+.player-info .info{
     color: #72c0e6;
+}
+.player-info .info .name{
+    letter-spacing: 5px;
+}
+.player-info .player-poll{
+    background: url('/images/vote/theme-default/player-rank.png');
+    color: #fff;
+}
+.player-details{
+    background: #fff;
+}
+.player-details .tag{
+    color: #fff;
+    background: #72c0e6;
+}
+.player-img{
+    background: #fff;
 }
 .btn-info,
 .btn-info:hover,
 .btn-info:focus,
 .btn-info:active{
-    background-color: #72c0e6 !important;
-    border: 1px solid #72c0e6 !important;
+    background-color: #f05e23 !important;
+    border: 1px solid #f05e23 !important;
 }
 .btn-warning,
 .btn-warning:hover,
@@ -124,7 +147,7 @@ a.vote-toupiao:active{
 }
 
 .rank-item .media .number{
-    background-image: url("/images/vote/theme-blue/rank-num.png");
+    background-image: url("/images/vote/theme-default/rank-num.png");
     color: #fff;
 }
 .rank-item .media{
