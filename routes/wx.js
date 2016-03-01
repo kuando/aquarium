@@ -14,4 +14,7 @@ module.exports = function (app) {
     //授权发起页
     app.get('/wx/auth', wxMid.preAuthCode, wx.authPage);
 
+
+    app.get('/wx/auth/success', wx.authCallback);
+
 };

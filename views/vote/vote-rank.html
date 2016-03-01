@@ -2,11 +2,12 @@
 <html>
 <head lang="en">
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
     <meta name="format-detection" content="telephone=no"/>
-    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="msapplication-tap-highlight" content="no"/>
     <title></title>
     <link href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="/css/bootstrap.css" rel="stylesheet">
@@ -18,11 +19,12 @@
 <!--header-->
 <div class="container-fluid">
     <div class="vote-column-title">
-        排行榜
+        排行榜(前50名)
     </div>
     <div class="row">
         <div class="col-xs-12">
             <div class="rank-list">
+                <% players.forEach(function(player,i){ %>
                 <div class="rank-item">
                     <div class="media">
                         <div class="media-left">
@@ -31,43 +33,14 @@
                             </a>
                         </div>
                         <div class="media-body">
-                            <h4 class="media-heading">王小宝</h4>
-                            <span>编号：00001</span>
-                            <span class="player-num">4680</span>票
-                            <div class="number">1</div>
+                            <h4 class="media-heading"><%= player.name %></h4>
+                            <span>编号：<%= player.sequence %></span>
+                            <span class="player-num"><%= player.poll %></span>票
+                            <div class="number"><%= i+1 %></div>
                         </div>
                     </div>
                 </div>
-                <div class="rank-item">
-                    <div class="media">
-                        <div class="media-left">
-                            <a href="#">
-                                <img class="media-object" src="/images/castvote/2.jpg" alt="...">
-                            </a>
-                        </div>
-                        <div class="media-body">
-                            <h4 class="media-heading">马晓东</h4>
-                            <span>编号：00001</span>
-                            <span class="player-num">3123</span>票
-                            <div class="number">2</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="rank-item">
-                    <div class="media">
-                        <div class="media-left">
-                            <a href="#">
-                                <img class="media-object" src="/images/castvote/3.jpg" alt="...">
-                            </a>
-                        </div>
-                        <div class="media-body">
-                            <h4 class="media-heading">李小伟</h4>
-                            <span>编号：00001</span>
-                            <span class="player-num">1232</span>票
-                            <div class="number">3</div>
-                        </div>
-                    </div>
-                </div>
+                <% }) %>
             </div>
         </div>
     </div>

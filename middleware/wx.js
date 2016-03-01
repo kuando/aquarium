@@ -47,10 +47,19 @@ function getPreAuthCode() {
         }
         return getComponentAccessToken().then((token)=> {
             let url = getPreAuthCodeUrl(token);
-            return request.post(url, {
-                "component_appid": wx.componentAppid
-            });
+            let options = {
+                method: 'POST',
+                uri: url,
+                body: {
+                    "component_appid": wx.componentAppid
+                },
+                json: true
+            };
+            return request(options);
         }).then((ret)=> {
+            if (ret.errcode) {
+                return Promise.reject(new Error(ret.errmsg));
+            }
             let code = ret['pre_auth_code'];
             // 考虑网络延时因素,缓存提前2分钟过期
             let expiresIn = parseInt(ret['expires_in']) - 120;
@@ -74,12 +83,20 @@ function getComponentAccessToken() {
             if (!ticket) {
                 return Promise.reject(new Error('ComponentVerifyTicket not ready'));
             }
-            let data = {
-                "component_appid": wx.componentAppid,
-                "component_appsecret": wx.componentAppSecret,
-                "component_verify_ticket": ticket
+            let options = {
+                method: 'POST',
+                uri: COMPONENT_TOKEN_API,
+                body: {
+                    "component_appid": wx.componentAppid,
+                    "component_appsecret": wx.componentAppSecret,
+                    "component_verify_ticket": ticket
+                },
+                json: true
             };
-            return request.post(COMPONENT_TOKEN_API, data).then((ret)=> {
+            return request(options).then((ret)=> {
+                if (ret.errcode) {
+                    return Promise.reject(new Error(ret.errmsg));
+                }
                 let token = ret.component_access_token;
                 // 考虑网络延时因素,缓存提前10分钟秒过期
                 let expiresIn = ret['expires_in'] - 120;

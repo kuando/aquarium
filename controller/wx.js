@@ -12,9 +12,15 @@ module.exports = {
     // 授权页面
     authPage: function (req, res) {
         let preAuthCode = req.preAuthCode;
-        res.json({
-            preAuthCode: preAuthCode
-        });
+        res.locals.appid = wx.componentAppid;
+        res.locals.code = preAuthCode;
+        res.render('auth');
+
+    },
+
+    authCallback: function (req, res) {
+        console.log(req.query);
+        res.render('auth-success', req.query);
     },
 
     // 接受授权事件
