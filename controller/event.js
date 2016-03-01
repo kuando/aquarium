@@ -145,7 +145,20 @@ module.exports = {
     },
 
     voteRank: (req, res)=> {
-        res.render('vote/vote-rank');
+        let Vote = Event.discriminators['vote'];
+        let voteId = req.params.voteId;
+        Vote.findById(voteId)
+            .select('_id')
+            .exec().then((vote)=> {
+            if (!vote) {
+                return Promise.reject(new Error('投票不存在'));
+            }
+            res.locals.vote = vote;
+            return VotePlayer.where('vote', voteId).sort('-poll').limit(50).exec();
+        }).then((players)=> {
+            res.locals.players = players;
+            res.render('vote/vote-rank');
+        });
     },
 
     votePlayer: (req, res)=> {
