@@ -7,6 +7,6 @@ module.exports = function (app) {
 
     require('./event')(app);
 
-    require('./wx')(app);
+    //require('./wx')(app);
 
 };

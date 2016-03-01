@@ -1,7 +1,7 @@
 body{
     background-color: #ffdccc;
 }
-body.details{
+body.bg-color{
     background-color: #eecf37;
 }
 .search-btn,
@@ -123,6 +123,13 @@ a.vote-toupiao:active{
 }
 .player-img{
     background: #fff;
+}
+.btn-default,
+.btn-default:hover,
+.btn-default:focus,
+.btn-default:active{
+    background-color: #ff756b !important;
+    border: 1px solid #ff756b !important;
 }
 .btn-info,
 .btn-info:hover,
