@@ -13,7 +13,7 @@
     <link href="/css/bootstrap.css" rel="stylesheet">
     <link href="/css/bootstrap-theme.css" rel="stylesheet">
     <link href="/css/vote.css" rel="stylesheet">
-    <link href="/css/theme/theme-green.css" rel="stylesheet">
+    <link href="/css/theme/theme-default.css" rel="stylesheet">
 </head>
 <body>
 <!--header-->
@@ -28,15 +28,13 @@
                 <div class="rank-item">
                     <div class="media">
                         <div class="media-left">
-                            <a href="#">
-                                <img class="media-object" src="/images/castvote/1.jpg" alt="...">
-                            </a>
+                            <div class="number number_<%= i > 2 || i %>"><%= i+1 %></div>
                         </div>
                         <div class="media-body">
+                            <img class="media-object" src="/images/castvote/1.jpg" alt="...">
                             <h4 class="media-heading"><%= player.name %></h4>
                             <span>编号：<%= player.sequence %></span>
-                            <span class="player-num"><%= player.poll %></span>票
-                            <div class="number"><%= i+1 %></div>
+                            <div class="player-poll"><%= player.poll %></div>
                         </div>
                     </div>
                 </div>

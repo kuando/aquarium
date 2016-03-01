@@ -152,9 +152,8 @@ a.vote-toupiao:active{
     background-color: #f67685 !important;
     border: 1px solid #f67685 !important;
 }
-
-.rank-item .media .number{
-    background-image: url("/images/vote/theme-red/rank-num.png");
+.rank-item .media .player-poll{
+    background-image: url("/images/vote/theme-red/rank-poll-bg.png");
     color: #fff;
 }
 .rank-item .media{
