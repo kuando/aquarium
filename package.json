@@ -29,6 +29,7 @@
     "lodash": "^4.5.1",
     "moment": "^2.11.1",
     "mongoose": "^4.3.5",
+    "qiniu": "^6.1.9",
     "randomstring": "^1.1.4",
     "request": "^2.69.0",
     "request-promise": "^2.0.1",

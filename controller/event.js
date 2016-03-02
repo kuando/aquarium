@@ -119,7 +119,7 @@ module.exports = {
     voteRules: (req, res)=> {
         let voteId = req.params.voteId;
         let Vote = Event.discriminators['vote'];
-        Vote.findById(voteId).select('prize participation explanation')
+        Vote.findById(voteId).select('prize participation explanation theme')
             .lean().exec()
             .then((vote)=> {
                 if (!vote) {
@@ -133,8 +133,9 @@ module.exports = {
     voteEnroll: (req, res)=> {
         let Vote = Event.discriminators['vote'];
         let voteId = req.params.voteId;
+        res.locals.token = req.token;
         Vote.findById(voteId)
-            .select('voteEnroll prize participation explanation')
+            .select('voteEnroll prize participation explanation theme')
             .exec().then((vote)=> {
             if (!vote) {
                 return Promise.reject(new Error('投票不存在'));
@@ -144,11 +145,57 @@ module.exports = {
         });
     },
 
+    //报名
+    doEnroll: (req, res)=> {
+        let Vote = Event.discriminators['vote'];
+        let voteId = req.params.voteId;
+        let phone = req.body.phone;
+        if (!phone || phone === '') {
+            return res.status(400).json({
+                err: '手机不能为空'
+            });
+        }
+        VotePlayer.count({
+            phone: phone,
+            vote: voteId
+        }).exec().then((count)=> {
+            if (count > 0) {
+                return res.status(400).json({
+                    err: '一个手机号只能报一次名'
+                });
+            }
+            return Vote.findById(voteId)
+                .select('status voteEnroll')
+                .exec().then((vote)=> {
+                    if (!vote) {
+                        return Promise.reject(new Error('投票不存在'));
+                    }
+                    if (vote.status === 1) {
+                        return Promise.reject(new Error('投票已经结束'));
+                    }
+                    if (!vote.voteEnroll) {
+                        return Promise.reject(new Error('投票已停止报名'));
+                    }
+                    let votePlayer = new VotePlayer(req.body);
+                    votePlayer.isAudit = false;
+                    votePlayer.source = 'enroll';
+                    votePlayer.vote = vote;
+                    return votePlayer.save();
+                }).then((player)=> {
+                    res.json(player);
+                })
+        }).catch((err)=> {
+            res.status(400).json({
+                err: err.message
+            });
+        });
+    },
+
     voteRank: (req, res)=> {
         let Vote = Event.discriminators['vote'];
         let voteId = req.params.voteId;
         Vote.findById(voteId)
-            .select('_id')
+            .select('_id theme')
             .exec().then((vote)=> {
             if (!vote) {
                 return Promise.reject(new Error('投票不存在'));
@@ -165,7 +212,7 @@ module.exports = {
         let Vote = Event.discriminators['vote'];
         let playerId = req.params.playerId;
         let voteId = req.params.voteId;
-        Vote.findById(voteId).select('requireFollow followTip schoolId')
+        Vote.findById(voteId).select('requireFollow followTip schoolId theme')
             .populate('schoolId', 'schoolName privateQrcode')
             .exec()
             .then((vote)=> {

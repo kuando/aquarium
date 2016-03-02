@@ -4,6 +4,7 @@
 'use strict';
 
 const event = require('../controller/event');
+const qiniu = require('../middleware/qiniu');
 
 module.exports = function (app) {
 
@@ -29,7 +30,10 @@ module.exports = function (app) {
     app.get('/votes/:voteId([a-f0-9]{24})/rules', event.voteRules);
 
     //投票报名
-    app.get('/votes/:voteId([a-f0-9]{24})/enroll', event.voteEnroll);
+    app.get('/votes/:voteId([a-f0-9]{24})/enroll', qiniu.token(), event.voteEnroll);
+
+    //在线报名
+    app.post('/votes/:voteId([a-f0-9]{24})/enrolls', event.doEnroll);
 
     //投票排行
     app.get('/votes/:voteId([a-f0-9]{24})/rank', event.voteRank);
@@ -39,5 +43,6 @@ module.exports = function (app) {
 
     //投票
     app.put('/votes/:voteId([a-f0-9]{24})/players/:playerId([a-f0-9]{24})', event.doVote);
+
 
 };

@@ -22,5 +22,12 @@ module.exports = {
         componentAppSecret: '0c79e1fa963cd80cc0be99b20a18faeb',
         encodingAESKey: 'gV9Zf9mndKz6sKEWaphp5893V58TmMFPGCAM4gceNF9',
         verifyToken: 'lovekuando'
+    },
+
+    qiniu: {
+        accessKey: 'SPJ9b_qmVxy0FQU-93J4xb5EbHv9Z4Jn_-78f8gr',
+        secretKey: 'NOFnKRTsd1RjjYoyT1qPAgHyczBmAjl-s26GXpA4',
+        bucket: 'yirgacheffe',
+        visitUrl: 'http://7rfll3.com1.z0.glb.clouddn.com'
     }
 };

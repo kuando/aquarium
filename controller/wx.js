@@ -31,10 +31,8 @@ module.exports = {
         let encrypt = req.body.xml.encrypt[0];
         let crypt = new MsgCrypt(wx.verifyToken, wx.encodingAESKey, wx.componentAppid);
         let xmlText = crypt.decryptMsg(msgSignature, timestamp, nonce, encrypt);
-        console.log('xmlText is ', xmlText);
         let xmlDoc = libxmljs.parseXml(xmlText);
         let ticket = xmlDoc.get('//ComponentVerifyTicket');
-        console.log('ticket is ', ticket);
         redis.set('COMPONENT_VERIFY_TICKET', ticket.text());
         res.send("success");
     }

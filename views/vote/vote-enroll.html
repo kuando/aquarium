@@ -2,16 +2,16 @@
 <html>
 <head lang="en">
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
     <meta name="format-detection" content="telephone=no"/>
-    <meta name="msapplication-tap-highlight" content="no" />
-    <title></title>
+    <meta name="msapplication-tap-highlight" content="no"/>
+    <title>我要报名</title>
     <link href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="/css/bootstrap.css" rel="stylesheet">
     <link href="/css/weui.css" rel="stylesheet">
-    <link href="/css/uploadify.css" rel="stylesheet">
     <link href="/css/bootstrap-theme.css" rel="stylesheet">
     <link href="/css/vote.css" rel="stylesheet">
     <link href="/css/theme/theme-<%= vote.theme%>.css" rel="stylesheet">
@@ -29,13 +29,13 @@
                     <div class="weui_cell">
                         <div class="weui_cell_hd"><label class="weui_label">姓名</label></div>
                         <div class="weui_cell_bd weui_cell_primary">
-                            <input class="weui_input" type="text"  placeholder="请输入姓名"/>
+                            <input class="weui_input" type="text" placeholder="请输入姓名" id="name"/>
                         </div>
                     </div>
                     <div class="weui_cell">
                         <div class="weui_cell_hd"><label class="weui_label">手机</label></div>
                         <div class="weui_cell_bd weui_cell_primary">
-                            <input class="weui_input" type="text"  placeholder="请输入手机号"/>
+                            <input class="weui_input" type="text" placeholder="请输入手机号" id="phone"/>
                         </div>
                     </div>
                 </div>
@@ -45,24 +45,16 @@
                             <div class="weui_uploader">
                                 <div class="weui_uploader_hd weui_cell">
                                     <div class="weui_cell_bd weui_cell_primary">图片上传</div>
-                                    <div class="weui_cell_ft">0/2</div>
+                                    <div class="weui_cell_ft"><span id="imageCount">0</span>/5</div>
                                 </div>
                                 <div class="weui_uploader_bd">
                                     <ul class="weui_uploader_files">
-                                        <li class="weui_uploader_file" style="background-image:url(http://shp.qpic.cn/weixinsrc_pic/pScBR7sbqjOBJomcuvVJ6iacVrbMJaoJZkFUIq4nzQZUIqzTKziam7ibg/)"></li>
-                                        <li class="weui_uploader_file" style="background-image:url(http://shp.qpic.cn/weixinsrc_pic/pScBR7sbqjOBJomcuvVJ6iacVrbMJaoJZkFUIq4nzQZUIqzTKziam7ibg/)"></li>
-                                        <li class="weui_uploader_file" style="background-image:url(http://shp.qpic.cn/weixinsrc_pic/pScBR7sbqjOBJomcuvVJ6iacVrbMJaoJZkFUIq4nzQZUIqzTKziam7ibg/)"></li>
-                                        <li class="weui_uploader_file weui_uploader_status" style="background-image:url(http://shp.qpic.cn/weixinsrc_pic/pScBR7sbqjOBJomcuvVJ6iacVrbMJaoJZkFUIq4nzQZUIqzTKziam7ibg/)">
-                                            <div class="weui_uploader_status_content">
-                                                <i class="weui_icon_warn"></i>
-                                            </div>
-                                        </li>
-                                        <li class="weui_uploader_file weui_uploader_status" style="background-image:url(http://shp.qpic.cn/weixinsrc_pic/pScBR7sbqjOBJomcuvVJ6iacVrbMJaoJZkFUIq4nzQZUIqzTKziam7ibg/)">
-                                            <div class="weui_uploader_status_content">50%</div>
-                                        </li>
+
                                     </ul>
                                     <div class="weui_uploader_input_wrp">
-                                        <input class="weui_uploader_input" type="file" accept="image/jpg,image/jpeg,image/png,image/gif" multiple />
+                                        <input class="weui_uploader_input" type="file"
+                                               id="imageFile"
+                                               accept="image/jpg,image/jpeg,image/png,image/gif" multiple/>
                                     </div>
                                 </div>
                             </div>
@@ -72,13 +64,13 @@
                 <div class="weui_cells weui_cells_form">
                     <div class="weui_cell">
                         <div class="weui_cell_bd weui_cell_primary">
-                            <textarea class="weui_textarea" placeholder="请输入描述信息" rows="3"></textarea>
-                            <div class="weui_textarea_counter"><span>0</span>/200</div>
+                            <textarea class="weui_textarea" placeholder="请输入描述信息" rows="3" id="brief"></textarea>
+                            <div class="weui_textarea_counter"><span id="charCount">0</span>/200</div>
                         </div>
                     </div>
                 </div>
                 <div class="weui_btn_area">
-                    <button class="btn btn-default btn-block">确定</button>
+                    <button class="btn btn-default btn-block" id="submitEnroll">确定</button>
                 </div>
             </div>
         </div>
@@ -100,27 +92,13 @@
         </div>
     </form>
 </div>
+<input type="hidden" id="token" value="<%= token %>">
+<input type="hidden" id="voteId" value="<%= vote._id %>">
+
 <script type="text/javascript" src="/js/lib/jquery-2.2.1.min.js"></script>
 <script type="text/javascript" src="/js/lib/bootstrap.min.js"></script>
 <script type="text/javascript" src="/js/lib/jquery.uploadify.min.js"></script>
 <script type="text/javascript" src="/js/vote.js"></script>
+<script type="text/javascript" src="/js/vote-enroll.js"></script>
 </body>
-<script type="text/javascript">
-    window.URL = window.URL || window.webkitURL;
-    var fileElem = document.getElementById("fileElem");
-    var fileList = document.getElementById("fileList");
-    function handleFiles(obj) {
-        var files = obj.files;
-        var img = new Image();
-        if(window.URL){
-            //File API
-            img.src = window.URL.createObjectURL(files[0]); //创建一个object URL，并不是你的本地路径
-            img.onload = function(e) {
-                window.URL.revokeObjectURL(this.src); //图片加载后，释放object URL
-            };
-            img.className = "col-xs-4";
-            fileList.appendChild(img);
-        }
-    }
-</script>
 </html>
