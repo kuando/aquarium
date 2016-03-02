@@ -10,10 +10,11 @@
     <title></title>
     <link href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="/css/bootstrap.css" rel="stylesheet">
+    <link href="/css/weui.css" rel="stylesheet">
     <link href="/css/uploadify.css" rel="stylesheet">
     <link href="/css/bootstrap-theme.css" rel="stylesheet">
     <link href="/css/vote.css" rel="stylesheet">
-    <link href="/css/theme/theme-red.css" rel="stylesheet">
+    <link href="/css/theme/theme-<%= vote.theme%>.css" rel="stylesheet">
 </head>
 <body class="bg-color">
 <!--header-->
@@ -24,39 +25,61 @@
     <div class="row">
         <div class="col-xs-12">
             <div class="enroll-form">
-                <form class="form-horizontal">
-                    <div class="form-group">
-                        <label for="name">姓名：</label>
-                        <input type="email" class="form-control" id="name" placeholder="请输入姓名">
+                <div class="weui_cells weui_cells_form">
+                    <div class="weui_cell">
+                        <div class="weui_cell_hd"><label class="weui_label">姓名</label></div>
+                        <div class="weui_cell_bd weui_cell_primary">
+                            <input class="weui_input" type="text"  placeholder="请输入姓名"/>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="phone">电话：</label>
-                        <input type="password" class="form-control" id="phone" placeholder="请输入电话">
+                    <div class="weui_cell">
+                        <div class="weui_cell_hd"><label class="weui_label">手机</label></div>
+                        <div class="weui_cell_bd weui_cell_primary">
+                            <input class="weui_input" type="text"  placeholder="请输入手机号"/>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label>上传图片：</label>
-                        <div class="row">
-                            <div id="fileList">
-
-                            </div>
-                            <div class="col-xs-4">
-                                <a href="javascript:void(0);" class="a-upload">
-                                    <img src="/images/vote/theme-green/upload_btn.png" width="100%">
-                                    <input type="file" id="fileElem" multiple accept="image/*"  onchange="handleFiles(this)">
-                                </a>
+                </div>
+                <div class="weui_cells weui_cells_form">
+                    <div class="weui_cell">
+                        <div class="weui_cell_bd weui_cell_primary">
+                            <div class="weui_uploader">
+                                <div class="weui_uploader_hd weui_cell">
+                                    <div class="weui_cell_bd weui_cell_primary">图片上传</div>
+                                    <div class="weui_cell_ft">0/2</div>
+                                </div>
+                                <div class="weui_uploader_bd">
+                                    <ul class="weui_uploader_files">
+                                        <li class="weui_uploader_file" style="background-image:url(http://shp.qpic.cn/weixinsrc_pic/pScBR7sbqjOBJomcuvVJ6iacVrbMJaoJZkFUIq4nzQZUIqzTKziam7ibg/)"></li>
+                                        <li class="weui_uploader_file" style="background-image:url(http://shp.qpic.cn/weixinsrc_pic/pScBR7sbqjOBJomcuvVJ6iacVrbMJaoJZkFUIq4nzQZUIqzTKziam7ibg/)"></li>
+                                        <li class="weui_uploader_file" style="background-image:url(http://shp.qpic.cn/weixinsrc_pic/pScBR7sbqjOBJomcuvVJ6iacVrbMJaoJZkFUIq4nzQZUIqzTKziam7ibg/)"></li>
+                                        <li class="weui_uploader_file weui_uploader_status" style="background-image:url(http://shp.qpic.cn/weixinsrc_pic/pScBR7sbqjOBJomcuvVJ6iacVrbMJaoJZkFUIq4nzQZUIqzTKziam7ibg/)">
+                                            <div class="weui_uploader_status_content">
+                                                <i class="weui_icon_warn"></i>
+                                            </div>
+                                        </li>
+                                        <li class="weui_uploader_file weui_uploader_status" style="background-image:url(http://shp.qpic.cn/weixinsrc_pic/pScBR7sbqjOBJomcuvVJ6iacVrbMJaoJZkFUIq4nzQZUIqzTKziam7ibg/)">
+                                            <div class="weui_uploader_status_content">50%</div>
+                                        </li>
+                                    </ul>
+                                    <div class="weui_uploader_input_wrp">
+                                        <input class="weui_uploader_input" type="file" accept="image/jpg,image/jpeg,image/png,image/gif" multiple />
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label>描述：</label>
-                        <textarea class="form-control" rows="3" placeholder="请根据参赛规则进行填写"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-xs-offset-1 col-xs-10">
-                            <button class="btn btn-default btn-block">报名</button>
+                </div>
+                <div class="weui_cells weui_cells_form">
+                    <div class="weui_cell">
+                        <div class="weui_cell_bd weui_cell_primary">
+                            <textarea class="weui_textarea" placeholder="请输入描述信息" rows="3"></textarea>
+                            <div class="weui_textarea_counter"><span>0</span>/200</div>
                         </div>
                     </div>
-                </form>
+                </div>
+                <div class="weui_btn_area">
+                    <button class="btn btn-default btn-block">确定</button>
+                </div>
             </div>
         </div>
     </div>

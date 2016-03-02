@@ -279,12 +279,8 @@ a.vote-toupiao{
 }
 /*±¨Ãû*/
 .enroll-form{
-    padding: 10px 20px;
-    background-color: #fff;
-    border-radius: 5px;
     margin-top: 20px;
     margin-bottom: 70px;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.3);
 }
 /*a  upload */
 .a-upload {
@@ -307,6 +303,7 @@ a.vote-toupiao{
 }
 /*ÅÅÐÐ*/
 .rank-list{
+    margin-bottom: 70px;
 }
 .rank-item{
     height: 60px;
@@ -324,27 +321,45 @@ a.vote-toupiao{
     font-size: 14px;
     margin-top: 3px;
 }
-.rank-item .media .player-num{
-    font-weight: bold;
-    margin-left: 20px;
-    margin-right: 2px;
-    font-size: 16px;
+.rank-item .media .player-poll{
+    font-size: 14px;
+    width: 72px;
+    height: 25px;
+    padding-left: 25px;
+    text-align: center;
+    position: absolute;
+    top: 18px;
+    right: 10px;
+    line-height: 24px;
+}
+.rank-item .media .number_0{
+    background-image: url("/images/vote/rank-1.png");
+    color: #fff;
+}
+.rank-item .media .number_1{
+    background-image: url("/images/vote/rank-2.png");
+    color: #fff;
+}
+.rank-item .media .number_2{
+    background-image: url("/images/vote/rank-3.png");
+    color: #fff;
 }
 .rank-item .media .number{
-    background-image: url("/images/vote/blue-rank-num.png");
-    width: 34px;
-    height: 40px;
-    position: absolute;
+    width: 40px;
+    height: 35px;
+    margin-left: 15px;
+    margin-top: 8px;
     text-align: center;
-    top: 0;
-    right: 30px;
-    padding-top: 5px;
-    font-weight: 600;
-    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+}
+.rank-item .media .number_true{
+    margin-top: 13px;
 }
 .rank-item .media img{
     border-radius: 50%;
     height: 50px;
     width: 50px;
-    margin-left: 5px;
+    float: left;
+    margin-right: 10px;
 }

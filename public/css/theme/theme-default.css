@@ -153,8 +153,8 @@ a.vote-toupiao:active{
     border: 1px solid #f67685 !important;
 }
 
-.rank-item .media .number{
-    background-image: url("/images/vote/theme-default/rank-num.png");
+.rank-item .media .player-poll{
+    background-image: url("/images/vote/theme-default/rank-poll-bg.png");
     color: #fff;
 }
 .rank-item .media{
