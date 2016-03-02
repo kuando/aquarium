@@ -186,10 +186,28 @@ module.exports = {
                     .count().exec();
             })
             .then((rank)=> {
-                res.locals.rank = rank;
+                res.locals.rank = rank + 1;
                 res.render('vote/vote-detail');
             }).catch((err)=> {
             console.log('error is ', err);
+        });
+    },
+
+    doVote: (req, res)=> {
+        let Vote = Event.discriminators['vote'];
+        let voteId = req.params.voteId;
+        let playerId = req.params.playerId;
+        Vote.findByIdAndUpdate(voteId, {
+            $inc: {totalPoll: 1}
+        }).select('_id').exec().then((vote)=> {
+            if (!vote) {
+                return Promise.reject(new Error('投票不存在'));
+            }
+            return VotePlayer.update({_id: playerId}, {$inc: {poll: 1}}).exec();
+        }).then(()=> {
+            res.sendStatus(200);
+        }).catch((err)=> {
+
         });
     }
 };

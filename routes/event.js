@@ -37,4 +37,7 @@ module.exports = function (app) {
     //投票详情
     app.get('/votes/:voteId([a-f0-9]{24})/players/:playerId([a-f0-9]{24})', event.votePlayer);
 
+    //投票
+    app.put('/votes/:voteId([a-f0-9]{24})/players/:playerId([a-f0-9]{24})', event.doVote);
+
 };

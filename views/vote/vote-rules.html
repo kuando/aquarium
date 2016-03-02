@@ -24,23 +24,25 @@
         <div class="row rules-column">奖品设置</div>
         <div class="row rules-details">
             <div class="col-xs-12">
-                1.本次活动每人每天有3次机会，希望投票 <br/>
-                2.本次活动每人每天有3次机会，希望投票 <br/>
-                3.本次活动每人每天有3次机会，希望投票 <br/>
-                4.每人每天有3次机会，希望投票 <br/>
-                5.你知道的，每人每天有3次机会，希望投票 <br/>
+                <%= vote.prize %>
+
             </div>
         </div>
-        <div class="row rules-column">奖品设置</div>
+        <div class="row rules-column">参与方式</div>
         <div class="row rules-details">
             <div class="col-xs-12">
-                1.本次活动每人每天有3次机会，希望投票 <br/>
-                2.本次活动每人每天有3次机会，希望投票 <br/>
-                3.本次活动每人每天有3次机会，希望投票 <br/>
-                4.每人每天有3次机会，希望投票 <br/>
-                5.你知道的，每人每天有3次机会，希望投票 <br/>
+                <%= vote.participation %>
+
             </div>
         </div>
+        <% if(vote.explanation) { %>
+        <div class="row rules-column">参与方式</div>
+        <div class="row rules-details">
+            <div class="col-xs-12">
+                <%= vote.explanation %>
+            </div>
+        </div>
+        <% } %>
     </div>
 </div>
 <%- include('footer.html') %>

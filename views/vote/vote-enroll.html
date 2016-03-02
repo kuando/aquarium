@@ -89,7 +89,6 @@
     function handleFiles(obj) {
         var files = obj.files;
         var img = new Image();
-        console.log(img);
         if(window.URL){
             //File API
             img.src = window.URL.createObjectURL(files[0]); //创建一个object URL，并不是你的本地路径
