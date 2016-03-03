@@ -88,7 +88,7 @@ $(document).ready(function () {
         var $progress = $('<div class="weui_uploader_status_content">0%</div>');
         var $img = $('<li class="weui_uploader_file weui_uploader_status" style="background-image:url(' + fileData + ')"></li>');
         $img.append($progress);
-        $imgList.append($img);
+        $imgList.prepend($img);
         var token = $("#token").val();
         var formData = new FormData();
         formData.append('file', fileData);
