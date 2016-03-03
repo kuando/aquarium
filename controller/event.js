@@ -201,7 +201,9 @@ module.exports = {
                 return Promise.reject(new Error('投票不存在'));
             }
             res.locals.vote = vote;
-            return VotePlayer.where('vote', voteId).sort('-poll').limit(50).exec();
+            return VotePlayer.where('vote', voteId)
+                .where('isAudit', true)
+                .sort('-poll').limit(50).exec();
         }).then((players)=> {
             res.locals.players = players;
             res.render('vote/vote-rank');
@@ -282,12 +284,18 @@ function renderEnrolledEvent(req, res) {
 function renderVoteEvent(req, res) {
     let event = req.event;
     let limit = req.query.limit || 20;
-    let skip = req.query.skip || 0;
-    return VotePlayer.find({vote: event})
-        .limit(limit).skip(skip).exec()
-        .then((players)=> {
+    let page = req.query.page || 1;
+    let search = req.query.search;
+    let query = VotePlayer.find({vote: event, isAudit: true});
+    let skip = (page - 1) * 20;
+    query.limit(limit).skip(skip);
+    if (search && !_.isEmpty(search)) {
+        let exp = new RegExp(search);
+        query.or([{name: exp}, {sequence: exp}])
+    }
+    return query.exec().then((players)=> {
             res.locals.players = players;
-            return VotePlayer.count({vote: event}).exec();
+            return query.count().exec();
         })
         .then((count)=> {
             res.locals.vote = event;

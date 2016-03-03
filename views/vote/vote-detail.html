@@ -12,7 +12,7 @@
     <link href="/css/bootstrap.css" rel="stylesheet">
     <link href="/css/bootstrap-theme.css" rel="stylesheet">
     <link href="/css/vote.css" rel="stylesheet">
-    <link href="/css/theme/theme-red.css" rel="stylesheet">
+    <link href="/css/theme/theme-<%= vote.theme %>.css" rel="stylesheet">
 </head>
 <body class="bg-color">
 <!--header-->
@@ -21,7 +21,7 @@
         <div class="col-xs-12">
             <div class="player-info">
                 <div class="img">
-                    <img src="/images/castvote/1.jpg">
+                    <img src="http://resource.hizuoye.com/<%= player.images[0] %>">
                 </div>
                 <div class="info">
                     <p class="number"><%= player.sequence %>号</p>
