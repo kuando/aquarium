@@ -164,8 +164,12 @@ module.exports = {
                     err: '一个手机号只能报一次名'
                 });
             }
-            return Vote.findById(voteId)
-                .select('status voteEnroll')
+            return Vote.findByIdAndUpdate(voteId, {
+                    $inc: {
+                        playerCounter: 1
+                    }
+                }, {new: true})
+                .select('status voteEnroll playerCounter')
                 .exec().then((vote)=> {
                     if (!vote) {
                         return Promise.reject(new Error('投票不存在'));
@@ -177,6 +181,7 @@ module.exports = {
                         return Promise.reject(new Error('投票已停止报名'));
                     }
                     let votePlayer = new VotePlayer(req.body);
+                    votePlayer.sequence = vote.playerCounter + '';
                     votePlayer.isAudit = false;
                     votePlayer.source = 'enroll';
                     votePlayer.vote = vote;
