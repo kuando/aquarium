@@ -18,11 +18,9 @@ $(document).ready(function () {
             event.preventDefault();
         }
     });
+
     if (window.File && window.FileReader && window.FormData) {
-
         $inputField.on('change', function (e) {
-
-
             var file = e.target.files[0];
             if (file) {
                 if (/^image\//i.test(file.type)) {
@@ -36,10 +34,11 @@ $(document).ready(function () {
         alert("File upload is not supported!");
     }
 
+    //读取本地图片用于预览
     function readFile(file) {
         var reader = new FileReader();
         reader.onloadend = function () {
-            processFile(reader.result, file.type);
+            sendFile(file, reader.result);
         };
         reader.onerror = function () {
             alert('读取图片出错啦');
@@ -47,53 +46,16 @@ $(document).ready(function () {
         reader.readAsDataURL(file);
     }
 
-    function processFile(dataURL, fileType) {
-        var maxWidth = 800;
-        var maxHeight = 800;
-        var image = new Image();
-        image.src = dataURL;
-        image.onload = function () {
-            var width = image.width;
-            var height = image.height;
-            var shouldResize = (width > maxWidth) || (height > maxHeight);
-            if (!shouldResize) {
-                sendFile(dataURL);
-                return;
-            }
-            var newWidth;
-            var newHeight;
-            if (width > height) {
-                newHeight = height * (maxWidth / width);
-                newWidth = maxWidth;
-            } else {
-                newWidth = width * (maxHeight / height);
-                newHeight = maxHeight;
-            }
-            var canvas = document.createElement('canvas');
-            canvas.width = newWidth;
-            canvas.height = newHeight;
-            var context = canvas.getContext('2d');
-            context.drawImage(this, 0, 0, newWidth, newHeight);
-            dataURL = canvas.toDataURL(fileType);
-            sendFile(dataURL);
-        };
-
-        image.onerror = function () {
-            alert('There was an error processing your file!');
-        };
-    }
-
-    function sendFile(fileData) {
+    function sendFile(file, dataUrl) {
         var $imgList = $(".weui_uploader_files");
         var $progress = $('<div class="weui_uploader_status_content">0%</div>');
-        var $img = $('<li class="weui_uploader_file weui_uploader_status" style="background-image:url(' + fileData + ')"></li>');
+        var $img = $('<li class="weui_uploader_file weui_uploader_status" style="background-image:url(' + dataUrl + ')"></li>');
         $img.append($progress);
         $imgList.prepend($img);
         var token = $("#token").val();
         var formData = new FormData();
-        formData.append('file', fileData);
+        formData.append('file', file);
         formData.append('token', token);
-
         $.ajax({
             url: 'http://upload.qiniu.com/',
             method: 'POST',

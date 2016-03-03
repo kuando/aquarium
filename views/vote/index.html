@@ -26,12 +26,11 @@
             </ol>
             <!-- Wrapper for slides -->
             <div class="carousel-inner" role="listbox">
-                <div class="item active">
-                    <img class="" src="/images/castvote/111.jpg" width="100%" alt="...">
-                </div>
+                <% vote.slides.forEach(function(side){ %>
                 <div class="item">
-                    <img src="/images/castvote/111.jpg" width="100%" alt="...">
+                    <img src="http://resource.hizuoye.com/<%= side %>" width="100%" alt="...">
                 </div>
+                <% }) %>
             </div>
 
             <!-- Controls -->
@@ -63,27 +62,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="recently">
-                <p>最近报名：</p>
-                <ul class="list-unstyled">
-                    <li><img src="/images/castvote/1.jpg"></li>
-                    <li><img src="/images/castvote/2.jpg"></li>
-                    <li><img src="/images/castvote/3.jpg"></li>
-                    <li><img src="/images/castvote/4.jpg"></li>
-                    <li><img src="/images/castvote/5.jpg"></li>
-                    <li><img src="/images/castvote/6.jpg"></li>
-                    <li><img src="/images/castvote/7.jpg"></li>
-                    <li><img src="/images/castvote/8.jpg"></li>
-                    <li><img src="/images/castvote/9.jpg"></li>
-                    <li><img src="/images/castvote/1.jpg"></li>
-                    <li><img src="/images/castvote/2.jpg"></li>
-                    <li><img src="/images/castvote/3.jpg"></li>
-                    <li><img src="/images/castvote/4.jpg"></li>
-                    <li><img src="/images/castvote/5.jpg"></li>
-                    <li><img src="/images/castvote/6.jpg"></li>
-                    <li><img src="/images/castvote/7.jpg"></li>
-                </ul>
-            </div>
+
             <div class="vote-details chearfix">
                 <p><span>主题名称</span>：<%= record.title %></p>
                 <p><span>主办单位</span>：<%= record.schoolId.schoolName %></p>
@@ -101,14 +80,14 @@
             <div class="vote-filter">
                 <a href="/vote/enroll" class="btn btn-filter">我要参加</a>
                 <a href="/votes/<%= vote._id %>/rules" class="btn btn-filter">赛事规则</a>
-                <a href="/vote/rank" class="btn btn-filter">TOP 50</a>
+                <a href="/votes/<%= vote._id %>/rank" class="btn btn-filter">TOP 50</a>
             </div>
             <div class="vote-option-list">
                 <div class="row" id="masonry">
                     <% players.forEach(function(player){ %>
                     <div class="col-xs-6 col-sm-4 item">
                         <div class="thumbnail">
-                            <img src="/images/castvote/1.jpg" alt="...">
+                            <img src="http://resource.hizuoye.com/<%= player.images[0] %>" alt="...">
                             <div class="number"><%= player.sequence %>号</div>
                             <div class="caption">
                                 <div class="item-details">
@@ -125,19 +104,8 @@
                 </div>
             </div>
             <nav class="text-center">
-                <ul class="pagination">
-                    <li>
-                        <a href="#" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                        </a>
-                    </li>
-                    <li class="active"><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li>
-                        <a href="#" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
-                    </li>
+                <ul class="pagination" id="pagination">
+
                 </ul>
             </nav>
         </div>
@@ -162,10 +130,12 @@
         </div>
     </form>
 </div>
+<input type="hidden" id="totalPlayer" value="<%= totalPlayer %>">
 <script type="text/javascript" src="/js/lib/jquery-2.2.1.min.js"></script>
 <script type="text/javascript" src="/js/lib/bootstrap.min.js"></script>
 <script type="text/javascript" src="/js/lib/masonry.pkgd.min.js"></script>
 <script type="text/javascript" src="/js/lib/imagesloaded.pkgd.min.js"></script>
+<script type="text/javascript" src="/js/lib/jquery.twbsPagination.min.js"></script>
 <script type="text/javascript" src="/js/vote.js"></script>
 </body>
 <script type="text/javascript">
@@ -176,6 +146,20 @@
                 columnWidth: '.item',
                 itemSelector: '.item'
             });
+        });
+        var totalPlayer = $("#totalPlayer").val();
+        var totalPages = Math.ceil(totalPlayer / 20);
+        $('#pagination').twbsPagination({
+            first: '首页',
+            prev: '<<',
+            next: '>>',
+            last: '末页',
+            href: '?page={{number}}',
+            totalPages: totalPages,
+            visiblePages: 5,
+            onPageClick: function (event, page) {
+                $('#page-content').text('Page ' + page);
+            }
         });
     });
 </script>
