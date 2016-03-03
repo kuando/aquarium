@@ -11,15 +11,15 @@ body.bg-color{
 .search-btn:hover,
 .search-btn:focus,
 .search-btn:active{
-    background-color: #ff756b !important;
-    border: 1px solid #ff756b !important;
+    background-color: #fa483c !important;
+    border: 1px solid #fa483c !important;
     color: #fff;
 }
 .btn-filter,
 .btn-filter:hover,
 .btn-filter:focus{
-    background-color: #ff756b !important;
-    border: 1px solid #ff756b !important;
+    background-color: #fa483c !important;
+    border: 1px solid #fa483c !important;
     color: #ffffff;
     border-radius:4px;
 }
@@ -39,6 +39,9 @@ body.bg-color{
 }
 .vote-header .vote-details{
     color: #fff;
+}
+.vote-header .vote-details span{
+    background: #f4c600;
 }
 
 .vote-option-list .thumbnail{

@@ -5,7 +5,7 @@ body.bg-color{
     background-color: #76d4ba;
 }
 .search-result{
-    color: #76d4ba;
+    color: #72c0e6;
 }
 .search-btn,
 .search-btn:hover,
@@ -18,8 +18,8 @@ body.bg-color{
 .btn-filter,
 .btn-filter:hover,
 .btn-filter:focus{
-    background-color: #72d26e !important;
-    border: 1px solid #72d26e !important;
+    background-color: #76d4ba !important;
+    border: 1px solid #76d4ba !important;
     color: #ffffff;
     border-radius:4px;
 }
@@ -39,6 +39,9 @@ body.bg-color{
 }
 .vote-header .vote-details{
     color: #fff;
+}
+.vote-header .vote-details span{
+    background: #f67685;
 }
 
 .vote-option-list .thumbnail{

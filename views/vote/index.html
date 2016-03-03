@@ -64,10 +64,10 @@
             </div>
 
             <div class="vote-details chearfix">
-                <p><span>主题名称</span>：<%= record.title %></p>
-                <p><span>主办单位</span>：<%= record.schoolId.schoolName %></p>
-                <p><span>报名时间</span>：<%= moment(record.startTime).format('MM月DD日') %> 起</p>
-                <p><span>投票时间</span>：<%= moment(record.startTime).format('MM月DD日') %> 至 <%=
+                <p><span>活动主题</span><%= record.title %></p>
+                <p><span>主办单位</span><%= record.schoolId.schoolName %></p>
+                <p><span>报名时间</span><%= moment(record.startTime).format('MM月DD日') %> 起</p>
+                <p><span>投票时间</span><%= moment(record.startTime).format('MM月DD日') %> 至 <%=
                     moment(record.endTime).format('MM月DD日') %></p>
             </div>
         </div>
@@ -77,6 +77,18 @@
     </div>
     <div class="row vote-content">
         <div class="col-xs-12">
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <div class="input-group">
+                            <input type="text" class="form-control search-input" placeholder="请输入编号或名称">
+                        <span class="input-group-btn">
+                            <button class="btn search-btn" type="button">搜索</button>
+                        </span>
+                        </div>
+                    </div>
+                </div>
+            </form>
             <div class="vote-filter">
                 <a href="/vote/enroll" class="btn btn-filter">我要参加</a>
                 <a href="/votes/<%= vote._id %>/rules" class="btn btn-filter">赛事规则</a>
@@ -114,9 +126,35 @@
         <img src="/images/vote/theme-<%= record.theme%>/mw_002.jpg" width="100%">
     </div>
 </div>
+<div class="container-fluid">
+    <div class="vote-rules index">
+        <div class="row rules-column">奖品设置</div>
+        <div class="row rules-details">
+            <div class="col-xs-12">
+                <%= vote.prize %>
+
+            </div>
+        </div>
+        <div class="row rules-column">参与方式</div>
+        <div class="row rules-details">
+            <div class="col-xs-12">
+                <%= vote.participation %>
+
+            </div>
+        </div>
+        <% if(vote.explanation) { %>
+        <div class="row rules-column">参与方式</div>
+        <div class="row rules-details">
+            <div class="col-xs-12">
+                <%= vote.explanation %>
+            </div>
+        </div>
+        <% } %>
+    </div>
+</div>
 <%- include('footer.html') %>
 <div class="search-modal chearfix" id="searchModal">
-    <a class="close-search" id="closeSearch"><i class="fa fa-times"></i></a>
+    <a class="close-search" id="closeSearch"><img src="/images/vote/icon-close.png" width="18"></a>
     <form class="form-horizontal" id="searchModalForm">
         <div class="form-group">
             <div class="col-xs-offset-2 col-xs-8">

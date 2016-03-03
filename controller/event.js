@@ -300,7 +300,7 @@ function renderVoteEvent(req, res) {
         .then((count)=> {
             res.locals.vote = event;
             res.locals.totalPlayer = count;
-            req.pagePath = 'vote/search';
+            req.pagePath = 'vote/index';
             return renderEvent(req, res);
         });
 }

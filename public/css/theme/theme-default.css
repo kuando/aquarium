@@ -40,7 +40,9 @@ body.bg-color{
 .vote-header .vote-details{
     color: #fff;
 }
-
+.vote-header .vote-details span{
+    background: #f67685;
+}
 .vote-option-list .thumbnail{
     background-color: #72c0e6;
 }
@@ -138,8 +140,8 @@ a.vote-toupiao:active{
 .btn-info:hover,
 .btn-info:focus,
 .btn-info:active{
-    background-color: #f05e23 !important;
-    border: 1px solid #f05e23 !important;
+    background-color: #ea8010 !important;
+    border: 1px solid #ea8010 !important;
 }
 .btn-warning,
 .btn-warning:hover,
