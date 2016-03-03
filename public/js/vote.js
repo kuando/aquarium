@@ -43,10 +43,10 @@ $(document).ready(function () {
     //投票
     $("#doVote").on(event, function () {
         var requireFollow = $('#requireFollow').val();
-        //if (requireFollow) {
-        //    alert('请先关注');
-        //    return;
-        //}
+        if (requireFollow) {
+            alert('请先关注');
+            return;
+        }
         var voteId = $("#voteId").val();
         var state = $("#state").val();
         var playerId = $("#playerId").val();
