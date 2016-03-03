@@ -41,7 +41,7 @@ body.bg-color{
     color: #fff;
 }
 .vote-header .vote-details span{
-    background: #f67685;
+    background: #ff756b;
 }
 
 .vote-option-list .thumbnail{
@@ -51,7 +51,7 @@ body.bg-color{
     color: #fff;
 }
 .vote-toupiao{
-    background-color:#f67685;
+    background-color:#ff756b;
     color: #fff;
 }
 a.vote-toupiao:hover,
@@ -125,7 +125,7 @@ a.vote-toupiao:active{
 }
 .player-details .tag{
     color: #fff;
-    background: #76d4ba;
+    background: #ff756b;
 }
 .player-img{
     background: #fff;
@@ -155,8 +155,8 @@ a.vote-toupiao:active{
 .btn-danger:active,
 .btn-danger:focus,
 .btn-danger:hover{
-    background-color: #f67685 !important;
-    border: 1px solid #f67685 !important;
+    background-color: #ff756b !important;
+    border: 1px solid #ff756b !important;
 }
 .rank-item .media .player-poll{
     background-image: url("/images/vote/theme-green/rank-poll-bg.png");

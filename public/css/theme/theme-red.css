@@ -11,15 +11,15 @@ body.bg-color{
 .search-btn:hover,
 .search-btn:focus,
 .search-btn:active{
-    background-color: #fa483c !important;
-    border: 1px solid #fa483c !important;
+    background-color: #ff756b !important;
+    border: 1px solid #ff756b !important;
     color: #fff;
 }
 .btn-filter,
 .btn-filter:hover,
 .btn-filter:focus{
-    background-color: #fa483c !important;
-    border: 1px solid #fa483c !important;
+    background-color: #ff756b !important;
+    border: 1px solid #ff756b !important;
     color: #ffffff;
     border-radius:4px;
 }
