@@ -292,7 +292,7 @@ function renderVoteEvent(req, res) {
         .then((count)=> {
             res.locals.vote = event;
             res.locals.totalPlayer = count;
-            req.pagePath = 'vote/index';
+            req.pagePath = 'vote/search';
             return renderEvent(req, res);
         });
 }

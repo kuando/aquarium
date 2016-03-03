@@ -7,7 +7,6 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="format-detection" content="telephone=no"/>
     <meta name="msapplication-tap-highlight" content="no" />
-    <link href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="/css/weui.min.css" rel="stylesheet">
     <link href="/css/base.css" rel="stylesheet">
     <link href="/css/audition.css" rel="stylesheet" />
@@ -23,25 +22,25 @@
 
     <div class="star">
         <label class="colorful">推荐级别：</label>
-        <i class="fa fa-star"></i>
-        <i class="fa fa-star"></i>
-        <i class="fa fa-star"></i>
-        <i class="fa fa-star"></i>
-        <i class="fa fa-star"></i>
+        <img src="/images/icon-star.png" width="20">
+        <img src="/images/icon-star.png" width="20">
+        <img src="/images/icon-star.png" width="20">
+        <img src="/images/icon-star.png" width="20">
+        <img src="/images/icon-star.png" width="20">
     </div>
 
     <div style="width: 100%;">
         <div class="information">
             <div class="item">
-                <i class="fa fa-user"></i>
+                <img src="/images/icon-people.png" width="16">
                 <label>主讲老师：<%= record.teacher%></label>
             </div>
             <div class="item">
-                <i class="fa fa-clock-o"></i>
+                <img src="/images/icon-time.png" width="16">
                 <label>上课时间：<%= record.courseTime%></label>
             </div>
             <div class="item">
-                <i class="fa fa-location-arrow"></i>
+                <img src="/images/icon-didian.png" width="16">
                 <label>上课地点：<%= record.address%></label>
             </div>
         </div>
@@ -49,7 +48,7 @@
 
     <div class="audition-detail">
         <div class="introduction">
-            <i class="fa fa-bookmark"></i><label class="gap">教师简介</label>
+            <img src="/images/icon-tag.png" width="16"><label class="gap">教师简介</label>
         </div>
         <div class="detail">
             <div class="outer">
@@ -61,7 +60,6 @@
             </div>
         </div>
         <div class="detail-info">
-            <div class="left"><i class="fa fa-quote-left"></i></div>
             <div class="right">
                 <%= record.teacherBrief%>
             </div>
@@ -70,7 +68,7 @@
 
         <div class="class-introduction">
             <div class="introduction">
-                <i class="fa fa-bookmark"></i><label class="gap">课程简介</label>
+                <img src="/images/icon-tag.png" width="16"><label class="gap">课程简介</label>
             </div>
             <div class="class-detail">
                 <div class="left">
@@ -117,7 +115,7 @@
 
         </div>
         <div class="like">
-            <i class="fa fa-thumbs-o-up"></i><label class="number"><span id="like"><%= record.like%></span></label>
+            <img src="/images/icon-zan.png" width="16"><label class="number"><span id="like"><%= record.like%></span></label>
         </div>
         <div class="whistle">
             举报
@@ -133,7 +131,7 @@
             <div class="item">
                 <label class="name-label">手机：</label><input type="text" class="r-phone">
             </div>
-            <% if (record.enroll.fields.length) { %>
+            <% if (record.enroll.fields != null) { %>
             <% record.enroll.fields.forEach(function(field){ %>
             <div class="item">
                 <label class="name-label"><%= field.label%>：</label>
@@ -183,11 +181,11 @@
 
     <footer>
         <div class="footer" id="register">
-            <label style="font-size: 17px"><i class="fa fa-hand-pointer-o"></i> 点我报名</label>
+            <label style="font-size: 17px"><img src="/images/icon-edit.png" width="18"> 点我报名</label>
         </div>
     </footer>
     <input type="hidden" value="<%= record._id.toString()%>" class="r-id"/>
-    <input type="hidden" value="<%= record.enroll._id.toString()%>" class="r-enroll"/>
+    <input type="hidden" value="<%= record.enroll._id %>" class="r-enroll"/>
     <input type="hidden" value="<%= record.schoolId._id.toString()%>" class="r-schoolId"/>
 </body>
 <script type="text/javascript" src="/js/lib/zepto.min.js"></script>

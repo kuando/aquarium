@@ -8,7 +8,6 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
     <meta name="format-detection" content="telephone=no"/>
     <meta name="msapplication-tap-highlight" content="no"/>
-    <link href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="/css/weui.min.css" rel="stylesheet">
     <link href="/css/base.css" rel="stylesheet">
     <link href="/css/video.css" rel="stylesheet"/>
@@ -20,7 +19,7 @@
 <div class="video"><%- item.link%></div>
 <section class="content">
     <div class="introduction">
-        <i class="fa fa-bookmark"></i><label class="gap">知识重点</label>
+        <img src="/images/icon-tag.png" width="16"><label class="gap">知识重点</label>
     </div>
     <div class="brief">
         <%= item.brief%>
@@ -37,7 +36,7 @@
         </label>
     </div>
     <div class="like">
-        <i class="fa fa-thumbs-o-up"></i>
+        <img src="/images/icon-zan.png" width="16">
         <label class="number"><span id="like"><%= item.like%></span></label>
     </div>
     <div class="whistle">

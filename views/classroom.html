@@ -8,7 +8,6 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
     <meta name="format-detection" content="telephone=no"/>
     <meta name="msapplication-tap-highlight" content="no"/>
-    <link href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="/css/classroom.css" rel="stylesheet"/>
     <title><%= record.title%></title>
 </head>
@@ -22,22 +21,22 @@
     <div class="description">
         <div class="left">
             <label name="">推荐指数：</label>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
+            <img src="/images/icon-star.png" width="20">
+            <img src="/images/icon-star.png" width="20">
+            <img src="/images/icon-star.png" width="20">
+            <img src="/images/icon-star.png" width="20">
         </div>
         <div class="right">
-            <i class="fa fa-user"></i>
+            <img src="/images/icon-people.png" width="16">
             <%= record.visit%> 人正在看
         </div>
     </div>
 
-    <div class="course-brief"><i class="fa fa-bookmark"></i>课程简介</div>
+    <div class="course-brief"><img src="/images/icon-tag.png" width="16">课程简介</div>
     <div class="brief-detail item-list">
         <%= record.courseBrief%>
     </div>
-    <div class="course-brief"><i class="fa fa-bookmark"></i>课程列表</div>
+    <div class="course-brief"><img src="/images/icon-tag.png" width="16">课程列表</div>
     <div class="course-list">
         <ul>
             <% if (record.courses.length) { %>
@@ -45,7 +44,7 @@
             <li>
                 <a href="/events/<%= record.id.toString()%>/videos/<%= course._id%>">
                     <div class="left">
-                        <span class="label-icon"><i class="fa fa-play-circle-o"></i></span>
+                        <span class="label-icon"><img src="/images/icon-video.png" width="16"></span>
                         <%= course.title%>
                     </div>
                 </a>
@@ -68,7 +67,7 @@
         </label>
     </div>
     <div class="like">
-        <i class="fa fa-thumbs-o-up"></i><label class="number"><span id="like"><%= record.like%></span></label>
+        <img src="/images/icon-zan.png" width="16"><label class="number"><span id="like"><%= record.like%></span></label>
     </div>
     <div class="whistle">
         举报

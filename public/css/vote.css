@@ -369,3 +369,15 @@ a.vote-toupiao{
     border: none!important;
     box-shadow: inset 0 -4px rgba(0,0,0,.25);
 }
+/*ËÑË÷½á¹û*/
+.search-title{
+    margin-bottom: 0;
+    display: inline-block;
+}
+.result{
+    float: right;
+    margin-top: 5px;
+    font-size: 18px;
+    font-weight: bold;
+    margin-right: 5px;
+}

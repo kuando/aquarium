@@ -4,6 +4,9 @@ body{
 body.bg-color{
     background-color: #eecf37;
 }
+.search-result{
+    color: #ff756b;
+}
 .search-btn,
 .search-btn:hover,
 .search-btn:focus,

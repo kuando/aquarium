@@ -56,6 +56,10 @@ a:active {
     color: #323436;
 }
 
+.description .left img{
+    margin-bottom: -3px;
+}
+
 .description .right{
     font-size: 15px;
     float: left;
