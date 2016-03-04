@@ -25,7 +25,7 @@ module.exports = function (app) {
     app.get('/events/:eventId([a-f0-9]{24})/videos/:videoId([a-f0-9]{24})', event.findVideoById);
 
     // 投票首页
-    app.get('/votes/:eventId([a-f0-9]{24})', event.findEventById);
+    app.get('/votes/:eventId([a-f0-9]{24})',sdk.getSignature, event.findEventById);
 
     //投票规则
     app.get('/votes/:voteId([a-f0-9]{24})/rules', event.voteRules);

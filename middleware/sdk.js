@@ -6,7 +6,7 @@
 const request = require('request-promise');
 const Promise = require('bluebird').Promise;
 const redis = require('../config/redis');
-const wx = require('../config/config').wx;
+const weixin = require('../config/config').weixin;
 const jsSHA = require('jssha');
 const SDK_ACCESS_TOKEN = 'SDK_ACCESS_TOKEN';
 const SDK_TICKET = 'SDK_TICKET';
@@ -15,6 +15,7 @@ module.exports = {
     getSignature: function (req, res, next) {
         getTicket().then((ticket)=> {
             res.locals.sdk = sign(ticket, req.url);
+            console.log(res.locals.sdk);
             next();
         }).catch((err)=> {
             next(err);
@@ -27,14 +28,14 @@ function getAccessToken() {
         if (token) {
             return token;
         }
-        let appId = wx.componentAppid;
-        let secret = wx.componentAppSecret;
+        let appId = weixin.appid;
+        let secret = weixin.appSecret;
         let url = `https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=${appId}&secret=${secret}`;
-        return request.get(url).then((res)=> {
-            if (res.errcode) {
+        return request.get(url).then((rs)=> {
+            if (rs.errcode) {
                 return Promise.reject(new Error(res.errmsg));
             }
-            let accessToken = res.access_token;
+            let accessToken = rs.access_token;
             redis.set(SDK_ACCESS_TOKEN, accessToken, 'EX', 7000); //提前200秒过期
             return accessToken;
         })
@@ -102,7 +103,7 @@ function sign(jsapi_ticket, url) {
     var shaObj = new jsSHA('SHA-1', 'TEXT');
     shaObj.update(raw(ret));
     ret.signature = shaObj.getHash('HEX');
-    ret.appid = wx.componentAppid;
+    ret.appid = weixin.appid;
     delete ret.jsapi_ticket;
     delete ret.url;
     return ret;

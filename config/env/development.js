@@ -23,7 +23,10 @@ module.exports = {
         encodingAESKey: 'gV9Zf9mndKz6sKEWaphp5893V58TmMFPGCAM4gceNF9',
         verifyToken: 'lovekuando'
     },
-
+    weixin:{
+        appid: 'wxe68418f13df6bb70',
+        appSecret: '0556a946d4a4abc3fb2b6377596620f9'
+    },
     qiniu: {
         accessKey: 'SPJ9b_qmVxy0FQU-93J4xb5EbHv9Z4Jn_-78f8gr',
         secretKey: 'NOFnKRTsd1RjjYoyT1qPAgHyczBmAjl-s26GXpA4',
