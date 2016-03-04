@@ -5,6 +5,7 @@
 
 const event = require('../controller/event');
 const qiniu = require('../middleware/qiniu');
+const sdk = require('../middleware/sdk');
 
 module.exports = function (app) {
 
