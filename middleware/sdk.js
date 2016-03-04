@@ -31,6 +31,7 @@ function getAccessToken() {
         let secret = wx.componentAppSecret;
         let url = `https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=${appId}&secret=${secret}`;
         return request.get(url).then((res)=> {
+            res = JSON.parse(res);
             if (res.errcode) {
                 return Promise.reject(new Error(res.errmsg));
             }
@@ -49,6 +50,7 @@ function getTicket() {
         return getAccessToken().then((token)=> {
             let url = `https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=${token}&type=jsapi`;
             return request.get(url).then((res)=> {
+                res = JSON.parse(res);
                 if (res.errcode !== 0) {
                     return Promise.reject(new Error(res.errmsg));
                 }
