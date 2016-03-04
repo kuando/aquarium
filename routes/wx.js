@@ -5,7 +5,7 @@
 
 const wx = require('../controller/wx');
 const wxMid = require('../middleware/wx');
-
+const sdkMid = require('../middleware/sdk');
 module.exports = function (app) {
 
     // 接收微信授权事件
@@ -16,5 +16,8 @@ module.exports = function (app) {
 
 
     app.get('/wx/auth/success', wx.authCallback);
+
+    //获取jsdk签名
+    app.get('/wx/sdk', sdkMid.getSignature, wx.getSdkSignature);
 
 };

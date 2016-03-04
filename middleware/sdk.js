@@ -14,8 +14,7 @@ const SDK_TICKET = 'SDK_TICKET';
 module.exports = {
     getSignature: function (req, res, next) {
         getTicket().then((ticket)=> {
-            res.locals.sdk = sign(ticket, req.url);
-            console.log(res.locals.sdk);
+            req.sdk = sign(ticket, req.url);
             next();
         }).catch((err)=> {
             next(err);
@@ -31,8 +30,9 @@ function getAccessToken() {
         let appId = weixin.appid;
         let secret = weixin.appSecret;
         let url = `https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=${appId}&secret=${secret}`;
-        return request.get(url).then((rs)=> {
-            if (rs.errcode) {
+        return request.get(url).then((res)=> {
+            res = JSON.parse(rs);
+            if (res.errcode) {
                 return Promise.reject(new Error(res.errmsg));
             }
             let accessToken = rs.access_token;
@@ -50,6 +50,7 @@ function getTicket() {
         return getAccessToken().then((token)=> {
             let url = `https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=${token}&type=jsapi`;
             return request.get(url).then((res)=> {
+                res = JSON.parse(res);
                 if (res.errcode !== 0) {
                     return Promise.reject(new Error(res.errmsg));
                 }

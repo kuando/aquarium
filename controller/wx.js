@@ -35,5 +35,9 @@ module.exports = {
         let ticket = xmlDoc.get('//ComponentVerifyTicket');
         redis.set('COMPONENT_VERIFY_TICKET', ticket.text());
         res.send("success");
+    },
+
+    getSdkSignature: function (req, res) {
+        res.json(req.sdk);
     }
 };
