@@ -29,6 +29,9 @@ function getPreAuthCodeUrl(token) {
     return `https://api.weixin.qq.com/cgi-bin/component/api_create_preauthcode?component_access_token=${token}`;
 }
 
+
+
+
 //组件token缓存key
 const COMPONENT_ACCESS_TOKEN = 'COMPONENT_ACCESS_TOKEN';
 //验证ticket缓存key
