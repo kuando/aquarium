@@ -22,8 +22,8 @@
     <!-- 基本信息 -->
     <div class="base-info">
         <div class="left">
-            <div class="institution"><%= record.schoolId.schoolName%></div>
             <div class="date"><%= moment(record.createTime).format('YYYY-MM-DD') %></div>
+            <div class="institution"><%= record.schoolId.schoolName%></div>
         </div>
     </div>
 
@@ -105,7 +105,7 @@
             </label>
 
         </div>
-        <div class="like">
+        <div class="like zan">
             <img src="/images/icon-zan.png" width="16"><label class="number"><span id="like"><%= record.like%></span></label>
         </div>
         <div class="whistle">
@@ -115,7 +115,6 @@
 
     <div id="mask-bg"></div>
 
-
     <div id="mask-sh">
         <div class="register-info">
             <div class="item">
@@ -124,7 +123,6 @@
             <div class="item">
                 <label class="name-label">手机：</label><input type="text" class="r-phone">
             </div>
-            <% console.log(record.enroll.fields) %>
             <% if (record.enroll.fields != null) { %>
             <% record.enroll.fields.forEach(function(field){ %>
             <div class="item">
@@ -179,10 +177,10 @@
         </div>
     </footer>
     <input type="hidden" value="<%= record._id.toString()%>" class="r-id"/>
-    <input type="hidden" value="<%= record.enroll._id %>" class="r-enroll"/>
+    <input type="hidden" value="<%= record.enroll.toString() %>" class="r-enroll"/>
     <input type="hidden" value="<%= record.schoolId._id.toString()%>" class="r-schoolId"/>
 </body>
-<script type="text/javascript" src="/js/lib/zepto.min.js"></script>
+<script type="text/javascript" src="/js/lib/jquery-2.2.1.min.js"></script>
 <script type="text/javascript" src="/js/register.js"></script>
 <script type="text/javascript" src="/js/share.js"></script>
 </html>

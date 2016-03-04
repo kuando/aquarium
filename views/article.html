@@ -23,8 +23,8 @@
 <!-- 基本信息 -->
 <div class="base-info">
     <div class="left">
-        <div class="institution"><%= record.schoolId.schoolName%></div>
         <div class="cus-date"><%= moment(record.createTime).format('YYYY-MM-DD') %></div>
+        <div class="institution"><%= record.schoolId.schoolName%></div>
     </div>
 </div>
 <%if (record.coverImage) {%>
@@ -43,7 +43,7 @@
     <div class="viewd">
         阅读<label class="number"><%= record.visit%></label>
     </div>
-    <div class="like">
+    <div class="like zan">
         <img src="/images/icon-zan.png" width="16"><label class="number"><span id="like"><%= record.like || 0 %></span></label>
     </div>
     <div class="whistle">
@@ -52,16 +52,31 @@
 </div>
 <input type="hidden" value="<%= record._id.toString()%>" class="r-id"/>
 </body>
-<script type="text/javascript" src="/js/lib/zepto.min.js"></script>
+<script type="text/javascript" src="/js/lib/jquery-2.2.1.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
         //点赞
-        $('.like').bind('click', function () {
+        var $statistics = $('.statistics');
+        $statistics.on('click','.zan',function () {
+            $(this).addClass('no-zan');
+            $(this).removeClass('zan');
+            $(this).find('img').attr({ src: "/images/icon-zantc.png"});
             var like = $('#like').html();
             like = like === '' ? 0 : like;
             var _id = $('.r-id').val();
             $.post("/events/" + _id + '/like').then(function () {
                 $('#like').empty().text(parseInt(like) + 1);
+            });
+        });
+        $statistics.on('click','.no-zan',function () {
+            $(this).addClass('zan');
+            $(this).removeClass('no-zan');
+            $(this).find('img').attr({ src: "/images/icon-zan.png"});
+            var like = $('#like').html();
+            like = like === '' ? 0 : like;
+            var _id = $('.r-id').val();
+            $.post("/events/" + _id + '/like').then(function () {
+                $('#like').empty().text(parseInt(like) - 1);
             });
         });
     });

@@ -13,8 +13,8 @@ $(document).ready(function () {
 
     $('.weui_uploader_input_wrp').click(function (event) {
         var count = parseInt($imageCount.text());
-        if (count >= 5) {
-            alert('最多上传5张图片');
+        if (count >= 3) {
+            alert('最多上传3张图片');
             event.preventDefault();
         }
     });
@@ -47,11 +47,11 @@ $(document).ready(function () {
     }
 
     function sendFile(file, dataUrl) {
-        var $imgList = $(".weui_uploader_files");
+        var $imgList = $("#imgUpload");
         var $progress = $('<div class="weui_uploader_status_content">0%</div>');
         var $img = $('<li class="weui_uploader_file weui_uploader_status" style="background-image:url(' + dataUrl + ')"></li>');
         $img.append($progress);
-        $imgList.prepend($img);
+        $imgList.before($img);
         var token = $("#token").val();
         var formData = new FormData();
         formData.append('file', file);

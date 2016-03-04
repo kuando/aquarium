@@ -15,7 +15,7 @@ module.exports = {
 
     findEventById: (req, res) => {
         Event.findByIdAndUpdate(req.params.eventId, {$inc: {visit: 1}})
-            .populate('schoolId', 'schoolName')
+            .populate('schoolId', 'schoolName').populate('enroll')
             .exec()
             .then((event)=> {
                 if (!event) {

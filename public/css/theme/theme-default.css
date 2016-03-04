@@ -140,22 +140,22 @@ a.vote-toupiao:active{
 .btn-info:hover,
 .btn-info:focus,
 .btn-info:active{
-    background-color: #ea8010 !important;
-    border: 1px solid #ea8010 !important;
+    background-color: #FDAC23 !important;
+    border: 1px solid #FDAC23 !important;
 }
 .btn-warning,
 .btn-warning:hover,
 .btn-warning:focus,
 .btn-warning:active{
-    background-color: #ffbd4a !important;
-    border: 1px solid #ffbd4a !important;
+    background-color: #A6E33C !important;
+    border: 1px solid #FAC450 !important;
 }
 .btn-danger,
 .btn-danger:active,
 .btn-danger:focus,
 .btn-danger:hover{
-    background-color: #ff756b !important;
-    border: 1px solid #ff756b !important;
+    background-color: #F387C0 !important;
+    border: 1px solid #F387C0 !important;
 }
 
 .rank-item .media .player-poll{

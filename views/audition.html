@@ -114,7 +114,7 @@
             </label>
 
         </div>
-        <div class="like">
+        <div class="like zan">
             <img src="/images/icon-zan.png" width="16"><label class="number"><span id="like"><%= record.like%></span></label>
         </div>
         <div class="whistle">
@@ -185,10 +185,10 @@
         </div>
     </footer>
     <input type="hidden" value="<%= record._id.toString()%>" class="r-id"/>
-    <input type="hidden" value="<%= record.enroll._id %>" class="r-enroll"/>
+    <input type="hidden" value="<%= record.enroll.toString() %>" class="r-enroll"/>
     <input type="hidden" value="<%= record.schoolId._id.toString()%>" class="r-schoolId"/>
 </body>
-<script type="text/javascript" src="/js/lib/zepto.min.js"></script>
+<script type="text/javascript" src="/js/lib/jquery-2.2.1.min.js"></script>
 <script type="text/javascript" src="/js/register.js"></script>
 <script type="text/javascript" src="/js/share.js"></script>
 </html>

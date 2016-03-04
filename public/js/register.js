@@ -56,11 +56,27 @@ $(document).ready(function () {
     });
 
     //点赞
-    $('.like').bind('click', function () {
+    var $statistics = $('.statistics');
+    $statistics.on('click','.zan',function () {
+        $(this).addClass('no-zan');
+        $(this).removeClass('zan');
+        $(this).find('img').attr({ src: "/images/icon-zantc.png"});
+        var like = $('#like').html();
+        like = like === '' ? 0 : like;
         var _id = $('.r-id').val();
-        var like = $('#like').text();
-        $.post("/events/" + _id + '/like', function () {
-            $('#like').text(parseInt(like) + 1);
+        $.post("/events/" + _id + '/like').then(function () {
+            $('#like').empty().text(parseInt(like) + 1);
+        });
+    });
+    $statistics.on('click','.no-zan',function () {
+        $(this).addClass('zan');
+        $(this).removeClass('no-zan');
+        $(this).find('img').attr({ src: "/images/icon-zan.png"});
+        var like = $('#like').html();
+        like = like === '' ? 0 : like;
+        var _id = $('.r-id').val();
+        $.post("/events/" + _id + '/like').then(function () {
+            $('#like').empty().text(parseInt(like) - 1);
         });
     });
 

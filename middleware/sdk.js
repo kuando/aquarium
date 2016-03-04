@@ -14,7 +14,7 @@ const SDK_TICKET = 'SDK_TICKET';
 module.exports = {
     getSignature: function (req, res, next) {
         getTicket().then((ticket)=> {
-            req.sdk = sign(ticket, req.url);
+            req.sdk = sign(ticket, req.query.url);
             next();
         }).catch((err)=> {
             next(err);
@@ -31,11 +31,11 @@ function getAccessToken() {
         let secret = weixin.appSecret;
         let url = `https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=${appId}&secret=${secret}`;
         return request.get(url).then((res)=> {
-            res = JSON.parse(rs);
+            res = JSON.parse(res);
             if (res.errcode) {
                 return Promise.reject(new Error(res.errmsg));
             }
-            let accessToken = rs.access_token;
+            let accessToken = res.access_token;
             redis.set(SDK_ACCESS_TOKEN, accessToken, 'EX', 7000); //提前200秒过期
             return accessToken;
         })
