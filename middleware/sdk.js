@@ -13,8 +13,9 @@ const SDK_TICKET = 'SDK_TICKET';
 
 module.exports = {
     getSignature: function (req, res, next) {
+        let url = req.url.split('#')[0];
         getTicket().then((ticket)=> {
-            res.locals.sdk = sign(ticket, req.url);
+            req.sdk = sign(ticket, url);
             next();
         }).catch((err)=> {
             next(err);

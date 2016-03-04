@@ -5,6 +5,7 @@
 
 const wx = require('../controller/wx');
 const wxMid = require('../middleware/wx');
+const sdk = require('../middleware/sdk');
 
 module.exports = function (app) {
 
@@ -16,5 +17,8 @@ module.exports = function (app) {
 
 
     app.get('/wx/auth/success', wx.authCallback);
+
+    //获取jsdk签名
+    app.get('/wx/sdk', sdk.getSignature, wx.sdkSignature);
 
 };
