@@ -202,6 +202,7 @@ module.exports = {
         let Vote = Event.discriminators['vote'];
         let playerId = req.params.playerId;
         let voteId = req.params.voteId;
+        res.locals.followFlag = req.query.followFlag === '1';
         Vote.findById(voteId).select('requireFollow followTip schoolId theme')
             .populate('schoolId', 'schoolName privateQrcode')
             .exec()
@@ -224,7 +225,7 @@ module.exports = {
             })
             .then((rank)=> {
                 res.locals.rank = rank + 1;
-                res.render('vote/vote-detail');
+                res.render('vote/vote-player');
             })
             .catch(next);
     },
