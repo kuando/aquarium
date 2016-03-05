@@ -16,7 +16,6 @@
 </head>
 <body>
 <!--header-->
-<a href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxe68418f13df6bb70&redirect_uri=http://testwx.hizuoye.com/votes/56c58480c8110b07399c9e2d&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect">登录</a>
 <div class="container-fluid">
     <div class="row">
         <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
@@ -28,7 +27,7 @@
             <!-- Wrapper for slides -->
             <div class="carousel-inner" role="listbox">
                 <% vote.slides.forEach(function(side){ %>
-                <div class="item">
+                <div class="item active">
                     <img src="http://resource.hizuoye.com/<%= side %>" width="100%" alt="...">
                 </div>
                 <% }) %>
@@ -132,14 +131,14 @@
         <div class="row rules-column">奖品设置</div>
         <div class="row rules-details">
             <div class="col-xs-12">
-                <%= vote.prize %>
+                <%- vote.prize %>
 
             </div>
         </div>
         <div class="row rules-column">参与方式</div>
         <div class="row rules-details">
             <div class="col-xs-12">
-                <%= vote.participation %>
+                <%- vote.participation %>
 
             </div>
         </div>
@@ -147,7 +146,7 @@
         <div class="row rules-column">参与方式</div>
         <div class="row rules-details">
             <div class="col-xs-12">
-                <%= vote.explanation %>
+                <%- vote.explanation %>
             </div>
         </div>
         <% } %>
