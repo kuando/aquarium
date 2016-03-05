@@ -2,7 +2,7 @@ body{
     background-color: #ffdccc;
 }
 body.bg-color{
-    background-color: #eecf37;
+    background-color: #FFA5B4;
 }
 .search-result{
     color: #ff756b;
@@ -28,11 +28,11 @@ body.bg-color{
     border: 1px solid #037ab2 !important;
 }
 .vote-header{
-    background-color: #fee797;
+    background-color: #ff756b;
 }
 .vote-header .vote-arrangements li{
-    border-color: #fee797;
-    color: #fee797;
+    border-color: #ff756b;
+    color: #ff756b;
 }
 .vote-header .recently p{
     color: #fff;
@@ -41,7 +41,7 @@ body.bg-color{
     color: #fff;
 }
 .vote-header .vote-details span{
-    background: #f4c600;
+    background: #fee797;
 }
 
 .vote-option-list .thumbnail{
