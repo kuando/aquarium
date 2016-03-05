@@ -25,10 +25,10 @@ $.get("/wx/sdk?url=" + url.split('#')[0], function (data) {
     });
 
     wx.ready(function () {
+        var newUrl = url.query_set({followFlag, 0}).to_string();
         wx.onMenuShareTimeline({
-            link: url.query_set({'followFlag': 0}).to_string(),
+            link: newUrl,
             success: function () {
-                alert('分享成功');
                 if (eventId && eventId !== '') {
                     $.ajax({
                         url: '/events/' + eventId + '/share',
