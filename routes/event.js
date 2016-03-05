@@ -15,8 +15,11 @@ module.exports = function (app) {
     //点赞服务
     app.post('/events/:eventId([a-f0-9]{24})/like', event.addLikeCount);
 
-    //报名服务
+    //报名
     app.post('/events/:eventId([a-f0-9]{24})/enrollNames', event.saveEnrolledName);
+
+    //分享
+    app.put('/events/:eventId([a-f0-9]{24})/share', event.share);
 
     //视频点赞服务
     app.post('/events/:eventId([a-f0-9]{24})/videos/:videoId([a-f0-9]{24})/like', event.addVideoLikeCount);
@@ -25,7 +28,7 @@ module.exports = function (app) {
     app.get('/events/:eventId([a-f0-9]{24})/videos/:videoId([a-f0-9]{24})', event.findVideoById);
 
     // 投票首页
-    app.get('/votes/:eventId([a-f0-9]{24})',sdk.getSignature, event.findEventById);
+    app.get('/votes/:eventId([a-f0-9]{24})', sdk.getSignature, event.findEventById);
 
     //投票规则
     app.get('/votes/:voteId([a-f0-9]{24})/rules', event.voteRules);

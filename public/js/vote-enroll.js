@@ -114,7 +114,6 @@ $(document).ready(function () {
             alert('描述不能为空');
             return;
         }
-
         $.ajax({
             url: '/votes/' + voteId + '/enrolls',
             method: 'POST',
@@ -132,6 +131,5 @@ $(document).ready(function () {
         }).then(function (res) {
             alert('报名成功');
         });
-
     });
 });
