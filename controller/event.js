@@ -103,7 +103,7 @@ module.exports = {
     },
 
 
-    voteRules: (req, res)=> {
+    voteRules: (req, res, next)=> {
         let voteId = req.params.voteId;
         let Vote = Event.discriminators['vote'];
         Vote.findById(voteId).select('prize participation explanation theme')

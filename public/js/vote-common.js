@@ -20,13 +20,8 @@ $(document).ready(function () {
         $("#shareModal").fadeIn()
     });
 
-
-
     $Controls.on(event, "#followSponsor", function () {
         $("#followModal").fadeIn()
     });
-
-
-
 
 });
