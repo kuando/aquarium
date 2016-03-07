@@ -2,34 +2,63 @@
  * Created by Frank on 16/3/7.
  */
 'use strict';
-var gulp = require('gulp');
-var rev = require('gulp-rev');
-var cssmin = require('gulp-cssmin');
-var clean = require('gulp-clean');
-var uglify = require('gulp-uglify');
+const gulp = require('gulp');
+const rev = require('gulp-rev');
+const csso = require('gulp-csso');
+const clean = require('gulp-clean');
+const uglify = require('gulp-uglify');
+const filter = require('gulp-filter');
+const revReplace = require("gulp-rev-replace");
+const imagemin = require('gulp-imagemin');
+const pngquant = require('imagemin-pngquant');
+const gulpSequence = require('gulp-sequence');
 
+const libFilter = filter(file=> {
+    return !/js\/lib/.test(file.path);
+}, {restore: true, passthrough: false});
 
+const jsFilter = filter('**/*.js', {restore: true});
+const cssFilter = filter('**/*.css', {restore: true});
+
+//清理dist文件夹
 gulp.task('clean', function () {
-    return gulp.src('dist', {read: false})
-        .pipe(clean());
-});
-
-gulp.task('css', function () {
-    return gulp.src('public/css/**/*.css')
-        .pipe(cssmin())
-        .pipe(rev())
-        .pipe(gulp.dest('dist/css'));
+    return gulp.src('dist', {read: false}).pipe(clean());
 });
 
 
-gulp.task('js', function () {
-    return gulp.src('public/js/**/*.js')
+//图片压缩
+gulp.task('image', function () {
+    return gulp.src("public/images/*")
+        .pipe(imagemin({
+            progressive: true,
+            svgoPlugins: [{removeViewBox: false}],
+            use: [pngquant()]
+        }))
+        .pipe(gulp.dest('dist/images'));
+});
+
+gulp.task('revision', function () {
+    return gulp.src(["public/**/*.css", "public/**/*.js"])
+        .pipe(jsFilter)
         .pipe(uglify())
-        .on('error', function (fileName, lineNumber, message) {
-            console.error(fileName, lineNumber, message)
-        })
+        .pipe(jsFilter.restore)
+        .pipe(cssFilter)
+        .pipe(csso())
+        .pipe(cssFilter.restore)
+        .pipe(libFilter)
         .pipe(rev())
-        .pipe(gulp.dest('dist/js'))
+        .pipe(libFilter.restore)
+        .pipe(gulp.dest('dist'))
+        .pipe(rev.manifest())
+        .pipe(gulp.dest('dist'))
 });
 
-gulp.task('default', ['clean', 'js', 'css']);
+
+gulp.task("revreplace", ["revision"], function () {
+    var manifest = gulp.src("dist/rev-manifest.json");
+    return gulp.src("views/**/*.html")
+        .pipe(revReplace({manifest: manifest}))
+        .pipe(gulp.dest('dist/view'));
+});
+
+gulp.task('build', gulpSequence('clean', ['revreplace', 'image']));

@@ -14,14 +14,16 @@ const app = express();
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(xmlParser());
 
-app.set('views', path.join(__dirname, '../views'));
+if (process.env.NODE_ENV !== 'development') {
+    app.set('views', path.join(__dirname, '../dist/views'));
+    app.set('view cache', true);
+} else {
+    app.set('views', path.join(__dirname, '../views'));
+    app.use(express.static(path.join(__dirname, '../public')));
+}
 
 app.engine('.html', ejs.__express);
-
 app.set('view engine', 'html');
-
-app.use(express.static(path.join(__dirname, '../public')));
-
 
 //初始化 server models
 requireDir('../models', {
