@@ -1,5 +1,14 @@
 $(document).ready(function () {
     var $container = $('#masonry');
+    var $carousel = $('#carousel-example-generic');
+    $carousel.hammer().on('swipeleft', function(){
+        $(this).carousel('next');
+    });
+
+    $carousel.hammer().on('swiperight', function(){
+        $(this).carousel('prev');
+    });
+
     $container.imagesLoaded(function () {
         $container.masonry({
             columnWidth: '.item',
