@@ -1,7 +1,0 @@
-{
-"version": 3,
-"mappings": "AAEA,IAAI;EACF,KAAK,EAHA,OAAO;EAIZ,gBAAgB,EAJX,OAAO;;AAOd,EAAE;EACA,KAAK,EAAE,OAAO",
-"sources": ["invitation.scss"],
-"names": [],
-"file": "invitation.css"
-}

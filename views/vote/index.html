@@ -176,34 +176,10 @@
 <script type="text/javascript" src="/js/lib/masonry.pkgd.min.js"></script>
 <script type="text/javascript" src="/js/lib/imagesloaded.pkgd.min.js"></script>
 <script type="text/javascript" src="/js/lib/jquery.twbsPagination.min.js"></script>
-<script type="text/javascript" src="/js/vote.js"></script>
 <script type="text/javascript" src="/js/lib/youarei.min.js"></script>
 <script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 <script type="text/javascript" src="/js/weixin.js"></script>
+<script type="text/javascript" src="/js/vote-common.js"></script>
+<script type="text/javascript" src="/js/vote-index.js"></script>
 </body>
-<script type="text/javascript">
-    $(document).ready(function () {
-        var $container = $('#masonry');
-        $container.imagesLoaded(function () {
-            $container.masonry({
-                columnWidth: '.item',
-                itemSelector: '.item'
-            });
-        });
-        var totalPlayer = $("#totalPlayer").val();
-        var totalPages = Math.ceil(totalPlayer / 20);
-        $('#pagination').twbsPagination({
-            first: '首页',
-            prev: '<<',
-            next: '>>',
-            last: '末页',
-            href: '?page={{number}}',
-            totalPages: totalPages,
-            visiblePages: 5,
-            onPageClick: function (event, page) {
-                $('#page-content').text('Page ' + page);
-            }
-        });
-    });
-</script>
 </html>
