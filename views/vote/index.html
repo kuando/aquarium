@@ -26,9 +26,10 @@
             </ol>
             <!-- Wrapper for slides -->
             <div class="carousel-inner" role="listbox">
-                <% vote.slides.forEach(function(side){ %>
-                <div class="item active">
-                    <img src="http://resource.hizuoye.com/<%= side %>" width="100%" alt="...">
+                <% vote.slides.forEach(function(side,index){ %>
+                <div class="item <%if(index==0){ %>active
+                <% } %>">
+                    <img src="http://resource.hizuoye.com/<%= side %>" width="100%" style="height: 220px" alt="...">
                 </div>
                 <% }) %>
             </div>
@@ -90,7 +91,7 @@
                 </div>
             </form>
             <div class="vote-filter">
-                <a href="/vote/enroll" class="btn btn-filter">我要参加</a>
+                <a href="/votes/<%= vote._id %>/enroll" class="btn btn-filter">我要参加</a>
                 <a href="/votes/<%= vote._id %>/rules" class="btn btn-filter">赛事规则</a>
                 <a href="/votes/<%= vote._id %>/rank" class="btn btn-filter">TOP 50</a>
             </div>
@@ -135,7 +136,7 @@
 
             </div>
         </div>
-        <div class="row rules-column">参与方式</div>
+        <div class="row rules-column">参赛方式</div>
         <div class="row rules-details">
             <div class="col-xs-12">
                 <%- vote.participation %>
@@ -143,7 +144,7 @@
             </div>
         </div>
         <% if(vote.explanation) { %>
-        <div class="row rules-column">参与方式</div>
+        <div class="row rules-column">投票说明</div>
         <div class="row rules-details">
             <div class="col-xs-12">
                 <%- vote.explanation %>
