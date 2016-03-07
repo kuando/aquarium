@@ -129,7 +129,8 @@ $(document).ready(function () {
                 }
             }
         }).then(function (res) {
-            alert('报名成功');
+            alert('报名成功！请等待审核通过');
+            self.location.href = '/votes/'+ voteId;
         });
     });
 });
