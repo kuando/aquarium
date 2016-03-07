@@ -8,6 +8,9 @@
     margin: 0 auto;
     margin-top: 20px;
 }
+.banner-icon{
+    line-height: 210px;
+}
 .vote-header{
     padding: 10px 10px 0 10px;
     margin-bottom: -20px;
