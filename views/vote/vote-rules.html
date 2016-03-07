@@ -23,14 +23,14 @@
         <div class="row rules-column">奖品设置</div>
         <div class="row rules-details">
             <div class="col-xs-12">
-                <%- vote.prize %>
+                <%- vote.prize.replace(/\n/g,'<br>') %>
 
             </div>
         </div>
         <div class="row rules-column">参赛方式</div>
         <div class="row rules-details">
             <div class="col-xs-12">
-                <%- vote.participation %>
+                <%- vote.participation.replace(/\n/g,'<br>') %>
 
             </div>
         </div>
@@ -38,7 +38,7 @@
         <div class="row rules-column">投票说明</div>
         <div class="row rules-details">
             <div class="col-xs-12">
-                <%- vote.explanation %>
+                <%- vote.explanation.replace(/\n/g,'<br>') %>
             </div>
         </div>
         <% } %>

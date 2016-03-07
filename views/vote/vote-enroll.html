@@ -13,9 +13,9 @@
     <link href="/css/weui.css" rel="stylesheet">
     <link href="/css/bootstrap-theme.css" rel="stylesheet">
     <link href="/css/vote.css" rel="stylesheet">
-    <link href="/css/theme/theme-<%= vote.theme%>.css" rel="stylesheet">
+    <link href="/css/theme/theme-<%= vote.theme %>.css" rel="stylesheet">
 </head>
-<body class="bg-color">
+<body class="">
 <!--header-->
 <div class="container-fluid">
     <div class="vote-column-title">
@@ -76,6 +76,33 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="vote-column-title">
+        活动规则
+    </div>
+    <div class="vote-rules">
+        <div class="row rules-column">奖品设置</div>
+        <div class="row rules-details">
+            <div class="col-xs-12">
+                <%- vote.prize.replace(/\n/g,'<br>') %>
+
+            </div>
+        </div>
+        <div class="row rules-column">参赛方式</div>
+        <div class="row rules-details">
+            <div class="col-xs-12">
+                <%- vote.participation.replace(/\n/g,'<br>') %>
+
+            </div>
+        </div>
+        <% if(vote.explanation) { %>
+        <div class="row rules-column">投票说明</div>
+        <div class="row rules-details">
+            <div class="col-xs-12">
+                <%- vote.explanation.replace(/\n/g,'<br>') %>
+            </div>
+        </div>
+        <% } %>
     </div>
 </div>
 <%- include('footer.html') %>
