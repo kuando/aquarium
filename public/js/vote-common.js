@@ -24,4 +24,14 @@ $(document).ready(function () {
         $("#followModal").fadeIn()
     });
 
+    $('.search-btn').click(function () {
+        var searchText = $(this).closest('.input-group').find('input').val();
+        var voteId = $("#voteId").val();
+        if (searchText.trim() === '') {
+            alert('请输入选手名字或者编号');
+        } else {
+            self.location.href = "/votes/" + voteId + '/search?key=' + searchText;
+        }
+    });
+
 });

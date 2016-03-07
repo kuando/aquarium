@@ -2,8 +2,7 @@
 <html>
 <head lang="en">
     <meta charset="utf-8">
-    <meta name="viewport"
-          content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
     <meta name="format-detection" content="telephone=no"/>
@@ -149,23 +148,9 @@
     </div>
 </div>
 <%- include('footer.html') %>
-<div class="search-modal chearfix" id="searchModal">
-    <a class="close-search" id="closeSearch"><img src="/images/vote/icon-close.png" width="18"></a>
-    <form class="form-horizontal" id="searchModalForm">
-        <div class="form-group">
-            <div class="col-xs-offset-2 col-xs-8">
-                <div class="input-group">
-                    <input type="text" class="form-control search-input" placeholder="请输入编号或名称">
-                        <span class="input-group-btn">
-                            <button class="btn search-btn" type="button">搜索</button>
-                        </span>
-                </div>
-            </div>
-        </div>
-    </form>
-</div>
+
 <input type="hidden" id="totalPlayer" value="<%= totalPlayer %>">
-<input type="hidden" id="eventId" value="<%= record._id %>">
+
 <script type="text/javascript" src="/js/lib/jquery-2.2.1.min.js"></script>
 <script type="text/javascript" src="/js/lib/bootstrap.min.js"></script>
 <script type="text/javascript" src="/js/lib/hammer.min.js"></script>

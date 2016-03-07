@@ -246,6 +246,36 @@ module.exports = {
         }).catch(next);
     },
 
+    searchVotePlayer: (req, res, next)=> {
+        let key = req.query.key;
+        let page = req.query.page;
+        let limit = 20;
+        let Vote = Event.discriminators['vote'];
+        let voteId = req.params.voteId;
+        Vote.findById(voteId).select('theme').exec().then((vote)=> {
+            if (!vote) {
+                return Promise.reject(new Error('投票不存在'));
+            }
+            let query = VotePlayer.find({vote: vote, isAudit: true});
+            if (key && !_.isEmpty(key)) {
+                let exp = new RegExp(key);
+                query.or([{name: exp}, {sequence: exp}])
+            }
+            let skip = (page - 1 ) * limit;
+            query.limit(limit).skip(skip);
+            res.locals.vote = vote;
+            res.locals.key = key;
+            return query.exec().then((players)=> {
+                res.locals.players = players;
+                return VotePlayer.count(query.getQuery()).exec();
+            })
+        }).then((count)=> {
+            res.locals.totalPlayer = count;
+            res.render('vote/search-result');
+        });
+
+    },
+
     //活动分享
     share: (req, res)=> {
         let eventId = req.params.eventId;
@@ -305,17 +335,12 @@ function renderVoteEvent(req, res) {
     let event = req.event;
     let limit = req.query.limit || 20;
     let page = req.query.page || 1;
-    let search = req.query.search;
     let query = VotePlayer.find({vote: event, isAudit: true});
     let skip = (page - 1) * 20;
     query.limit(limit).skip(skip);
-    if (search && !_.isEmpty(search)) {
-        let exp = new RegExp(search);
-        query.or([{name: exp}, {sequence: exp}])
-    }
     return query.exec().then((players)=> {
             res.locals.players = players;
-            return query.count().exec();
+            return VotePlayer.count(query.getQuery()).exec();
         })
         .then((count)=> {
             res.locals.vote = event;

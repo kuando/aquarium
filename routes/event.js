@@ -33,6 +33,9 @@ module.exports = function (app) {
     //投票规则
     app.get('/votes/:voteId([a-f0-9]{24})/rules', event.voteRules);
 
+    //搜索结果页面
+    app.get('/votes/:voteId([a-f0-9]{24})/search', event.searchVotePlayer);
+
     //投票报名
     app.get('/votes/:voteId([a-f0-9]{24})/enroll', qiniu.token(), event.voteEnroll);
 

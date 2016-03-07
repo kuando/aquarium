@@ -60,21 +60,7 @@
     </div>
 </div>
 <%- include('footer.html') %>
-<div class="search-modal chearfix" id="searchModal">
-    <a class="close-search" id="closeSearch"><img src="/images/vote/icon-close.png" width="18"></a>
-    <form class="form-horizontal" id="searchModalForm">
-        <div class="form-group">
-            <div class="col-xs-offset-2 col-xs-8">
-                <div class="input-group">
-                    <input type="text" class="form-control search-input" placeholder="请输入编号或名称">
-                        <span class="input-group-btn">
-                            <button class="btn search-btn" type="button">搜索</button>
-                        </span>
-                </div>
-            </div>
-        </div>
-    </form>
-</div>
+
 <div class="follow-modal" id="followModal">
     <div class="follow-tips">
         <img class="center-block" src="http://resource.hizuoye.com/<%= vote.schoolId.privateQrcode %>" width="60%">
@@ -88,7 +74,6 @@
         <a class="close-share btn btn-info" id="closeShare">我知道了</a>
     </div>
 </div>
-<input type="hidden" value="<%= vote._id %>" id="voteId">
 <input type="hidden" value="<%= player._id %>" id="playerId">
 <input type="hidden" value="<%= vote.state %>" id="state">
 <input type="hidden" value="<%= vote.requireFollow %>" id="requireFollow">
