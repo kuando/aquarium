@@ -19,6 +19,11 @@
 <div class="container-fluid">
     <div class="row">
         <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+                <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+            </ol>
             <!-- Wrapper for slides -->
             <div class="carousel-inner" role="listbox">
                 <% vote.slides.forEach(function(side,index){ %>
@@ -31,11 +36,11 @@
 
             <!-- Controls -->
             <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-                <span class="banner-icon" aria-hidden="true"><img src="/images/icon-left.png" width="24"></span>
+                <span class="fa fa-chevron-left" aria-hidden="true"></span>
                 <span class="sr-only">Previous</span>
             </a>
             <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-                <span class="banner-icon" aria-hidden="true"><img src="/images/icon-right.png" width="24"></span>
+                <span class="fa fa-chevron-right" aria-hidden="true"></span>
                 <span class="sr-only">Next</span>
             </a>
         </div>
@@ -168,47 +173,13 @@
 <input type="hidden" id="eventId" value="<%= record._id %>">
 <script type="text/javascript" src="/js/lib/jquery-2.2.1.min.js"></script>
 <script type="text/javascript" src="/js/lib/bootstrap.min.js"></script>
-<script type="text/javascript" src="/js/lib/hammer.min.js"></script>
-<script type="text/javascript" src="/js/lib/jquery.hammer.js"></script>
 <script type="text/javascript" src="/js/lib/masonry.pkgd.min.js"></script>
 <script type="text/javascript" src="/js/lib/imagesloaded.pkgd.min.js"></script>
 <script type="text/javascript" src="/js/lib/jquery.twbsPagination.min.js"></script>
-<script type="text/javascript" src="/js/vote.js"></script>
 <script type="text/javascript" src="/js/lib/youarei.min.js"></script>
-<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script type="text/javascript" src="/js/lib/jweixin-1.0.0.js"></script>
 <script type="text/javascript" src="/js/weixin.js"></script>
+<script type="text/javascript" src="/js/vote-common.js"></script>
+<script type="text/javascript" src="/js/vote-index.js"></script>
 </body>
-<script type="text/javascript">
-    $(document).ready(function () {
-        var $carousel = $('#carousel-example-generic');
-        $carousel.hammer().on('swipeleft', function(){
-            $(this).carousel('next');
-        });
-
-        $carousel.hammer().on('swiperight', function(){
-            $(this).carousel('prev');
-        });
-        var $container = $('#masonry');
-        $container.imagesLoaded(function () {
-            $container.masonry({
-                columnWidth: '.item',
-                itemSelector: '.item'
-            });
-        });
-        var totalPlayer = $("#totalPlayer").val();
-        var totalPages = Math.ceil(totalPlayer / 20);
-        $('#pagination').twbsPagination({
-            first: '首页',
-            prev: '<<',
-            next: '>>',
-            last: '末页',
-            href: '?page={{number}}',
-            totalPages: totalPages,
-            visiblePages: 5,
-            onPageClick: function (event, page) {
-                $('#page-content').text('Page ' + page);
-            }
-        });
-    });
-</script>
 </html>
