@@ -91,8 +91,14 @@
 <input type="hidden" value="<%= vote._id %>" id="voteId">
 <input type="hidden" value="<%= player._id %>" id="playerId">
 <input type="hidden" value="<%= vote.state %>" id="state">
+<input type="hidden" value="<%= vote.requireFollow %>" id="requireFollow">
+<input type="hidden" value="<%= followFlag %>" id="followFlag">
 <script type="text/javascript" src="/js/lib/jquery-2.2.1.min.js"></script>
 <script type="text/javascript" src="/js/vote.js"></script>
+<script type="text/javascript" src="/js/vote-player.js"></script>
+<script type="text/javascript" src="/js/lib/youarei.min.js"></script>
+<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script type="text/javascript" src="/js/weixin.js"></script>
 </body>
 
 </html>

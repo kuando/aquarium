@@ -9,11 +9,14 @@ const Event = mongoose.model('Event');
 const Classroom = Event.discriminators['classroom'];
 const EnrollNames = mongoose.model('EnrollNames');
 const VotePlayer = mongoose.model('VotePlayer');
+const Task = mongoose.model('ScoreTask');
+const TaskRecord = mongoose.model('TaskRecord');
+const Student = mongoose.model('Student');
 
 
 module.exports = {
 
-    findEventById: (req, res) => {
+    findEventById: (req, res, next) => {
         Event.findByIdAndUpdate(req.params.eventId, {$inc: {visit: 1}})
             .populate('schoolId', 'schoolName').populate('enroll')
             .exec()
@@ -34,26 +37,19 @@ module.exports = {
                     default:
                         return Promise.reject(new Error('活动类型错误'));
                 }
-            })
-            .catch((err)=> {
-                console.error(err);
-                res.sendStatus(400);
-            });
+            }).catch(next);
     },
 
-    addLikeCount: (req, res)=> {
+    addLikeCount: (req, res, next)=> {
         Event.findByIdAndUpdate(req.params.eventId, {$inc: {like: 1}}).select('like').exec()
             .then(() => {
                 res.sendStatus(200);
             })
-            .catch((err)=> {
-                console.error(err);
-                res.sendStatus(400);
-            });
+            .catch(next);
     },
 
 
-    saveEnrolledName: (req, res)=> {
+    saveEnrolledName: (req, res, next)=> {
         Event.findById(req.params.eventId).select('enroll schoolId').exec()
             .then((event)=> {
                 if (!event || !event.enroll) {
@@ -68,13 +64,10 @@ module.exports = {
             .then((enrollName)=> {
                 res.json({result: enrollName});
             })
-            .catch((err)=> {
-                console.error(err);
-                res.sendStatus(400);
-            });
+            .catch(next);
     },
 
-    findVideoById: (req, res)=> {
+    findVideoById: (req, res, next)=> {
         let eventId = req.params.eventId;
         let videoId = req.params.videoId;
         Classroom.findOneAndUpdate({
@@ -90,15 +83,11 @@ module.exports = {
                 item: classroom.courses[0],
                 eventId: classroom._id
             });
-        }).catch((err)=> {
-            console.error(err);
-            res.sendStatus(400);
-        });
+        }).catch(next);
     },
 
-    addVideoLikeCount: (req, res)=> {
-        Classroom.update(
-            {
+    addVideoLikeCount: (req, res, next)=> {
+        Classroom.update({
                 _id: req.params.eventId,
                 courses: {
                     $elemMatch: {
@@ -106,13 +95,11 @@ module.exports = {
                     }
                 }
             },
-            {$inc: {'courses.$.like': 1}}).exec(function (err) {
-            if (err) {
-                console.error(err);
-                return res.sendStatus(400);
-            }
-            res.sendStatus(200);
-        });
+            {$inc: {'courses.$.like': 1}})
+            .exec()
+            .then(()=> {
+                res.sendStatus(200);
+            }).catch(next);
     },
 
 
@@ -127,10 +114,10 @@ module.exports = {
                 }
                 res.locals.vote = vote;
                 res.render('vote/vote-rules');
-            });
+            }).catch(next);
     },
 
-    voteEnroll: (req, res)=> {
+    voteEnroll: (req, res, next)=> {
         let Vote = Event.discriminators['vote'];
         let voteId = req.params.voteId;
         res.locals.token = req.token;
@@ -142,11 +129,11 @@ module.exports = {
             }
             res.locals.vote = vote;
             res.render('vote/vote-enroll');
-        });
+        }).catch(next);
     },
 
     //报名
-    doEnroll: (req, res)=> {
+    doEnroll: (req, res, next)=> {
         let Vote = Event.discriminators['vote'];
         let voteId = req.params.voteId;
         let phone = req.body.phone;
@@ -189,14 +176,10 @@ module.exports = {
                 }).then((player)=> {
                     res.json(player);
                 })
-        }).catch((err)=> {
-            res.status(400).json({
-                err: err.message
-            });
-        });
+        }).catch(next);
     },
 
-    voteRank: (req, res)=> {
+    voteRank: (req, res, next)=> {
         let Vote = Event.discriminators['vote'];
         let voteId = req.params.voteId;
         Vote.findById(voteId)
@@ -212,13 +195,14 @@ module.exports = {
         }).then((players)=> {
             res.locals.players = players;
             res.render('vote/vote-rank');
-        });
+        }).catch(next);
     },
 
-    votePlayer: (req, res)=> {
+    votePlayer: (req, res, next)=> {
         let Vote = Event.discriminators['vote'];
         let playerId = req.params.playerId;
         let voteId = req.params.voteId;
+        res.locals.followFlag = req.query.followFlag === '1';
         Vote.findById(voteId).select('requireFollow followTip schoolId theme')
             .populate('schoolId', 'schoolName privateQrcode')
             .exec()
@@ -241,13 +225,12 @@ module.exports = {
             })
             .then((rank)=> {
                 res.locals.rank = rank + 1;
-                res.render('vote/vote-detail');
-            }).catch((err)=> {
-            console.log('error is ', err);
-        });
+                res.render('vote/vote-player');
+            })
+            .catch(next);
     },
 
-    doVote: (req, res)=> {
+    doVote: (req, res, next)=> {
         let Vote = Event.discriminators['vote'];
         let voteId = req.params.voteId;
         let playerId = req.params.playerId;
@@ -260,9 +243,41 @@ module.exports = {
             return VotePlayer.update({_id: playerId}, {$inc: {poll: 1}}).exec();
         }).then(()=> {
             res.sendStatus(200);
-        }).catch((err)=> {
+        }).catch(next);
+    },
 
-        });
+    //活动分享
+    share: (req, res)=> {
+        let eventId = req.params.eventId;
+        //活动分享量加1
+        Event.update({_id: eventId}, {$inc: {share: 1}}).exec();
+        //如果是任务分享,则给对应学生增加积分
+        let task = req.body.task;
+        let student = req.body.student;
+        if (task && student) {
+            Task.findById(task).then((task)=> {
+                if (!task) {
+                    return Promise.reject(new Error('任务不存在'));
+                }
+                let scoreAward = task.scoreAward;
+                return Student.findByIdAndUpdate(student, {$inc: {score: scoreAward}})
+                    .select('_id schoolId')
+                    .exec().then((st)=> {
+                        if (!st) {
+                            return Promise.reject(new Error('学生不存在'));
+                        }
+                        let taskRecord = new TaskRecord({
+                            task: task,
+                            student: st,
+                            schoolId: st.schoolId
+                        });
+                        return taskRecord.save();
+                    })
+            }).catch((err)=> {
+                console.error(err);
+            });
+        }
+        res.sendStatus(200);
     }
 };
 
