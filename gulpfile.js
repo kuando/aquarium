@@ -58,7 +58,7 @@ gulp.task("revreplace", ["revision"], function () {
     var manifest = gulp.src("dist/rev-manifest.json");
     return gulp.src("views/**/*.html")
         .pipe(revReplace({manifest: manifest}))
-        .pipe(gulp.dest('dist/view'));
+        .pipe(gulp.dest('dist/views'));
 });
 
 gulp.task('build', gulpSequence('clean', ['revreplace', 'image']));
