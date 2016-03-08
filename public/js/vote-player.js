@@ -65,7 +65,7 @@ $(document).ready(function () {
     var playerName = $('#playerName').val();
     var sequence = $("#playerSequence").val();
     var desc = "我是" + sequence + "号选手" + playerName + ",快来帮我投票吧!";
-    var title = $('#shareTitle').text();
+    var title = $('#shareTitle').val();
     var shareUrl = new YouAreI(url).query_set({followFlag: 0}).to_string();
     var coverImage = $("#coverImage").attr('src');
     $.post("/wx/sdk", {url: url.split('#')[0]}, function (data) {
