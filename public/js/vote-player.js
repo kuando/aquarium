@@ -38,6 +38,9 @@ $(document).ready(function () {
         //每天只能投一次票
         var voteCountKey = voteId + getDateStr();
         var voteCount = window.localStorage.getItem(voteCountKey);
+        if (voteCount !== null) {
+            voteCount = parseInt(voteCount);
+        }
         if (voteCount !== null && voteCount >= 3) {
             return alert('每天只能投三票哦,明天再来吧!');
         }

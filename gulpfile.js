@@ -13,9 +13,10 @@ const imagemin = require('gulp-imagemin');
 const pngquant = require('imagemin-pngquant');
 const gulpSequence = require('gulp-sequence');
 
-const libFilter = filter(file=> {
-    return !/js\/lib/.test(file.path);
-}, {restore: true, passthrough: false});
+const igFilter = filter(file=> {
+    return !/js\/lib/.test(file.path) && !/css\/theme/.test(file.path);
+}, {restore: true});
+
 
 const jsFilter = filter('**/*.js', {restore: true});
 const cssFilter = filter('**/*.css', {restore: true});
@@ -28,7 +29,7 @@ gulp.task('clean', function () {
 
 //图片压缩
 gulp.task('image', function () {
-    return gulp.src("public/images/*")
+    return gulp.src("public/images/**/*")
         .pipe(imagemin({
             progressive: true,
             svgoPlugins: [{removeViewBox: false}],
@@ -45,9 +46,9 @@ gulp.task('revision', function () {
         .pipe(cssFilter)
         .pipe(csso())
         .pipe(cssFilter.restore)
-        .pipe(libFilter)
+        .pipe(igFilter)
         .pipe(rev())
-        .pipe(libFilter.restore)
+        .pipe(igFilter.restore)
         .pipe(gulp.dest('dist'))
         .pipe(rev.manifest())
         .pipe(gulp.dest('dist'))

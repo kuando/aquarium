@@ -20,7 +20,7 @@ $.get("/wx/sdk?url=" + url.split('#')[0], function (data) {
         timestamp: data.timestamp, // 必填，生成签名的时间戳
         nonceStr: data.nonceStr, // 必填，生成签名的随机串
         signature: data.signature,// 必填，签名，见附录1
-        jsApiList: ['onMenuShareTimeline'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+        jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
     });
 
     wx.ready(function () {
@@ -41,5 +41,18 @@ $.get("/wx/sdk?url=" + url.split('#')[0], function (data) {
 
             }
         });
+        wx.onMenuShareAppMessage({
+            link: url.query_set({followFlag: 0}).to_string(),
+            success: function () {
+                if (eventId && eventId !== '') {
+                    $.ajax({
+                        url: '/events/' + eventId + '/share',
+                        method: 'PUT'
+                    }).then(function () {
+
+                    });
+                }
+            }
+        })
     });
 });
