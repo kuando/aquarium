@@ -18,8 +18,15 @@ $(document).ready(function () {
     $(".follow-modal").on('click', "#closeFollow", function () {
         $("#followModal").fadeOut();
     });
+
+
     //投票
     $("#doVote").on('click', function () {
+        var ua = navigator.userAgent.toLowerCase();
+        if (ua.match(/MicroMessenger/i)!='micromessenger') {
+            alert("请用微信客户端进行投票！");
+            return;
+        }
         var requireFollow = $('#requireFollow').val();
         var followFlag = $('#followFlag').val();
         var needFollow = requireFollow === 'true' && followFlag === 'false';
