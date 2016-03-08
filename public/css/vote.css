@@ -84,7 +84,11 @@ li.no-b{
     padding-top: 5px;
 }
 .vote-filter .btn{
-    margin-right: 5px;
+    border-radius: 0;
+}
+.vote-filter .btn:focus,
+.vote-filter .btn:active{
+    border-radius: 0;
 }
 .vote-option-list{
     padding-top: 20px;
@@ -127,8 +131,8 @@ a.vote-toupiao{
     text-decoration: none;
 }
 .vote-option-list .thumbnail .number{
-    width: 80px;
-    height: 45px;
+    width: 70px;
+    height: 39px;
     position: absolute;
     top: 0;
     right: 10px;

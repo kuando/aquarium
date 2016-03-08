@@ -21,7 +21,6 @@ body.bg-color{
     background-color: #72c0e6 !important;
     border: 1px solid #72c0e6 !important;
     color: #ffffff;
-    border-radius:4px;
 }
 .btn-filter.active{
     background-color: #037ab2 !important;
@@ -148,7 +147,7 @@ a.vote-toupiao:active{
 .btn-warning:focus,
 .btn-warning:active{
     background-color: #A6E33C !important;
-    border: 1px solid #FAC450 !important;
+    border: 1px solid #A6E33C !important;
 }
 .btn-danger,
 .btn-danger:active,
