@@ -21,7 +21,7 @@
         <div class="col-xs-12">
             <div class="player-info">
                 <div class="img">
-                    <img src="http://resource.hizuoye.com/<%= player.images[0] %>">
+                    <img src="http://resource.hizuoye.com/<%= player.images[0] %>" id="coverImage">
                 </div>
                 <div class="info">
                     <p class="number"><%= player.sequence %>号</p>
@@ -75,16 +75,21 @@
         <a class="close-share btn btn-info" id="closeShare">我知道了</a>
     </div>
 </div>
+
+<input type="hidden" value="<%= vote._id %>" id="eventId">
 <input type="hidden" value="<%= player._id %>" id="playerId">
 <input type="hidden" value="<%= vote.state %>" id="state">
 <input type="hidden" value="<%= vote.requireFollow %>" id="requireFollow">
 <input type="hidden" value="<%= followFlag %>" id="followFlag">
+<input type="hidden" value="<%= player.name %>" id="playerName">
+<input type="hidden" value="<%= player.sequence %>" id="playerSequence">
+<input type="hidden" value="<%= vote.title %>" id="shareTitle">
 <script type="text/javascript" src="/js/lib/jquery-2.2.1.min.js"></script>
 <script type="text/javascript" src="/js/lib/youarei.min.js"></script>
 <script type="text/javascript" src="/js/lib/jweixin-1.0.0.js"></script>
 <script type="text/javascript" src="/js/vote-common.js"></script>
 <script type="text/javascript" src="/js/vote-player.js"></script>
-<script type="text/javascript" src="/js/weixin.js"></script>
+
 </body>
 
 </html>

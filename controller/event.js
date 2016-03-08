@@ -17,6 +17,7 @@ const Student = mongoose.model('Student');
 module.exports = {
 
     findEventById: (req, res, next) => {
+
         Event.findByIdAndUpdate(req.params.eventId, {$inc: {visit: 1}})
             .populate('schoolId', 'schoolName').populate('enroll')
             .exec()
@@ -203,7 +204,7 @@ module.exports = {
         let playerId = req.params.playerId;
         let voteId = req.params.voteId;
         res.locals.followFlag = req.query.followFlag === '1';
-        Vote.findById(voteId).select('requireFollow followTip schoolId theme')
+        Vote.findById(voteId).select('requireFollow followTip schoolId theme title')
             .populate('schoolId', 'schoolName privateQrcode')
             .exec()
             .then((vote)=> {
@@ -252,6 +253,7 @@ module.exports = {
         let limit = 20;
         let Vote = Event.discriminators['vote'];
         let voteId = req.params.voteId;
+        res.locals.followFlag = req.query.followFlag || 0;
         Vote.findById(voteId).select('theme').exec().then((vote)=> {
             if (!vote) {
                 return Promise.reject(new Error('投票不存在'));
@@ -338,6 +340,7 @@ function renderVoteEvent(req, res) {
     let query = VotePlayer.find({vote: event, isAudit: true});
     let skip = (page - 1) * 20;
     query.limit(limit).skip(skip);
+    res.locals.followFlag = req.query.followFlag || 0;
     return query.exec().then((players)=> {
             res.locals.players = players;
             return VotePlayer.count(query.getQuery()).exec();

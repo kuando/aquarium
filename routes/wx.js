@@ -18,6 +18,6 @@ module.exports = function (app) {
     app.get('/wx/auth/success', wx.authCallback);
 
     //获取jsdk签名
-    app.get('/wx/sdk', sdkMid.getSignature, wx.getSdkSignature);
+    app.post('/wx/sdk', sdkMid.getSignature, wx.getSdkSignature);
 
 };

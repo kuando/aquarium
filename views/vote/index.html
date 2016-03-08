@@ -95,7 +95,7 @@
                     <% players.forEach(function(player){ %>
                     <div class="col-xs-6 col-sm-4 item">
                         <div class="thumbnail">
-                            <a href="/votes/<%= record._id%>/players/<%= player._id %>">
+                            <a href="/votes/<%= record._id%>/players/<%= player._id %>?followFlag=<%=followFlag || 0 %>">
                                 <img src="http://resource.hizuoye.com/<%= player.images[0] %>" width="100%" alt="...">
                             </a>
                             <div class="number"><%= player.sequence %>号</div>
@@ -104,7 +104,7 @@
                                     <p class="name"><%= player.name %></p>
                                     <p class="count"><%= player.poll %> 票</p>
                                 </div>
-                                <a href="/votes/<%= record._id%>/players/<%= player._id %>"
+                                <a href="/votes/<%= record._id%>/players/<%= player._id %>?followFlag=<%=followFlag || 0 %>"
                                    class="vote-toupiao"
                                    role="button">投票</a>
                             </div>
@@ -153,6 +153,9 @@
 <%- include('footer.html') %>
 
 <input type="hidden" id="totalPlayer" value="<%= totalPlayer %>">
+<input type="hidden" value="<%= vote._id %>" id="eventId">
+<input type="hidden" value="<%= vote.slides[0] %>" id="coverImage">
+<input type="hidden" value="<%= vote.title %>" id="shareTitle">
 
 <script type="text/javascript" src="/js/lib/jquery-2.2.1.min.js"></script>
 <script type="text/javascript" src="/js/lib/bootstrap.min.js"></script>
@@ -163,7 +166,6 @@
 <script type="text/javascript" src="/js/lib/jquery.twbsPagination.min.js"></script>
 <script type="text/javascript" src="/js/lib/youarei.min.js"></script>
 <script type="text/javascript" src="/js/lib/jweixin-1.0.0.js"></script>
-<script type="text/javascript" src="/js/weixin.js"></script>
 <script type="text/javascript" src="/js/vote-common.js"></script>
 <script type="text/javascript" src="/js/vote-index.js"></script>
 </body>
