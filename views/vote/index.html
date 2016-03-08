@@ -95,7 +95,9 @@
                     <% players.forEach(function(player){ %>
                     <div class="col-xs-6 col-sm-4 item">
                         <div class="thumbnail">
-                            <img src="http://resource.hizuoye.com/<%= player.images[0] %>" width="100%" alt="...">
+                            <a href="/votes/<%= record._id%>/players/<%= player._id %>">
+                                <img src="http://resource.hizuoye.com/<%= player.images[0] %>" width="100%" alt="...">
+                            </a>
                             <div class="number"><%= player.sequence %>号</div>
                             <div class="caption">
                                 <div class="item-details">
