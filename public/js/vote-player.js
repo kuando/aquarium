@@ -50,10 +50,11 @@ $(document).ready(function () {
             url: '/votes/' + voteId + '/players/' + playerId,
             method: 'PUT'
         }).then(function () {
-            self.location.href = '';
+            alert('投票成功！');
             window.localStorage.setItem(hasVoteKey, true);
             voteCount = voteCount === null ? 1 : (voteCount + 1);
             window.localStorage.setItem(voteCountKey, voteCount);
+            window.location.href = '/votes/' + voteId;
         });
     });
 });
