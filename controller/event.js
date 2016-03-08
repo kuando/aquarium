@@ -204,7 +204,7 @@ module.exports = {
         let playerId = req.params.playerId;
         let voteId = req.params.voteId;
         res.locals.followFlag = req.query.followFlag === '1';
-        Vote.findById(voteId).select('requireFollow followTip schoolId theme')
+        Vote.findById(voteId).select('requireFollow followTip schoolId theme title')
             .populate('schoolId', 'schoolName privateQrcode')
             .exec()
             .then((vote)=> {
