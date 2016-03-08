@@ -86,9 +86,17 @@
                 </div>
             </form>
             <div class="vote-filter">
-                <a href="/votes/<%= vote._id %>/enroll" class="btn btn-filter">我要参加</a>
-                <a href="/votes/<%= vote._id %>/rules" class="btn btn-filter">赛事规则</a>
-                <a href="/votes/<%= vote._id %>/rank" class="btn btn-filter">TOP 50</a>
+                <div class="row">
+                    <div class="col-xs-4">
+                        <a href="/votes/<%= vote._id %>/enroll" class="btn btn-filter btn-block btn-md">我要参加</a>
+                    </div>
+                    <div class="col-xs-4">
+                        <a href="/votes/<%= vote._id %>/rules" class="btn btn-warning btn-block btn-md">赛事规则</a>
+                    </div>
+                    <div class="col-xs-4">
+                        <a href="/votes/<%= vote._id %>/rank" class="btn btn-info btn-block btn-md">TOP 50</a>
+                    </div>
+                </div>
             </div>
             <div class="vote-option-list">
                 <div class="row" id="masonry">
