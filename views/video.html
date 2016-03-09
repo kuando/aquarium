@@ -46,7 +46,7 @@
 <input type="hidden" value="<%= eventId%>" class="e-id"/>
 <input type="hidden" value="<%= item._id%>" class="v-id"/>
 </body>
-<script type="text/javascript" src="/js/lib/zepto.min.js"></script>
+<script type="text/javascript" src="/js/lib/jquery-2.2.1.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
         //点赞
@@ -54,11 +54,10 @@
             var e_id = $('.e-id').val();
             var v_id = $('.v-id').val();
             var like = $('#like').text();
-            $.post("/events/" + e_id + "/videos/" + v_id + "/like",function () {
+            $.post("/events/" + e_id + "/videos/" + v_id + "/like", function () {
                 $('#like').text(parseInt(like) + 1);
             });
         });
-
     });
 </script>
 </html>
