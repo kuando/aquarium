@@ -33,11 +33,9 @@
     "body-parser": "^1.14.2",
     "ejs": "^2.4.1",
     "express": "^4.13.3",
-    "express-xml-bodyparser": "^0.3.0",
     "http-errors": "^1.4.0",
     "ioredis": "^1.15.1",
     "jssha": "^2.0.2",
-    "libxmljs": "^0.17.1",
     "lodash": "^4.5.1",
     "moment": "^2.11.1",
     "mongoose": "^4.3.5",
@@ -46,7 +44,6 @@
     "request": "^2.69.0",
     "request-promise": "^2.0.1",
     "require-dir": "^0.3.0",
-    "weui": "^0.2.3",
-    "xml2js": "^0.4.16"
+    "weui": "^0.2.3"
   }
 }
