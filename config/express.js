@@ -15,6 +15,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 if (process.env.NODE_ENV !== 'development') {
     app.set('views', path.join(__dirname, '../dist/views'));
     app.set('view cache', true);
+    app.use(express.static(path.join(__dirname, '../dist')));
 } else {
     app.set('views', path.join(__dirname, '../views'));
     app.use(express.static(path.join(__dirname, '../public')));

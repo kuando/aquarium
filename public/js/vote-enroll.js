@@ -10,11 +10,10 @@ $(document).ready(function () {
     var $brief = $("#brief");
     var voteId = $("#voteId").val();
     var images = [];
-
     $('.weui_uploader_input_wrp').click(function (event) {
         var count = parseInt($imageCount.text());
         if (count >= 3) {
-            alert('最多上传3张图片');
+            $.alert('最多上传3张图片');
             event.preventDefault();
         }
     });
@@ -26,12 +25,12 @@ $(document).ready(function () {
                 if (/^image\//i.test(file.type)) {
                     readFile(file);
                 } else {
-                    alert('只能上传图片!');
+                    $.alert('只能上传图片!');
                 }
             }
         });
     } else {
-        alert("File upload is not supported!");
+        $.alert('图片无法上传,请安装最新版本微信');
     }
 
     //读取本地图片用于预览
@@ -41,7 +40,7 @@ $(document).ready(function () {
             sendFile(file, reader.result);
         };
         reader.onerror = function () {
-            alert('读取图片出错啦');
+            $.alert('读取图片出错啦');
         };
         reader.readAsDataURL(file);
     }
@@ -86,33 +85,28 @@ $(document).ready(function () {
         var count = content.length;
         $charCount.html(count);
         if (count > 200) {
-            alert('最多两百字');
+            $.alert('最多两百字');
             $brief.val(content.substr(0, 200));
         }
     }
 
     $brief.on('keydown', countChar);
     $brief.on('keyup', countChar);
-
     $("#submitEnroll").click(function () {
         var name = $('#name').val();
         var phone = $("#phone").val();
         var brief = $brief.val();
         if (name.trim() === '') {
-            alert('姓名不能为空');
-            return;
+            return $.alert('姓名不能为空');
         }
         if (phone.trim() === '') {
-            alert('手机不能为空');
-            return;
+            return $.alert('手机不能为空');
         }
         if (images.length === 0) {
-            alert('至少上传一张图片');
-            return;
+            return $.alert('至少上传一张图片');
         }
         if (brief.trim() === '') {
-            alert('描述不能为空');
-            return;
+            return $.alert('描述不能为空');
         }
         $.ajax({
             url: '/votes/' + voteId + '/enrolls',
@@ -123,14 +117,19 @@ $(document).ready(function () {
                 images: images,
                 brief: brief
             },
-            error: function (err) {
-                if (err.status === 400) {
-                    alert(err.responseJSON.err);
-                }
+            beforeSend: function () {
+                $.showLoading("正在报名中...");
+            },
+            complete: function () {
+                $.hideLoading();
             }
-        }).then(function (res) {
-            alert('报名成功！请等待审核通过');
-            self.location.href = '/votes/'+ voteId;
+        }).done(function () {
+            $.alert('报名成功！请等待审核通过', function () {
+                self.location.href = '/votes/' + voteId;
+            });
+        }).fail(function (res) {
+            console.log(res);
+            $.alert('报名失败,请重新再试');
         });
     });
 });

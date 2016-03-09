@@ -13,6 +13,8 @@ const redis = new Redis({
     host: config.host,
 
     keyPrefix: config.prefix,
+    
+    password: config.auth_pass,
 
     retryStrategy(times) {
         if (times > 200) {

@@ -9,11 +9,12 @@
     <meta name="format-detection" content="telephone=no"/>
     <meta name="msapplication-tap-highlight" content="no"/>
     <title><%= vote.title%></title>
-    <link href="/css/bootstrap.css" rel="stylesheet">
-    <link href="/css/weui.css" rel="stylesheet">
-    <link href="/css/bootstrap-theme.css" rel="stylesheet">
-    <link href="/css/vote.css" rel="stylesheet">
-    <link href="/css/theme/theme-<%= vote.theme %>.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/weui.min.css">
+    <link rel="stylesheet" href="/css/jquery-weui.css">
+    <link rel="stylesheet" href="/css/bootstrap-theme.css">
+    <link rel="stylesheet" href="/css/vote.css">
+    <link rel="stylesheet" href="/css/theme/theme-<%= vote.theme %>.css">
 </head>
 <body class="">
 <!--header-->
@@ -49,12 +50,12 @@
                                 <div class="weui_uploader_bd">
                                     <ul class="weui_uploader_files">
                                         <li id="imgUpload">
-                                        <div class="weui_uploader_input_wrp">
-                                            <input class="weui_uploader_input" type="file"
-                                                   name="file"
-                                                   id="imageFile"
-                                                   accept="image/jpg,image/jpeg,image/png,image/gif"/>
-                                        </div>
+                                            <div class="weui_uploader_input_wrp">
+                                                <input class="weui_uploader_input" type="file"
+                                                       name="file"
+                                                       id="imageFile"
+                                                       accept="image/jpg,image/jpeg,image/png,image/gif"/>
+                                            </div>
                                         </li>
                                     </ul>
 
@@ -110,6 +111,8 @@
 <script type="text/javascript" src="/js/lib/jquery-2.2.1.min.js"></script>
 <script type="text/javascript" src="/js/lib/bootstrap.min.js"></script>
 <script type="text/javascript" src="/js/lib/jquery.uploadify.min.js"></script>
+<script type="text/javascript" src="/js/lib/jquery-weui.js"></script>
+<script type="text/javascript" src="/js/lib/hammer-time.min.js"></script>
 <script type="text/javascript" src="/js/vote-common.js"></script>
 <script type="text/javascript" src="/js/vote-enroll.js"></script>
 </body>

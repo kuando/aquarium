@@ -3,7 +3,6 @@
  */
 'use strict';
 $(document).ready(function () {
-
     function getDateStr() {
         var date = new Date();
         var year = date.getFullYear();
@@ -11,7 +10,6 @@ $(document).ready(function () {
         var day = date.getDay() + 1;
         return year + '-' + month + '-' + day;
     }
-
     $(".share-modal").on('click', "#closeShare", function () {
         $("#shareModal").fadeOut();
     });
@@ -19,21 +17,20 @@ $(document).ready(function () {
         $("#followModal").fadeOut();
     });
 
-
     //投票
     $("#doVote").on('click', function () {
         var ua = navigator.userAgent.toLowerCase();
-        if (ua.match(/MicroMessenger/i)!='micromessenger') {
-            alert("请用微信客户端进行投票！");
+        var isNotWeixin = ua.indexOf('micromessenger') === -1;
+        if (isNotWeixin) {
+            $.alert("请用微信客户端进行投票！");
             return;
         }
         var voteId = $("#voteId").val();
         var state = $("#state").val();
         var playerId = $("#playerId").val();
         if (state === 1) {
-            return alert('投票已经结束');
+            return $.alert('投票已经结束');
         }
-
         var voteCountKey = voteId + getDateStr();
         var voteCount = window.localStorage.getItem(voteCountKey);
 
@@ -49,22 +46,31 @@ $(document).ready(function () {
             voteCount = parseInt(voteCount);
         }
         if (voteCount !== null && voteCount >= 3) {
-            return alert('每天只能投三票哦,明天再来吧!');
+            return $.alert('每天只能投三票哦,明天再来吧!');
         }
         var hasVoteKey = playerId + getDateStr();
         var hasVote = window.localStorage.getItem(hasVoteKey);
         if (hasVote !== null) {
-            return alert('今天已经投过这个选手啦');
+            return $.alert('今天已经投过这个选手啦');
         }
         $.ajax({
             url: '/votes/' + voteId + '/players/' + playerId,
-            method: 'PUT'
-        }).then(function () {
-            alert('投票成功！');
+            method: 'POST',
+            beforeSend: function () {
+                $.showLoading("正在投票中...");
+            },
+            complete: function () {
+                $.hideLoading();
+            }
+        }).done(function () {
             window.localStorage.setItem(hasVoteKey, true);
             voteCount = voteCount === null ? 1 : (voteCount + 1);
             window.localStorage.setItem(voteCountKey, voteCount);
-            window.location.href = '/votes/' + voteId;
+            $.alert('投票成功!', function () {
+                window.location.href = '/votes/' + voteId;
+            });
+        }).fail(function () {
+            $.alert('投票失败');
         });
     });
 
@@ -95,7 +101,7 @@ $(document).ready(function () {
                     if (eventId && eventId !== '') {
                         $.ajax({
                             url: '/events/' + eventId + '/share',
-                            method: 'PUT'
+                            method: 'POST'
                         }).then(function () {
 
                         });
@@ -111,7 +117,7 @@ $(document).ready(function () {
                     if (eventId && eventId !== '') {
                         $.ajax({
                             url: '/events/' + eventId + '/share',
-                            method: 'PUT'
+                            method: 'POST'
                         }).then(function () {
 
                         });

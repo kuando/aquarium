@@ -19,7 +19,7 @@ module.exports = function (app) {
     app.post('/events/:eventId([a-f0-9]{24})/enrollNames', event.saveEnrolledName);
 
     //分享
-    app.put('/events/:eventId([a-f0-9]{24})/share', event.share);
+    app.post('/events/:eventId([a-f0-9]{24})/share', event.share);
 
     //视频点赞服务
     app.post('/events/:eventId([a-f0-9]{24})/videos/:videoId/like', event.addVideoLikeCount);
@@ -49,7 +49,7 @@ module.exports = function (app) {
     app.get('/votes/:voteId([a-f0-9]{24})/players/:playerId([a-f0-9]{24})', event.votePlayer);
 
     //投票
-    app.put('/votes/:voteId([a-f0-9]{24})/players/:playerId([a-f0-9]{24})', event.doVote);
+    app.post('/votes/:voteId([a-f0-9]{24})/players/:playerId([a-f0-9]{24})', event.doVote);
 
 
 };
