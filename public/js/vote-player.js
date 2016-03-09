@@ -27,22 +27,24 @@ $(document).ready(function () {
             alert("请用微信客户端进行投票！");
             return;
         }
-        var requireFollow = $('#requireFollow').val();
-        var followFlag = $('#followFlag').val();
-        var needFollow = requireFollow === 'true' && followFlag === 'false';
-        if (needFollow) {
-            $("#followModal").fadeIn();
-            return;
-        }
         var voteId = $("#voteId").val();
         var state = $("#state").val();
         var playerId = $("#playerId").val();
         if (state === 1) {
             return alert('投票已经结束');
         }
-        //每天只能投一次票
+
         var voteCountKey = voteId + getDateStr();
         var voteCount = window.localStorage.getItem(voteCountKey);
+
+        var requireFollow = $('#requireFollow').val();
+        var followFlag = $('#followFlag').val();
+        var needFollow = requireFollow === 'true' && followFlag === 'false';
+        if (voteCount === null && needFollow) {
+            $("#followModal").fadeIn();
+            return;
+        }
+        //每天只能投一次票
         if (voteCount !== null) {
             voteCount = parseInt(voteCount);
         }
