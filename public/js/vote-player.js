@@ -2,6 +2,11 @@
  * Created by Frank on 16/3/5.
  */
 'use strict';
+require('hammer-timejs');
+require('jquery-weui/dist/js/jquery-weui');
+require('./vote-common');
+var YouAreI = require('youarei');
+
 $(document).ready(function () {
     function getDateStr() {
         var date = new Date();
@@ -10,6 +15,7 @@ $(document).ready(function () {
         var day = date.getDay() + 1;
         return year + '-' + month + '-' + day;
     }
+
     $(".share-modal").on('click', "#closeShare", function () {
         $("#shareModal").fadeOut();
     });

@@ -2,6 +2,9 @@
  * Created by Frank on 16/3/2.
  */
 'use strict';
+require('jquery-weui/dist/js/jquery-weui');
+require('hammer-timejs');
+require('./vote-common');
 
 $(document).ready(function () {
     var $inputField = $('#imageFile');

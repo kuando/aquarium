@@ -13,6 +13,8 @@ const imagemin = require('gulp-imagemin');
 const pngquant = require('imagemin-pngquant');
 const gulpSequence = require('gulp-sequence');
 const concatCss = require('gulp-concat-css');
+const browserify = require('gulp-browserify');
+
 
 //忽略版本号
 const igFilter = filter(file=> {
@@ -23,6 +25,12 @@ const igFilter = filter(file=> {
 const jsFilter = filter('**/*.js', {restore: true});
 //css过滤
 const cssFilter = filter('**/*.css', {restore: true});
+
+const entryFilter = filter(
+    [   '**/vote-index.js',
+        '**/vote-player.js',
+        '**/vote-enroll.js',
+        '**/vote-search.js'], {restore: true});
 
 //清理dist文件夹
 gulp.task('clean', function () {
@@ -43,6 +51,13 @@ gulp.task('image', function () {
 
 gulp.task('revision', ['concatVoteCss'], function () {
     return gulp.src(["public/**/*.css", "public/**/*.js", '.tmp/**/*'])
+        .pipe(entryFilter)
+        .pipe(browserify({
+            debug: true
+        })).on('error', function (a, b, c) {
+            console.error(a, b, c);
+
+        }).pipe(entryFilter.restore)
         .pipe(jsFilter)
         .pipe(uglify())
         .pipe(jsFilter.restore)

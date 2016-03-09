@@ -1,13 +1,14 @@
+'use strict';
+
+require('bootstrap/dist/js/bootstrap');
+require('imagesloaded');
+require('hammer-timejs');
+require('twbs-pagination');
+require('./vote-common');
+var YouAreI = require('youarei');
+
 $(document).ready(function () {
     var $container = $('#masonry');
-    var $carousel = $('#carousel-example-generic');
-    $carousel.hammer().on('swipeleft', function () {
-        $(this).carousel('next');
-    });
-
-    $carousel.hammer().on('swiperight', function () {
-        $(this).carousel('prev');
-    });
 
     $container.imagesLoaded(function () {
         $container.masonry({
@@ -54,7 +55,7 @@ $(document).ready(function () {
                     if (eventId && eventId !== '') {
                         $.ajax({
                             url: '/events/' + eventId + '/share',
-                            method: 'PUT'
+                            method: 'POST'
                         }).then(function () {
 
                         });
@@ -70,7 +71,7 @@ $(document).ready(function () {
                     if (eventId && eventId !== '') {
                         $.ajax({
                             url: '/events/' + eventId + '/share',
-                            method: 'PUT'
+                            method: 'POST'
                         }).then(function () {
 
                         });

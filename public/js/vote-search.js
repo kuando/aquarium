@@ -2,6 +2,11 @@
  * Created by Frank on 16/3/7.
  */
 'use strict';
+require('imagesloaded');
+require('hammer-timejs');
+require('twbs-pagination');
+require('./vote-common');
+
 $(document).ready(function () {
     var $container = $('#masonry');
     $container.imagesLoaded(function () {
@@ -19,7 +24,7 @@ $(document).ready(function () {
         prev: '<<',
         next: '>>',
         last: '末页',
-        href: '?page={{number}}&key='+key,
+        href: '?page={{number}}&key=' + key,
         totalPages: totalPages,
         visiblePages: 5,
         onPageClick: function (event, page) {
