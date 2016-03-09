@@ -34,6 +34,7 @@
     "ejs": "^2.4.1",
     "express": "^4.13.3",
     "express-xml-bodyparser": "^0.3.0",
+    "http-errors": "^1.4.0",
     "ioredis": "^1.15.1",
     "jssha": "^2.0.2",
     "libxmljs": "^0.17.1",
