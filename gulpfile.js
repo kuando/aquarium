@@ -12,18 +12,21 @@ const revReplace = require("gulp-rev-replace");
 const imagemin = require('gulp-imagemin');
 const pngquant = require('imagemin-pngquant');
 const gulpSequence = require('gulp-sequence');
+const concatCss = require('gulp-concat-css');
 
+//忽略版本号
 const igFilter = filter(file=> {
     return !/js\/lib/.test(file.path) && !/css\/theme/.test(file.path);
 }, {restore: true});
 
-
+//js过滤
 const jsFilter = filter('**/*.js', {restore: true});
+//css过滤
 const cssFilter = filter('**/*.css', {restore: true});
 
 //清理dist文件夹
 gulp.task('clean', function () {
-    return gulp.src('dist', {read: false}).pipe(clean());
+    return gulp.src(['dist', '.tmp'], {read: false}).pipe(clean());
 });
 
 
@@ -38,8 +41,8 @@ gulp.task('image', function () {
         .pipe(gulp.dest('dist/images'));
 });
 
-gulp.task('revision', function () {
-    return gulp.src(["public/**/*.css", "public/**/*.js"])
+gulp.task('revision', ['concatVoteCss'], function () {
+    return gulp.src(["public/**/*.css", "public/**/*.js", '.tmp/**/*'])
         .pipe(jsFilter)
         .pipe(uglify())
         .pipe(jsFilter.restore)
@@ -61,5 +64,17 @@ gulp.task("revreplace", ["revision"], function () {
         .pipe(revReplace({manifest: manifest}))
         .pipe(gulp.dest('dist/views'));
 });
+
+gulp.task('concatVoteCss', function () {
+    return gulp.src(['public/css/bootstrap.css',
+            'public/css/bootstrap-theme.css',
+            'public/css/weui.css',
+            'public/css/jquery-weui.css',
+            'public/css/vote.css'])
+        .pipe(concatCss('css/vote.bundle.css'))
+        .pipe(csso())
+        .pipe(gulp.dest('.tmp'));
+});
+
 
 gulp.task('build', gulpSequence('clean', ['revreplace', 'image']));
