@@ -75,6 +75,7 @@ module.exports = {
     findVideoById: (req, res, next)=> {
         let eventId = req.params.eventId;
         let videoId = req.params.videoId;
+        console.log(videoId);
         Classroom.findOneAndUpdate({
             _id: eventId,
             courses: {

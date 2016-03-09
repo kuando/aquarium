@@ -22,10 +22,10 @@ module.exports = function (app) {
     app.put('/events/:eventId([a-f0-9]{24})/share', event.share);
 
     //视频点赞服务
-    app.post('/events/:eventId([a-f0-9]{24})/videos/:videoId([a-f0-9]{24})/like', event.addVideoLikeCount);
+    app.post('/events/:eventId([a-f0-9]{24})/videos/:videoId/like', event.addVideoLikeCount);
 
     //点播课程
-    app.get('/events/:eventId([a-f0-9]{24})/videos/:videoId([a-f0-9]{24})', event.findVideoById);
+    app.get('/events/:eventId([a-f0-9]{24})/videos/:videoId', event.findVideoById);
 
     // 投票首页
     app.get('/votes/:eventId([a-f0-9]{24})', sdk.getSignature, event.findEventById);
