@@ -23,7 +23,7 @@ module.exports = {
             .exec()
             .then((event)=> {
                 if (!event) {
-                    return Promise.reject(new Error('活动不存在'));
+                    res.render('error');
                 }
                 req.event = event;
                 switch (event.template) {
