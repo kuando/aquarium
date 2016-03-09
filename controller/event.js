@@ -3,8 +3,9 @@
  */
 'use strict';
 const _ = require('lodash');
-const moment = require('moment');
 const mongoose = require('mongoose');
+const moment = require('moment');
+const createError = require('http-errors');
 const Event = mongoose.model('Event');
 const Classroom = Event.discriminators['classroom'];
 const EnrollNames = mongoose.model('EnrollNames');
@@ -23,7 +24,7 @@ module.exports = {
             .exec()
             .then((event)=> {
                 if (!event) {
-                    res.render('error');
+                    return Promise.reject(createError(404, '活动不存在'));
                 }
                 req.event = event;
                 switch (event.template) {
@@ -36,7 +37,7 @@ module.exports = {
                     case 'vote':
                         return renderVoteEvent(req, res);
                     default:
-                        return Promise.reject(new Error('活动类型错误'));
+                        return Promise.reject(createError(404, '活动类型不存在'));
                 }
             }).catch(next);
     },
@@ -54,7 +55,10 @@ module.exports = {
         Event.findById(req.params.eventId).select('enroll schoolId').exec()
             .then((event)=> {
                 if (!event || !event.enroll) {
-                    return Promise.reject(new Error('活动不存在或没有报名'));
+                    return Promise.reject(createError(404, '活动不存在或没有报名'));
+                }
+                if (!event.enroll) {
+                    return Promise.reject(createError(400, '活动不能报名'));
                 }
                 return event;
             })
@@ -78,7 +82,7 @@ module.exports = {
             }
         }, {$inc: {'courses.$.visit': 1}}).exec().then((classroom)=> {
             if (!classroom || classroom.courses.length === 0) {
-                return Promise.reject(new Error('视频不存在'));
+                return Promise.reject(createError(404, '视频不存在'));
             }
             return res.render('video', {
                 item: classroom.courses[0],
@@ -111,7 +115,7 @@ module.exports = {
             .lean().exec()
             .then((vote)=> {
                 if (!vote) {
-                    return Promise.reject(new Error('投票不存在'));
+                    return Promise.reject(createError(404, '投票不存在'));
                 }
                 res.locals.vote = vote;
                 res.render('vote/vote-rules');
@@ -126,7 +130,7 @@ module.exports = {
             .select('voteEnroll prize participation explanation theme')
             .exec().then((vote)=> {
             if (!vote) {
-                return Promise.reject(new Error('投票不存在'));
+                return Promise.reject(createError(404, '投票不存在'));
             }
             res.locals.vote = vote;
             res.render('vote/vote-enroll');
@@ -148,25 +152,25 @@ module.exports = {
             vote: voteId
         }).exec().then((count)=> {
             if (count > 0) {
-                return res.status(400).json({
-                    err: '一个手机号只能报一次名'
-                });
+                return Promise.reject(createError(400, '一个手机只能报名一次'));
             }
             return Vote.findByIdAndUpdate(voteId, {
                     $inc: {
                         playerCounter: 1
                     }
                 }, {new: true})
-                .select('status voteEnroll playerCounter')
+                .select('status voteEnroll playerCounter endTime')
                 .exec().then((vote)=> {
                     if (!vote) {
-                        return Promise.reject(new Error('投票不存在'));
-                    }
-                    if (vote.status === 1) {
-                        return Promise.reject(new Error('投票已经结束'));
+                        return Promise.reject(createError(404, '投票不存在'));
                     }
                     if (!vote.voteEnroll) {
-                        return Promise.reject(new Error('投票已停止报名'));
+                        return Promise.reject(createError(400, '投票已停止报名'));
+                    }
+                    let endTime = moment(vote.endTime);
+                    let now = moment();
+                    if (endTime.isBefore(now)) {
+                        return Promise.reject(createError(400, '投票已经结束'));
                     }
                     let votePlayer = new VotePlayer(req.body);
                     votePlayer.sequence = vote.playerCounter + '';
@@ -187,7 +191,7 @@ module.exports = {
             .select('_id theme')
             .exec().then((vote)=> {
             if (!vote) {
-                return Promise.reject(new Error('投票不存在'));
+                return Promise.reject(createError(404, '投票不存在'));
             }
             res.locals.vote = vote;
             return VotePlayer.where('vote', voteId)
@@ -209,14 +213,14 @@ module.exports = {
             .exec()
             .then((vote)=> {
                 if (!vote) {
-                    return Promise.reject(new Error('投票不存在'));
+                    return Promise.reject(createError(404, '投票不存在'));
                 }
                 res.locals.vote = vote;
                 return VotePlayer.findById(playerId).lean().exec();
             })
             .then((player)=> {
                 if (!player) {
-                    return Promise.reject(new Error('选手不存在'));
+                    return Promise.reject(createError(404, '选手不存在'));
                 }
                 res.locals.player = player;
                 return VotePlayer
@@ -237,9 +241,14 @@ module.exports = {
         let playerId = req.params.playerId;
         Vote.findByIdAndUpdate(voteId, {
             $inc: {totalPoll: 1}
-        }).select('_id').exec().then((vote)=> {
+        }).select('_id endTime').exec().then((vote)=> {
             if (!vote) {
-                return Promise.reject(new Error('投票不存在'));
+                return Promise.reject(createError(404, '投票不存在'));
+            }
+            let endTime = moment(vote.endTime);
+            let now = moment();
+            if (endTime.isBefore(now)) {
+                return Promise.reject(createError(400, '投票已经结束'));
             }
             return VotePlayer.update({_id: playerId}, {$inc: {poll: 1}}).exec();
         }).then(()=> {
@@ -256,7 +265,7 @@ module.exports = {
         res.locals.followFlag = req.query.followFlag || 0;
         Vote.findById(voteId).select('theme').exec().then((vote)=> {
             if (!vote) {
-                return Promise.reject(new Error('投票不存在'));
+                return Promise.reject(createError(404, '投票不存在'));
             }
             let query = VotePlayer.find({vote: vote, isAudit: true});
             if (key && !_.isEmpty(key)) {
@@ -274,7 +283,7 @@ module.exports = {
         }).then((count)=> {
             res.locals.totalPlayer = count;
             res.render('vote/search-result');
-        });
+        }).catch(next);
 
     },
 
@@ -289,14 +298,14 @@ module.exports = {
         if (task && student) {
             Task.findById(task).then((task)=> {
                 if (!task) {
-                    return Promise.reject(new Error('任务不存在'));
+                    return Promise.reject(createError(404, '任务不存在'));
                 }
                 let scoreAward = task.scoreAward;
                 return Student.findByIdAndUpdate(student, {$inc: {score: scoreAward}})
                     .select('_id schoolId')
                     .exec().then((st)=> {
                         if (!st) {
-                            return Promise.reject(new Error('学生不存在'));
+                            return Promise.reject(createError(404, '学生不存在'));
                         }
                         let taskRecord = new TaskRecord({
                             task: task,
@@ -323,17 +332,18 @@ function renderEvent(req, res) {
 }
 
 // 渲染包含报名的活动页面
-function renderEnrolledEvent(req, res) {
+function renderEnrolledEvent(req, res, next) {
     let event = req.event;
     let enroll = event.enroll;
     EnrollNames.find({enroll: enroll}).then((names)=> {
         res.locals.list = names;
         renderEvent(req, res);
-    });
+    }).catch(next);
 }
 
+
 // 渲染投票页面
-function renderVoteEvent(req, res) {
+function renderVoteEvent(req, res, next) {
     let event = req.event;
     let limit = req.query.limit || 20;
     let page = req.query.page || 1;
@@ -350,6 +360,6 @@ function renderVoteEvent(req, res) {
             res.locals.totalPlayer = count;
             req.pagePath = 'vote/index';
             return renderEvent(req, res);
-        });
+        }).catch(next);
 }
 
