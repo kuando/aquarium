@@ -453,7 +453,7 @@ a.vote-toupiao{
         transform: scale(1); } }
 
 .ball-beat > div {
-    background-color: #72d26e;
+    background-color: #fff;
     width: 15px;
     height: 15px;
     border-radius: 100%;
