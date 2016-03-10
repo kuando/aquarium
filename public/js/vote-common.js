@@ -4,20 +4,16 @@
 'use strict';
 
 $(document).ready(function () {
-
+    $.ajaxSetup({
+        dataType: "json"
+    });
     $('#loading').fadeOut();
-    var event = 'click';
-
-
-
-    $(".vote-menu").on(event, "#openSearchModal", function () {
+    $(".vote-menu").on('click', "#openSearchModal", function () {
         $("#searchModal").fadeIn()
     });
-
-    $("#searchModal").on(event, "#closeSearch", function () {
+    $("#searchModal").on('click', "#closeSearch", function () {
         $("#searchModal").fadeOut()
     });
-
     $('.search-btn').click(function () {
         var searchText = $(this).closest('.input-group').find('input').val();
         var voteId = $("#voteId").val();

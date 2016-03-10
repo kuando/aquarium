@@ -33,7 +33,6 @@ requireDir('../models', {
 require('../routes')(app);
 
 app.use(function (err, req, res, next) {
-    console.error(err);
     let accept = req.accepts('html', 'text', 'json');
     let status = err.status || 500;
     switch (accept) {
@@ -41,7 +40,7 @@ app.use(function (err, req, res, next) {
             return res.render(`error/${status}`);
         case 'json':
         case 'text':
-            return res.statusCode(status).send(err.message);
+            return res.status(status).send(err.message);
     }
     return next();
 });

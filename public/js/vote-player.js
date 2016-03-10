@@ -69,8 +69,8 @@ $(document).ready(function () {
             $.alert('投票成功!', function () {
                 window.location.href = '/votes/' + voteId;
             });
-        }).fail(function () {
-            $.alert('投票失败');
+        }).fail(function (xhr, textStatus, errorThrown) {
+            $.alert(xhr.responseText || '投票失败');
         });
     });
 

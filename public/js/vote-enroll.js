@@ -130,9 +130,8 @@ $(document).ready(function () {
             $.alert('报名成功！请等待审核通过', function () {
                 self.location.href = '/votes/' + voteId;
             });
-        }).fail(function (res) {
-            console.log(res);
-            $.alert('报名失败,请重新再试');
+        }).fail(function (xhr, textStatus, errorThrown) {
+            $.alert(xhr.responseText || '报名失败!');
         });
     });
 });
