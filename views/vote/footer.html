@@ -1,3 +1,12 @@
+<div class="loaders" id="loading">
+    <div class="loader">
+        <div class="loader-inner ball-beat">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+</div>
 <div class="search-modal chearfix" id="searchModal">
     <a class="close-search" id="closeSearch"><img src="/images/vote/icon-close.png" width="18"></a>
     <form class="form-horizontal" id="searchModalForm">
@@ -16,10 +25,38 @@
 <nav class="navbar vote-menu navbar-fixed-bottom">
     <div class="container-fluid">
         <ul class="list-unstyled">
-            <li><a href="/votes/<%= vote._id %>"><img class="center-block" src="/images/vote/icon-home.png">首页</a></li>
-            <li><a href="/votes/<%= vote._id %>/enroll"><img class="center-block" src="/images/vote/icon-enroll.png">报名</a></li>
-            <li><a href="/votes/<%= vote._id %>/rank"><img class="center-block" src="/images/vote/icon-rank.png">排行</a></li>
-            <li class="no-b"><a href="javascript:void(0)" id="openSearchModal"><img class="center-block" src="/images/vote/icon-search.png">搜索</a></li>
+            <li>
+                <a href="/votes/<%= vote._id %>">
+                    <div class="menu">
+                        <img class="center-block" src="/images/vote/icon-home.png">
+                        首页
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="/votes/<%= vote._id %>/enroll">
+                    <div class="menu">
+                        <img class="center-block" src="/images/vote/icon-enroll.png">
+                        报名
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="/votes/<%= vote._id %>/rank">
+                    <div class="menu">
+                        <img class="center-block" src="/images/vote/icon-rank.png">
+                        排行
+                    </div>
+                </a>
+            </li>
+            <li class="no-b">
+                <a href="javascript:void(0)" id="openSearchModal">
+                    <div class="menu">
+                        <img class="center-block" src="/images/vote/icon-search.png">
+                        搜索
+                    </div>
+                </a>
+            </li>
         </ul>
     </div>
 </nav>
