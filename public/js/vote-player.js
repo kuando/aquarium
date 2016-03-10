@@ -14,6 +14,15 @@ $(document).ready(function () {
         var day = date.getDay() + 1;
         return year + '-' + month + '-' + day;
     }
+    var $Controls = $(".player-controls");
+
+    $Controls.on(event, "#sharePlayer", function () {
+        $("#shareModal").fadeIn()
+    });
+
+    $Controls.on(event, "#followSponsor", function () {
+        $("#followModal").fadeIn()
+    });
 
     $(".share-modal").on('click', "#closeShare", function () {
         $("#shareModal").fadeOut();

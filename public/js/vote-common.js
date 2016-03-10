@@ -4,9 +4,11 @@
 'use strict';
 
 $(document).ready(function () {
+
+    $('#loading').fadeOut();
     var event = 'click';
 
-    var $Controls = $(".player-controls");
+
 
     $(".vote-menu").on(event, "#openSearchModal", function () {
         $("#searchModal").fadeIn()
@@ -14,14 +16,6 @@ $(document).ready(function () {
 
     $("#searchModal").on(event, "#closeSearch", function () {
         $("#searchModal").fadeOut()
-    });
-
-    $Controls.on(event, "#sharePlayer", function () {
-        $("#shareModal").fadeIn()
-    });
-
-    $Controls.on(event, "#followSponsor", function () {
-        $("#followModal").fadeIn()
     });
 
     $('.search-btn').click(function () {
