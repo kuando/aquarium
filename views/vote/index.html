@@ -101,7 +101,7 @@
                     <% players.forEach(function(player){ %>
                     <div class="col-xs-6 col-sm-4 item">
                         <div class="thumbnail">
-                            <a href="/votes/<%= record._id%>/players/<%= player._id %>?followFlag=<%=followFlag || 0 %>">
+                            <a href="/votes/<%= record._id%>/players/<%= player._id %>">
                                 <img src="http://resource.hizuoye.com/<%= player.images[0] %>" width="100%" alt="...">
                             </a>
                             <div class="number"><%= player.sequence %>号</div>
@@ -110,7 +110,7 @@
                                     <p class="name"><%= player.name %></p>
                                     <p class="count"><%= player.poll %> 票</p>
                                 </div>
-                                <a href="/votes/<%= record._id%>/players/<%= player._id %>?followFlag=<%=followFlag || 0 %>"
+                                <a href="/votes/<%= record._id%>/players/<%= player._id %>"
                                    class="vote-toupiao"
                                    role="button">投票</a>
                             </div>
@@ -162,6 +162,7 @@
 <input type="hidden" value="<%= vote._id %>" id="eventId">
 <input type="hidden" value="http://resource.hizuoye.com/<%= vote.slides[0] %>" id="coverImage">
 <input type="hidden" value="<%= vote.title %>" id="shareTitle">
+<input type="hidden" value="<%= followFlag || 0 %>">
 <script type="text/javascript" src="/js/lib/jquery-2.2.1.min.js"></script>
 <script type="text/javascript" src="/js/lib/jweixin-1.0.0.js"></script>
 <script type="text/javascript" src="/js/lib/masonry.pkgd.min.js"></script>

@@ -6,7 +6,6 @@ require('hammer-timejs');
 require('jquery-weui/dist/js/jquery-weui');
 require('./vote-common');
 var YouAreI = require('youarei');
-
 $(document).ready(function () {
     function getDateStr() {
         var date = new Date();
@@ -28,8 +27,7 @@ $(document).ready(function () {
         var ua = navigator.userAgent.toLowerCase();
         var isNotWeixin = ua.indexOf('micromessenger') === -1;
         if (isNotWeixin) {
-            $.alert("请用微信客户端进行投票！");
-            return;
+            return $.alert("请用微信客户端进行投票！");
         }
         var voteId = $("#voteId").val();
         var state = $("#state").val();
@@ -39,19 +37,13 @@ $(document).ready(function () {
         }
         var voteCountKey = voteId + getDateStr();
         var voteCount = window.localStorage.getItem(voteCountKey);
-
         var requireFollow = $('#requireFollow').val();
-        var followFlag = $('#followFlag').val();
-        var needFollow = requireFollow === 'true' && followFlag === 'false';
-        if (voteCount === null && needFollow) {
+        if (voteCount === null && requireFollow === 'true') {
             $("#followModal").fadeIn();
             return;
         }
-        //每天只能投一次票
-        if (voteCount !== null) {
-            voteCount = parseInt(voteCount);
-        }
-        if (voteCount !== null && voteCount >= 3) {
+        voteCount = voteCount === null ? 0 : parseInt(voteCount);
+        if (voteCount >= 3) {
             return $.alert('每天只能投三票哦,明天再来吧!');
         }
         var hasVoteKey = playerId + getDateStr();
