@@ -5,7 +5,14 @@ require('imagesloaded');
 require('hammer-timejs');
 require('twbs-pagination');
 require('./vote-common');
-var YouAreI = require('youarei');
+
+function getDateStr() {
+    var date = new Date();
+    var year = date.getFullYear();
+    var month = date.getMonth() + 1;
+    var day = date.getDay() + 1;
+    return year + '-' + month + '-' + day;
+}
 
 $(document).ready(function () {
     var $container = $('#masonry');
@@ -16,7 +23,9 @@ $(document).ready(function () {
             itemSelector: '.item'
         });
     });
+    var followFlag = $("#followFlag").val();
     var totalPlayer = $("#totalPlayer").val();
+    var eventId = $('#eventId').val();
     var totalPages = Math.ceil(totalPlayer / 20);
     $('#pagination').twbsPagination({
         first: '首页',
@@ -31,11 +40,16 @@ $(document).ready(function () {
         }
     });
 
+    //如果followFlag为1,说明是从公共号进入,设置count为0,保证一天内都可以正常投票
+    var voteCountKey = eventId + getDateStr();
+    var voteCount = window.localStorage.getItem(voteCountKey);
+    if (followFlag === '1' && voteCount === null) {
+        window.localStorage.setItem(voteCountKey, 0);
+    }
+
     //投票分享
     var url = location.href;
-    var eventId = $('#eventId').val();
     var title = $('#shareTitle').val();
-    var shareUrl = new YouAreI(url).query_set({followFlag: 0}).to_string();
     var coverImage = $("#coverImage").val();
     $.post("/wx/sdk", {url: url.split('#')[0]}, function (data) {
         wx.config({
@@ -49,7 +63,7 @@ $(document).ready(function () {
         wx.ready(function () {
             wx.onMenuShareTimeline({
                 title: title,
-                link: shareUrl,
+                link: url,
                 imgUrl: coverImage,
                 success: function () {
                     if (eventId && eventId !== '') {
@@ -66,7 +80,7 @@ $(document).ready(function () {
                 title: title,
                 desc: '快来参加' + title,
                 imgUrl: coverImage,
-                link: shareUrl,
+                link: url,
                 success: function () {
                     if (eventId && eventId !== '') {
                         $.ajax({
