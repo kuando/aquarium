@@ -4,9 +4,7 @@
 'use strict';
 
 $(document).ready(function () {
-    $.ajaxSetup({
-        dataType: "json"
-    });
+
     $('#loading').fadeOut();
     $(".vote-menu").on('click', "#openSearchModal", function () {
         $("#searchModal").fadeIn()

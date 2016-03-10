@@ -56,21 +56,24 @@ $(document).ready(function () {
         $.ajax({
             url: '/votes/' + voteId + '/players/' + playerId,
             method: 'POST',
+            dataType: 'json',
             beforeSend: function () {
                 $.showLoading("正在投票中...");
             },
+            success: function () {
+                window.localStorage.setItem(hasVoteKey, true);
+                voteCount = voteCount === null ? 1 : (voteCount + 1);
+                window.localStorage.setItem(voteCountKey, voteCount);
+                $.alert('投票成功!', function () {
+                    window.location.href = '/votes/' + voteId;
+                });
+            },
+            error: function (xhr) {
+                $.alert(xhr.responseText || '投票失败');
+            },
             complete: function () {
                 $.hideLoading();
-            }
-        }).done(function () {
-            window.localStorage.setItem(hasVoteKey, true);
-            voteCount = voteCount === null ? 1 : (voteCount + 1);
-            window.localStorage.setItem(voteCountKey, voteCount);
-            $.alert('投票成功!', function () {
-                window.location.href = '/votes/' + voteId;
-            });
-        }).fail(function (xhr, textStatus, errorThrown) {
-            $.alert(xhr.responseText || '投票失败');
+            },
         });
     });
 

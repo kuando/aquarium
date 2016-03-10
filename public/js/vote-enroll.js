@@ -120,18 +120,21 @@ $(document).ready(function () {
                 images: images,
                 brief: brief
             },
+            dataType: 'json',
             beforeSend: function () {
                 $.showLoading("正在报名中...");
+            },
+            success: function () {
+                $.alert('报名成功！请等待审核通过', function () {
+                    self.location.href = '/votes/' + voteId;
+                });
+            },
+            error: function (xhr) {
+                $.alert(xhr.responseText || '报名失败!');
             },
             complete: function () {
                 $.hideLoading();
             }
-        }).done(function () {
-            $.alert('报名成功！请等待审核通过', function () {
-                self.location.href = '/votes/' + voteId;
-            });
-        }).fail(function (xhr, textStatus, errorThrown) {
-            $.alert(xhr.responseText || '报名失败!');
         });
     });
 });

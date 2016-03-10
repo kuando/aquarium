@@ -250,9 +250,10 @@ module.exports = {
             if (endTime.isBefore(now)) {
                 return Promise.reject(createError(400, '投票已经结束'));
             }
-            return VotePlayer.update({_id: playerId}, {$inc: {poll: 1}}).exec();
-        }).then(()=> {
-            res.sendStatus(200);
+            return VotePlayer.findByIdAndUpdate(playerId, {$inc: {poll: 1}}, {new: true})
+                .select('poll').exec();
+        }).then((player)=> {
+            res.json({poll: player.poll});
         }).catch(next);
     },
 
