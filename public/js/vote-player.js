@@ -5,7 +5,6 @@
 require('hammer-timejs');
 require('jquery-weui/dist/js/jquery-weui');
 require('./vote-common');
-var YouAreI = require('youarei');
 $(document).ready(function () {
     function getDateStr() {
         var date = new Date();
@@ -14,16 +13,14 @@ $(document).ready(function () {
         var day = date.getDay() + 1;
         return year + '-' + month + '-' + day;
     }
-    var $Controls = $(".player-controls");
 
-    $Controls.on(event, "#sharePlayer", function () {
+    var $Controls = $(".player-controls");
+    $Controls.on('click', "#sharePlayer", function () {
         $("#shareModal").fadeIn()
     });
-
-    $Controls.on(event, "#followSponsor", function () {
+    $Controls.on('click', "#followSponsor", function () {
         $("#followModal").fadeIn()
     });
-
     $(".share-modal").on('click', "#closeShare", function () {
         $("#shareModal").fadeOut();
     });
@@ -39,11 +36,7 @@ $(document).ready(function () {
             return $.alert("请用微信客户端进行投票！");
         }
         var voteId = $("#voteId").val();
-        var state = $("#state").val();
         var playerId = $("#playerId").val();
-        if (state === 1) {
-            return $.alert('投票已经结束');
-        }
         var voteCountKey = voteId + getDateStr();
         var voteCount = window.localStorage.getItem(voteCountKey);
         var requireFollow = $('#requireFollow').val();
@@ -88,7 +81,6 @@ $(document).ready(function () {
     var sequence = $("#playerSequence").val();
     var desc = "我是" + sequence + "号选手" + playerName + ",快来帮我投票吧!";
     var title = $('#shareTitle').val();
-    var shareUrl = new YouAreI(url).query_set({followFlag: 0}).to_string();
     var coverImage = $("#coverImage").attr('src');
     $.post("/wx/sdk", {url: url.split('#')[0]}, function (data) {
         wx.config({
@@ -102,7 +94,7 @@ $(document).ready(function () {
         wx.ready(function () {
             wx.onMenuShareTimeline({
                 title: title,
-                link: shareUrl,
+                link: url,
                 imgUrl: coverImage,
                 success: function () {
                     if (eventId && eventId !== '') {
@@ -119,7 +111,7 @@ $(document).ready(function () {
                 title: title,
                 desc: desc,
                 imgUrl: coverImage,
-                link: shareUrl,
+                link: url,
                 success: function () {
                     if (eventId && eventId !== '') {
                         $.ajax({
