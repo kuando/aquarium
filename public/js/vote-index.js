@@ -15,8 +15,9 @@ function getDateStr() {
 }
 
 $(document).ready(function () {
+    var ua = navigator.userAgent.toLowerCase();
+    var isWeixin = ua.indexOf('micromessenger') !== -1;
     var $container = $('#masonry');
-
     $container.imagesLoaded(function () {
         $container.masonry({
             columnWidth: '.item',
@@ -43,7 +44,7 @@ $(document).ready(function () {
     //如果followFlag为1,说明是从公共号进入,设置count为0,保证一天内都可以正常投票
     var voteCountKey = eventId + getDateStr();
     var voteCount = window.localStorage.getItem(voteCountKey);
-    if (followFlag === '1' && voteCount === null) {
+    if (followFlag === '1' && voteCount === null && isWeixin) {
         window.localStorage.setItem(voteCountKey, 0);
     }
 
