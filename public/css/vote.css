@@ -417,7 +417,9 @@ a.vote-toupiao{
     top: 20%;
     flex: 0 1 auto;
     flex-direction: row;
-    flex-wrap: wrap; }
+    flex-wrap: wrap;
+    text-align: center;
+}
 .loaders .loader {
     box-sizing: border-box;
     display: flex;
