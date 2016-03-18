@@ -2,7 +2,8 @@
 <html>
 <head lang="en">
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
     <meta name="format-detection" content="telephone=no"/>
@@ -38,7 +39,6 @@
 </div>
 
 
-
 <div class="statistics">
     <div class="viewd">
         阅读<label class="number"><%= record.visit%></label>
@@ -50,39 +50,37 @@
         举报
     </div>
 </div>
-<input type="hidden" value="<%= record._id.toString()%>" class="r-id"/>
+<input type="hidden" value="<%= record._id %>" id="eventId">
 </body>
 <script type="text/javascript" src="/js/lib/jquery-2.2.1.min.js"></script>
-<input type="hidden" value="<%= record._id %>" id="eventId">
+
 <script type="text/javascript">
     $(document).ready(function () {
         //点赞
         var $statistics = $('.statistics');
-        $statistics.on('click','.zan',function () {
+        var eventId = $("#eventId").val();
+        $statistics.on('click', '.zan', function () {
             $(this).addClass('no-zan');
             $(this).removeClass('zan');
-            $(this).find('img').attr({ src: "/images/icon-zantc.png"});
+            $(this).find('img').attr({src: "/images/icon-zantc.png"});
             var like = $('#like').html();
             like = like === '' ? 0 : like;
-            var _id = $('.r-id').val();
-            $.post("/events/" + _id + '/like').then(function () {
+            $.post("/events/" + eventId + '/like').then(function () {
                 $('#like').empty().text(parseInt(like) + 1);
             });
         });
-        $statistics.on('click','.no-zan',function () {
+        $statistics.on('click', '.no-zan', function () {
             $(this).addClass('zan');
             $(this).removeClass('no-zan');
-            $(this).find('img').attr({ src: "/images/icon-zan.png"});
+            $(this).find('img').attr({src: "/images/icon-zan.png"});
             var like = $('#like').html();
             like = like === '' ? 0 : like;
-            var _id = $('.r-id').val();
-            $.post("/events/" + _id + '/like').then(function () {
+            $.post("/events/" + eventId + '/like').then(function () {
                 $('#like').empty().text(parseInt(like) - 1);
             });
         });
     });
 </script>
-<script type="text/javascript" src="/js/lib/youarei.min.js"></script>
 <script type="text/javascript" src="/js/lib/jweixin-1.0.0.js"></script>
 <script type="text/javascript" src="/js/weixin.js"></script>
 </html>
